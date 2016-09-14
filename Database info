@@ -1,5 +1,8 @@
-Database so far has all table layouts and Students, Courses, Enrollment tables populated
+Database so far has all table layouts and Students, Courses, Enrollment, MedicalInformation, 
+EmergencyContact, ResidentialAddress tables populated
+
 Meals, recordings, classes not populated
+See erdplus-diagram if you need to see the layout
 
 Online database info
 Feel free to interact and change things to test the app I'll just overwrite everything at some point anyway
