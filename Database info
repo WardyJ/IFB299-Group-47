@@ -2,7 +2,7 @@ Database so far has all table layouts and Students, Courses, Enrollment, Medical
 EmergencyContact, ResidentialAddress tables populated
 
 Meals, recordings, classes not populated
-Current database dump should be on github, doesn't have a CREATE statement so you have to make a database schema and import it into that
+Current database dump should be on github, doesn't have a CREATE SCHEMA statement so you have to make a database schema and import it into that
 See erdplus-diagram if you want to see the layout
 
 Online database info
