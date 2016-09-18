@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="meditation_centre.meditation_centre" android:versionCode="1" android:versionName="1.0" android:installLocation="auto">
+  <!--suppress UsesMinSdkAttributes-->
+  <uses-sdk android:minSdkVersion="16" />
+  <uses-permission android:name="android.permission.SEND_SMS" />
+  <uses-permission android:name="android.permission.RECEIVE_SMS" />
+  <uses-permission android:name="android.permission.INTERNET" />
+  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+  <application android:label="meditation_centre" android:name="android.app.Application" android:allowBackup="true" android:debuggable="true">
+    <activity android:label="My Calendar" android:name="md50d3dc5fec1d4ca27705d760807907a2b.calendar" />
+    <activity android:label="Contact Us" android:name="md50d3dc5fec1d4ca27705d760807907a2b.contactPage" />
+    <activity android:label="Donation Info" android:name="md50d3dc5fec1d4ca27705d760807907a2b.donations" />
+    <activity android:label="login" android:name="md50d3dc5fec1d4ca27705d760807907a2b.login">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+    </activity>
+    <activity android:label="Zen Meditation Centre" android:name="md50d3dc5fec1d4ca27705d760807907a2b.menu" />
+    <activity android:label="My Profile" android:name="md50d3dc5fec1d4ca27705d760807907a2b.profile" />
+    <activity android:label="Report A Bug" android:name="md50d3dc5fec1d4ca27705d760807907a2b.smsTest" />
+    <provider android:name="mono.MonoRuntimeProvider" android:exported="false" android:initOrder="2147483647" android:authorities="meditation_centre.meditation_centre.mono.MonoRuntimeProvider.__mono_init__" />
+    <!--suppress ExportedReceiver-->
+    <receiver android:name="mono.android.Seppuku">
+      <intent-filter>
+        <action android:name="mono.android.intent.action.SEPPUKU" />
+        <category android:name="mono.android.intent.category.SEPPUKU.meditation_centre.meditation_centre" />
+      </intent-filter>
+    </receiver>
+  </application>
+</manifest>

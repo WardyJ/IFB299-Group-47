@@ -1,0 +1,88 @@
+c:\users\matt\documents\visual studio 2015\Projects\meditation_centre\meditation_centre\bin\Debug\meditation_centre.dll
+c:\users\matt\documents\visual studio 2015\Projects\meditation_centre\meditation_centre\bin\Debug\meditation_centre.pdb
+c:\users\matt\documents\visual studio 2015\Projects\meditation_centre\meditation_centre\bin\Debug\meditation_centre.meditation_centre.apk
+c:\users\matt\documents\visual studio 2015\Projects\meditation_centre\meditation_centre\bin\Debug\meditation_centre.meditation_centre-Signed.apk
+c:\users\matt\documents\visual studio 2015\Projects\meditation_centre\meditation_centre\obj\Debug\meditation_centre.csprojResolveAssemblyReference.cache
+c:\users\matt\documents\visual studio 2015\Projects\meditation_centre\meditation_centre\obj\Debug\meditation_centre.dll
+c:\users\matt\documents\visual studio 2015\Projects\meditation_centre\meditation_centre\obj\Debug\meditation_centre.pdb
+c:\users\matt\documents\visual studio 2015\Projects\meditation_centre\meditation_centre\obj\Debug\android\bin\meditation_centre.meditation_centre.apk
+c:\users\matt\documents\visual studio 2015\Projects\meditation_centre\meditation_centre\obj\Debug\res\values\strings.xml
+c:\users\matt\documents\visual studio 2015\Projects\meditation_centre\meditation_centre\obj\Debug\res\drawable\icon.png
+c:\users\matt\documents\visual studio 2015\Projects\meditation_centre\meditation_centre\obj\Debug\R.cs.flag
+c:\users\matt\documents\visual studio 2015\Projects\meditation_centre\meditation_centre\obj\Debug\uploadflags.txt
+c:\users\matt\documents\visual studio 2015\Projects\meditation_centre\meditation_centre\bin\Debug\meditation_centre.dll.mdb
+c:\users\matt\documents\visual studio 2015\Projects\meditation_centre\meditation_centre\bin\Debug\Java.Interop.dll.mdb
+c:\users\matt\documents\visual studio 2015\Projects\meditation_centre\meditation_centre\bin\Debug\Mono.Android.dll.mdb
+c:\users\matt\documents\visual studio 2015\Projects\meditation_centre\meditation_centre\bin\Debug\mscorlib.dll.mdb
+c:\users\matt\documents\visual studio 2015\Projects\meditation_centre\meditation_centre\bin\Debug\System.ComponentModel.Composition.dll.mdb
+c:\users\matt\documents\visual studio 2015\Projects\meditation_centre\meditation_centre\bin\Debug\System.Core.dll.mdb
+c:\users\matt\documents\visual studio 2015\Projects\meditation_centre\meditation_centre\bin\Debug\System.dll.mdb
+c:\users\matt\documents\visual studio 2015\Projects\meditation_centre\meditation_centre\bin\Debug\System.Net.Http.dll.mdb
+c:\users\matt\documents\visual studio 2015\Projects\meditation_centre\meditation_centre\bin\Debug\System.Runtime.Serialization.dll.mdb
+c:\users\matt\documents\visual studio 2015\Projects\meditation_centre\meditation_centre\bin\Debug\System.ServiceModel.Internals.dll.mdb
+c:\users\matt\documents\visual studio 2015\Projects\meditation_centre\meditation_centre\bin\Debug\System.Xml.dll.mdb
+c:\users\matt\documents\visual studio 2015\Projects\meditation_centre\meditation_centre\bin\Debug\System.Xml.Linq.dll.mdb
+c:\users\matt\documents\visual studio 2015\Projects\meditation_centre\meditation_centre\obj\Debug\android\assets\Java.Interop.dll.mdb
+c:\users\matt\documents\visual studio 2015\Projects\meditation_centre\meditation_centre\obj\Debug\android\assets\meditation_centre.dll.mdb
+c:\users\matt\documents\visual studio 2015\Projects\meditation_centre\meditation_centre\obj\Debug\android\assets\Mono.Android.dll.mdb
+c:\users\matt\documents\visual studio 2015\Projects\meditation_centre\meditation_centre\obj\Debug\android\assets\mscorlib.dll.mdb
+c:\users\matt\documents\visual studio 2015\Projects\meditation_centre\meditation_centre\obj\Debug\android\assets\System.ComponentModel.Composition.dll.mdb
+c:\users\matt\documents\visual studio 2015\Projects\meditation_centre\meditation_centre\obj\Debug\android\assets\System.Core.dll.mdb
+c:\users\matt\documents\visual studio 2015\Projects\meditation_centre\meditation_centre\obj\Debug\android\assets\System.dll.mdb
+c:\users\matt\documents\visual studio 2015\Projects\meditation_centre\meditation_centre\obj\Debug\android\assets\System.Net.Http.dll.mdb
+c:\users\matt\documents\visual studio 2015\Projects\meditation_centre\meditation_centre\obj\Debug\android\assets\System.Runtime.Serialization.dll.mdb
+c:\users\matt\documents\visual studio 2015\Projects\meditation_centre\meditation_centre\obj\Debug\android\assets\System.ServiceModel.Internals.dll.mdb
+c:\users\matt\documents\visual studio 2015\Projects\meditation_centre\meditation_centre\obj\Debug\android\assets\System.Xml.dll.mdb
+c:\users\matt\documents\visual studio 2015\Projects\meditation_centre\meditation_centre\obj\Debug\android\assets\System.Xml.Linq.dll.mdb
+C:\Users\Matt\Documents\Visual Studio 2015\Projects\meditation_centre\meditation_centre\obj\Debug\res\layout\contact.xml
+C:\Users\Matt\Documents\Visual Studio 2015\Projects\meditation_centre\meditation_centre\obj\Debug\res\layout\menu.xml
+C:\Users\Matt\Documents\Visual Studio 2015\Projects\meditation_centre\meditation_centre\obj\Debug\res\layout\donations.xml
+C:\Users\Matt\Documents\Visual Studio 2015\Projects\meditation_centre\meditation_centre\obj\Debug\res\layout\profile.xml
+C:\Users\Matt\Documents\Visual Studio 2015\Projects\meditation_centre\meditation_centre\obj\Debug\res\layout\calendar.xml
+C:\Users\Matt\Documents\Visual Studio 2015\Projects\meditation_centre\meditation_centre\obj\Debug\res\layout\login.xml
+C:\Users\Matt\Documents\Visual Studio 2015\Projects\meditation_centre\meditation_centre\obj\Debug\meditation_centre.dll.mdb
+C:\Users\Hugh Gaffney\Documents\meditation_centre\meditation_centre\obj\Debug\meditation_centre.csprojResolveAssemblyReference.cache
+C:\Users\Hugh Gaffney\Documents\meditation_centre\meditation_centre\obj\Debug\meditation_centre.dll
+C:\Users\Hugh Gaffney\Documents\meditation_centre\meditation_centre\obj\Debug\meditation_centre.pdb
+C:\Users\Hugh Gaffney\Documents\meditation_centre\meditation_centre\bin\Debug\meditation_centre.dll
+C:\Users\Hugh Gaffney\Documents\meditation_centre\meditation_centre\bin\Debug\meditation_centre.pdb
+C:\Users\Hugh Gaffney\Documents\meditation_centre\meditation_centre\bin\Debug\meditation_centre.meditation_centre.apk
+C:\Users\Hugh Gaffney\Documents\meditation_centre\meditation_centre\bin\Debug\meditation_centre.meditation_centre-Signed.apk
+C:\Users\Hugh Gaffney\Documents\meditation_centre\meditation_centre\obj\Debug\android\bin\meditation_centre.meditation_centre.apk
+C:\Users\Hugh Gaffney\Documents\meditation_centre\meditation_centre\obj\Debug\res\layout\contact.xml
+C:\Users\Hugh Gaffney\Documents\meditation_centre\meditation_centre\obj\Debug\res\layout\menu.xml
+C:\Users\Hugh Gaffney\Documents\meditation_centre\meditation_centre\obj\Debug\res\layout\profile.xml
+C:\Users\Hugh Gaffney\Documents\meditation_centre\meditation_centre\obj\Debug\res\layout\calendar.xml
+C:\Users\Hugh Gaffney\Documents\meditation_centre\meditation_centre\obj\Debug\res\layout\login.xml
+C:\Users\Hugh Gaffney\Documents\meditation_centre\meditation_centre\obj\Debug\res\layout\smstest.xml
+C:\Users\Hugh Gaffney\Documents\meditation_centre\meditation_centre\obj\Debug\res\layout\donations.xml
+C:\Users\Hugh Gaffney\Documents\meditation_centre\meditation_centre\obj\Debug\res\values\strings.xml
+C:\Users\Hugh Gaffney\Documents\meditation_centre\meditation_centre\obj\Debug\res\drawable\icon.png
+C:\Users\Hugh Gaffney\Documents\meditation_centre\meditation_centre\obj\Debug\R.cs.flag
+C:\Users\Hugh Gaffney\Documents\meditation_centre\meditation_centre\obj\Debug\uploadflags.txt
+C:\Users\Hugh Gaffney\Documents\meditation_centre\meditation_centre\bin\Debug\Java.Interop.dll.mdb
+C:\Users\Hugh Gaffney\Documents\meditation_centre\meditation_centre\bin\Debug\meditation_centre.dll.mdb
+C:\Users\Hugh Gaffney\Documents\meditation_centre\meditation_centre\bin\Debug\Mono.Android.dll.mdb
+C:\Users\Hugh Gaffney\Documents\meditation_centre\meditation_centre\bin\Debug\mscorlib.dll.mdb
+C:\Users\Hugh Gaffney\Documents\meditation_centre\meditation_centre\bin\Debug\System.ComponentModel.Composition.dll.mdb
+C:\Users\Hugh Gaffney\Documents\meditation_centre\meditation_centre\bin\Debug\System.Core.dll.mdb
+C:\Users\Hugh Gaffney\Documents\meditation_centre\meditation_centre\bin\Debug\System.dll.mdb
+C:\Users\Hugh Gaffney\Documents\meditation_centre\meditation_centre\bin\Debug\System.Net.Http.dll.mdb
+C:\Users\Hugh Gaffney\Documents\meditation_centre\meditation_centre\bin\Debug\System.Runtime.Serialization.dll.mdb
+C:\Users\Hugh Gaffney\Documents\meditation_centre\meditation_centre\bin\Debug\System.ServiceModel.Internals.dll.mdb
+C:\Users\Hugh Gaffney\Documents\meditation_centre\meditation_centre\bin\Debug\System.Xml.dll.mdb
+C:\Users\Hugh Gaffney\Documents\meditation_centre\meditation_centre\bin\Debug\System.Xml.Linq.dll.mdb
+C:\Users\Hugh Gaffney\Documents\meditation_centre\meditation_centre\obj\Debug\android\assets\Java.Interop.dll.mdb
+C:\Users\Hugh Gaffney\Documents\meditation_centre\meditation_centre\obj\Debug\android\assets\meditation_centre.dll.mdb
+C:\Users\Hugh Gaffney\Documents\meditation_centre\meditation_centre\obj\Debug\android\assets\Mono.Android.dll.mdb
+C:\Users\Hugh Gaffney\Documents\meditation_centre\meditation_centre\obj\Debug\android\assets\mscorlib.dll.mdb
+C:\Users\Hugh Gaffney\Documents\meditation_centre\meditation_centre\obj\Debug\android\assets\System.ComponentModel.Composition.dll.mdb
+C:\Users\Hugh Gaffney\Documents\meditation_centre\meditation_centre\obj\Debug\android\assets\System.Core.dll.mdb
+C:\Users\Hugh Gaffney\Documents\meditation_centre\meditation_centre\obj\Debug\android\assets\System.dll.mdb
+C:\Users\Hugh Gaffney\Documents\meditation_centre\meditation_centre\obj\Debug\android\assets\System.Net.Http.dll.mdb
+C:\Users\Hugh Gaffney\Documents\meditation_centre\meditation_centre\obj\Debug\android\assets\System.Runtime.Serialization.dll.mdb
+C:\Users\Hugh Gaffney\Documents\meditation_centre\meditation_centre\obj\Debug\android\assets\System.ServiceModel.Internals.dll.mdb
+C:\Users\Hugh Gaffney\Documents\meditation_centre\meditation_centre\obj\Debug\android\assets\System.Xml.dll.mdb
+C:\Users\Hugh Gaffney\Documents\meditation_centre\meditation_centre\obj\Debug\android\assets\System.Xml.Linq.dll.mdb
+C:\Users\Hugh Gaffney\Documents\meditation_centre\meditation_centre\obj\Debug\meditation_centre.dll.mdb
+C:\Users\Hugh Gaffney\Documents\meditation_centre\meditation_centre\bin\Debug\meditation_centre.dll.mdb
