@@ -6,16 +6,21 @@ Current database dump should be on github, doesn't have a CREATE SCHEMA statemen
 See erdplus-diagram if you want to see the layout
 
 Online database info
+
+NEW DATABASE - since we lost another one. I set up Amazon EC2 for this one. If you have old database info in code you nee to replace it.
+
 Feel free to interact and change things to test the app I'll just overwrite everything at some point anyway
 
-Server=stevie.heliohost.org
+Server=ec2-52-62-115-138.ap-southeast-2.compute.amazonaws.com
 Port=3306
-database=team47_meditationcentre
-User Id=team47
-Password=rolav1
+database=meditationcentre
+User Id=Team47
+Password=rolav1Team47rolav1
 charset=utf8
 
+Soon we'll use System.Net and interact with the database through php code.
 
+Old method to connect to database that I'm not using anymore but is easy to use and test with:
 Xamarin MYSQL component https://components.xamarin.com/view/mysql-plugin
 Not supposed to be used for final products but should be good for now
 
