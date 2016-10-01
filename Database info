@@ -14,7 +14,7 @@ Feel free to interact and change things to test the app I'll just overwrite ever
 Server=ec2-52-62-115-138.ap-southeast-2.compute.amazonaws.com
 Port=3306
 database=meditationcentre
-User Id=Team47
+User Id=root
 Password=rolav1Team47rolav1
 charset=utf8
 
