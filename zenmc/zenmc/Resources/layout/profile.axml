@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="5sp"
+    android:layout_marginRight="5sp">
+  <TextView
+      android:layout_marginTop="10sp"
+      android:text="FullName"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/prfTextFullName"
+      android:textSize="20sp" />
+  <TextView
+      android:text=""
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/prfFullName"
+      android:textSize="20sp" />
+  <TextView
+      android:layout_marginTop="10sp"
+      android:text="Date of Birth"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/prfTextDateOfBirth"
+      android:textSize="20sp" />
+  <TextView
+      android:text=""
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/prfDateOfBirth"
+      android:textSize="20sp" />
+  <TextView
+      android:layout_marginTop="10sp"
+      android:text="PhoneNumber"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/prfTextPhoneNumber"
+      android:textSize="20sp" />
+  <TextView
+      android:text=""
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/prfPhoneNumber"
+      android:textSize="20sp" />
+  <TextView
+      android:layout_marginTop="10sp"
+      android:text="Email"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/prfTextEmail"
+      android:textSize="20sp" />
+  <TextView
+      android:text=""
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/prfEmail"
+      android:textSize="20sp" />
+  <TextView
+      android:layout_marginTop="10sp"
+      android:text="Gender"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/prfTextGender"
+      android:textSize="20sp" />
+  <TextView
+      android:text=""
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/prfGender"
+      android:textSize="20sp" />
+  <ProgressBar
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/progressBar"
+      android:visibility="invisible" />
+</LinearLayout>

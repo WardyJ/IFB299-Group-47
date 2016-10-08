@@ -1,0 +1,95 @@
+<LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent" android:background="#7DBDE9" xmlns:android="http://schemas.android.com/apk/res/android"><ScrollView android:layout_marginLeft="10sp" android:layout_marginRight="10sp" android:minWidth="25px" android:minHeight="25px" android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/scrollView1"><TableLayout android:layout_width="fill_parent" android:layout_height="fill_parent" android:stretchColumns="1"><!--<TextView
+                android:text="Fields with * are required."
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/textView1" />--><!--<TextView
+                android:text="Full Name *"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/TextFullName"
+                android:layout_marginTop="10sp" />--><LinearLayout android:layout_width="wrap_content" android:layout_height="match_parent" android:gravity="center_horizontal" android:orientation="vertical" android:background="@drawable/formgroup"><TextView android:layout_width="wrap_content" android:layout_height="match_parent" android:text="Required Fields" android:textAppearance="?android:attr/textAppearanceLarge" android:id="@+id/textRequiredFields" /><EditText android:layout_width="match_parent" android:layout_height="30dp" android:id="@+id/XetFullName" android:inputType="textPersonName" android:hint="Full Name" android:paddingLeft="5dp" android:paddingRight="5dp" android:textColorHint="#99C8F5" android:background="@drawable/edittext" android:textColor="#4799E8" android:layout_margin="10dp" android:textCursorDrawable="@null" android:maxLength="128" /><!--<TextView
+                  android:text="Email *"
+                  android:textAppearance="?android:attr/textAppearanceMedium"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/TextEmail" />--><EditText android:layout_width="match_parent" android:layout_height="30dp" android:id="@+id/XetEmail" android:inputType="textEmailAddress" android:hint="Email Address" android:paddingLeft="5dp" android:paddingRight="5dp" android:textColorHint="#99C8F5" android:background="@drawable/edittext" android:textColor="#4799E8" android:layout_margin="10dp" android:textCursorDrawable="@null" android:maxLength="255" /><Button android:text="Set Date of Birth" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="15" android:id="@+id/btnDate" android:layout_marginLeft="20dp" android:layout_marginRight="20dp" android:background="#FFFFFF" android:textColor="#4799E8" /><TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/displayDateOfBirth" android:textAlignment="center" android:gravity="center" android:text="Date of birth not selected" android:textColor="#FFFFFF" /><!--<TextView
+                  android:text="Date of Birth *"
+                  android:textAppearance="?android:attr/textAppearanceMedium"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/TextDateOfBirth" />
+            
+                  <DatePicker
+                      android:id="@+id/datePicker"
+                      android:layout_width="wrap_content"
+                      android:layout_height="match_parent"
+                      android:datePickerMode="spinner"
+                      android:calendarViewShown="false"
+                      android:startYear="1900"
+                      android:endYear="1998" />
+              </LinearLayout>--><LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1" android:minWidth="25px" android:minHeight="25px" /><RadioGroup android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/XetGender"><RadioButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:checked="true" android:text="Male" android:id="@+id/XetMale" android:buttonTint="#ffffff" /><RadioButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Female" android:id="@+id/XetFemale" android:buttonTint="#ffffff" /></RadioGroup><!--<TextView
+                  android:text="Phone Number *"
+                  android:textAppearance="?android:attr/textAppearanceMedium"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/TextPhoneNumber" />--><EditText android:layout_width="match_parent" android:layout_height="30dp" android:id="@+id/XetPhoneNumber" android:inputType="phone" android:hint="Phone Number" android:paddingLeft="5dp" android:paddingRight="5dp" android:textColorHint="#99C8F5" android:background="@drawable/edittext" android:textColor="#4799E8" android:layout_margin="10dp" android:textCursorDrawable="@null" android:maxLength="50" /><!--<TextView
+                  android:text="Password (at least 6 characters) *"
+                  android:textAppearance="?android:attr/textAppearanceMedium"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/TextPassword" />--><EditText android:layout_width="match_parent" android:layout_height="30dp" android:id="@+id/XetPassword" android:hint="Password" android:paddingLeft="5dp" android:paddingRight="5dp" android:textColorHint="#99C8F5" android:background="@drawable/edittext" android:textColor="#4799E8" android:layout_margin="10dp" android:textCursorDrawable="@null" android:maxLength="20" /><!--<TextView
+                  android:text="Confirm Password *"
+                  android:textAppearance="?android:attr/textAppearanceMedium"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/TextConfirmPassword" />--><EditText android:layout_width="match_parent" android:layout_height="30dp" android:id="@+id/XetConfirmPassword" android:hint="Confirm Password" android:paddingLeft="5dp" android:paddingRight="5dp" android:textColorHint="#99C8F5" android:background="@drawable/edittext" android:textColor="#4799E8" android:layout_margin="10dp" android:textCursorDrawable="@null" android:maxLength="20" /><!--<TextView
+                  android:text="Emergency Contact Name *"
+                  android:textAppearance="?android:attr/textAppearanceMedium"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/TextContactName" />--><EditText android:layout_width="match_parent" android:layout_height="30dp" android:id="@+id/XetContactName" android:inputType="textPersonName" android:hint="Emergency Contact Name" android:paddingLeft="5dp" android:paddingRight="5dp" android:textColorHint="#99C8F5" android:background="@drawable/edittext" android:textColor="#4799E8" android:layout_margin="10dp" android:textCursorDrawable="@null" android:maxLength="128" /><!--<TextView
+                  android:text="Emergency Contact Phone Number *"
+                  android:textAppearance="?android:attr/textAppearanceMedium"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/TextContactPhoneNumber" />--><EditText android:layout_width="match_parent" android:layout_height="30dp" android:id="@+id/XetContactPhoneNumber" android:inputType="phone" android:hint="Emergency Contact Phone Number" android:paddingLeft="5dp" android:paddingRight="5dp" android:textColorHint="#99C8F5" android:background="@drawable/edittext" android:textColor="#4799E8" android:textCursorDrawable="@null" android:layout_margin="10dp" /></LinearLayout><!--<TextView
+                android:text="Medical Conditions"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/TextMedicalCondition" />--><!--<TextView
+                  android:text="Emergency Contact Relationship"
+                  android:textAppearance="?android:attr/textAppearanceMedium"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/TextRelationship" />--><EditText android:layout_width="match_parent" android:layout_height="30dp" android:id="@+id/XetRelationship" android:hint="Emergency Contact Relationship" android:paddingLeft="5dp" android:paddingRight="5dp" android:textColorHint="#99C8F5" android:background="@drawable/edittext" android:textColor="#4799E8" android:layout_margin="10dp" android:textCursorDrawable="@null" android:maxLength="255" /><EditText android:layout_width="match_parent" android:id="@+id/XetMedicalConditions" android:hint="Medical Conditions" android:paddingLeft="5dp" android:paddingRight="5dp" android:textColorHint="#99C8F5" android:background="@drawable/edittext" android:textColor="#4799E8" android:layout_margin="10dp" android:textCursorDrawable="@null" android:maxLength="255" android:inputType="textMultiLine" android:maxLines="4" android:minHeight="30dp" /><!--<TextView
+                android:text="PrescribedMedication"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/TextPrescribedMedication" />--><EditText android:layout_width="match_parent" android:layout_height="30dp" android:id="@+id/XetPrescribedMedication" android:hint="Prescribed Medication" android:paddingLeft="5dp" android:paddingRight="5dp" android:textColorHint="#99C8F5" android:background="@drawable/edittext" android:textColor="#4799E8" android:layout_margin="10dp" android:textCursorDrawable="@null" android:maxLength="255" android:inputType="textMultiLine" android:maxLines="4" android:minHeight="30dp" /><!--<TextView
+                android:text="Street Address"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/TextStreetAddress" />--><EditText android:layout_width="match_parent" android:id="@+id/XetStreetAddress" android:hint="Street Address" android:paddingLeft="5dp" android:paddingRight="5dp" android:textColorHint="#99C8F5" android:background="@drawable/edittext" android:textColor="#4799E8" android:layout_margin="10dp" android:textCursorDrawable="@null" android:maxLength="255" android:minLines="2" android:maxLines="4" /><!--<TextView
+                android:text="City"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/TextCity" />--><EditText android:layout_width="match_parent" android:layout_height="30dp" android:id="@+id/XetCity" android:hint="City" android:paddingLeft="5dp" android:paddingRight="5dp" android:textColorHint="#99C8F5" android:background="@drawable/edittext" android:textColor="#4799E8" android:layout_margin="10dp" android:textCursorDrawable="@null" android:maxLength="64" /><!--<TextView
+                android:text="Zip or Postcode"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/TextZipOrPostcode" />--><EditText android:layout_width="match_parent" android:layout_height="30dp" android:id="@+id/XetZipOrPostcode" android:inputType="number" android:hint="Zip or Postcode" android:paddingLeft="5dp" android:paddingRight="5dp" android:textColorHint="#99C8F5" android:background="@drawable/edittext" android:textColor="#4799E8" android:layout_margin="10dp" android:textCursorDrawable="@null" android:maxLength="16" /><!--<TextView
+                android:text="State"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/TextState" />--><EditText android:layout_width="match_parent" android:layout_height="30dp" android:id="@+id/XetState" android:hint="State" android:paddingLeft="5dp" android:paddingRight="5dp" android:textColorHint="#99C8F5" android:background="@drawable/edittext" android:textColor="#4799E8" android:layout_margin="10dp" android:textCursorDrawable="@null" android:maxLength="64" /><!--<TextView
+                android:text="Country"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/TextCountry" />--><EditText android:layout_width="match_parent" android:layout_height="30dp" android:id="@+id/XetCountry" android:hint="Country" android:paddingLeft="5dp" android:paddingRight="5dp" android:textColorHint="#99C8F5" android:background="@drawable/edittext" android:textColor="#4799E8" android:textCursorDrawable="@null" android:layout_margin="10dp" android:maxLength="64" /><Button android:text="Sign Up" android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/XbtnInsert" /><ProgressBar android:id="@+id/registerProgressBar" android:layout_width="wrap_content" android:layout_height="wrap_content" android:visibility="invisible" /><TextView android:text="" android:textAppearance="?android:attr/textAppearanceLarge" android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/XerrorLog" /></TableLayout></ScrollView></LinearLayout>
