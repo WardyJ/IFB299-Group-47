@@ -2,7 +2,7 @@
 <xs:schema xmlns:android="http://schemas.android.com/apk/res/android" attributeFormDefault="qualified" elementFormDefault="unqualified" targetNamespace="http://schemas.android.com/apk/res/android" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:annotation>
     <xs:documentation>v19</xs:documentation>
-    <xs:documentation>9/10/2016 3:21:14 AM</xs:documentation>
+    <xs:documentation>9/10/2016 3:02:47 PM</xs:documentation>
   </xs:annotation>
   <xs:attribute name="accessibilityLiveRegion">
     <xs:annotation>
@@ -9960,7 +9960,7 @@
             <xs:enumeration value="@+id/" />
             <xs:enumeration value="@+id/imageView1" />
             <xs:enumeration value="@id/btnDate" />
-            <xs:enumeration value="@id/button1" />
+            <xs:enumeration value="@id/btnResetPassword" />
             <xs:enumeration value="@id/calendarView" />
             <xs:enumeration value="@id/courseInfoBtn" />
             <xs:enumeration value="@id/displayDateOfBirth" />
@@ -9992,6 +9992,7 @@
             <xs:enumeration value="@id/progressBar" />
             <xs:enumeration value="@id/registerBtn" />
             <xs:enumeration value="@id/registerProgressBar" />
+            <xs:enumeration value="@id/resetPasswordProgressBar" />
             <xs:enumeration value="@id/scrollView1" />
             <xs:enumeration value="@id/sendButton" />
             <xs:enumeration value="@id/space1" />
@@ -10006,6 +10007,7 @@
             <xs:enumeration value="@id/textView5" />
             <xs:enumeration value="@id/textView6" />
             <xs:enumeration value="@id/txtDisplay" />
+            <xs:enumeration value="@id/txtResetError" />
             <xs:enumeration value="@id/txtview1" />
             <xs:enumeration value="@id/XbtnInsert" />
             <xs:enumeration value="@id/XerrorLog" />
@@ -10024,6 +10026,7 @@
             <xs:enumeration value="@id/XetPhoneNumber" />
             <xs:enumeration value="@id/XetPrescribedMedication" />
             <xs:enumeration value="@id/XetRelationship" />
+            <xs:enumeration value="@id/XetResetPassword" />
             <xs:enumeration value="@id/XetState" />
             <xs:enumeration value="@id/XetStreetAddress" />
             <xs:enumeration value="@id/XetZipOrPostcode" />

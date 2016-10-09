@@ -37,12 +37,12 @@
                   android:textAppearance="?android:attr/textAppearanceMedium"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:id="@+id/TextPassword" />--><EditText android:layout_width="match_parent" android:layout_height="30dp" android:id="@+id/XetPassword" android:hint="Password" android:paddingLeft="5dp" android:paddingRight="5dp" android:textColorHint="#99C8F5" android:background="@drawable/edittext" android:textColor="#4799E8" android:layout_margin="10dp" android:textCursorDrawable="@null" android:maxLength="20" /><!--<TextView
+                  android:id="@+id/TextPassword" />--><EditText android:layout_width="match_parent" android:layout_height="30dp" android:id="@+id/XetPassword" android:hint="Password" android:paddingLeft="5dp" android:paddingRight="5dp" android:textColorHint="#99C8F5" android:background="@drawable/edittext" android:textColor="#4799E8" android:layout_margin="10dp" android:textCursorDrawable="@null" android:maxLength="20" android:inputType="textPassword" /><!--<TextView
                   android:text="Confirm Password *"
                   android:textAppearance="?android:attr/textAppearanceMedium"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:id="@+id/TextConfirmPassword" />--><EditText android:layout_width="match_parent" android:layout_height="30dp" android:id="@+id/XetConfirmPassword" android:hint="Confirm Password" android:paddingLeft="5dp" android:paddingRight="5dp" android:textColorHint="#99C8F5" android:background="@drawable/edittext" android:textColor="#4799E8" android:layout_margin="10dp" android:textCursorDrawable="@null" android:maxLength="20" /><!--<TextView
+                  android:id="@+id/TextConfirmPassword" />--><EditText android:layout_width="match_parent" android:layout_height="30dp" android:id="@+id/XetConfirmPassword" android:hint="Confirm Password" android:paddingLeft="5dp" android:paddingRight="5dp" android:textColorHint="#99C8F5" android:background="@drawable/edittext" android:textColor="#4799E8" android:layout_margin="10dp" android:textCursorDrawable="@null" android:maxLength="20" android:inputType="textPassword" /><!--<TextView
                   android:text="Emergency Contact Name *"
                   android:textAppearance="?android:attr/textAppearanceMedium"
                   android:layout_width="match_parent"

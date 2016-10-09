@@ -131,23 +131,8 @@ namespace zenmc
             {
                 WebClient client = new WebClient();
 
-                parameters = new NameValueCollection();
-                parameters.Add("FullName", etFullName.Text);
-                parameters.Add("DateOfBirth", birthday);
-                parameters.Add("PhoneNumber", etPhoneNumber.Text);
-                parameters.Add("Email", etEmail.Text);
-                parameters.Add("Gender", gender);
-                parameters.Add("Password", etPassword.Text);
-                parameters.Add("MedicalConditions", etMedicalConditions.Text);
-                parameters.Add("PrescribedMedication", etPrescribedMedication.Text);
-                parameters.Add("ContactName", etContactName.Text);
-                parameters.Add("Relationship", etRelationship.Text);
-                parameters.Add("ContactPhoneNumber", etContactPhoneNumber.Text);
-                parameters.Add("StreetAddress", etStreetAddress.Text);
-                parameters.Add("City", etCity.Text);
-                parameters.Add("ZipOrPostcode", etZipOrPostcode.Text);
-                parameters.Add("State", etState.Text);
-                parameters.Add("Country", etCountry.Text);
+                setParameters();
+                
 
                 progressBar.Visibility = ViewStates.Visible;
                 client.UploadValuesCompleted += client_UploadValuesCompleted;
@@ -317,6 +302,27 @@ namespace zenmc
                 //FindViewById<TextView>(Resource.Id.TextContactPhoneNumber).SetTextColor(Android.Graphics.Color.Red);
             }
 
+        }
+
+        void setParameters()
+        {
+            parameters = new NameValueCollection();
+            parameters.Add("FullName", etFullName.Text);
+            parameters.Add("DateOfBirth", birthday);
+            parameters.Add("PhoneNumber", etPhoneNumber.Text);
+            parameters.Add("Email", etEmail.Text);
+            parameters.Add("Gender", gender);
+            parameters.Add("Password", etPassword.Text);
+            parameters.Add("MedicalConditions", etMedicalConditions.Text);
+            parameters.Add("PrescribedMedication", etPrescribedMedication.Text);
+            parameters.Add("ContactName", etContactName.Text);
+            parameters.Add("Relationship", etRelationship.Text);
+            parameters.Add("ContactPhoneNumber", etContactPhoneNumber.Text);
+            parameters.Add("StreetAddress", etStreetAddress.Text);
+            parameters.Add("City", etCity.Text);
+            parameters.Add("ZipOrPostcode", etZipOrPostcode.Text);
+            parameters.Add("State", etState.Text);
+            parameters.Add("Country", etCountry.Text);
         }
 
         void client_UploadValuesCompleted(object sender, UploadValuesCompletedEventArgs e)

@@ -9,7 +9,6 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using System.Data;
 using System.Security.Cryptography;
 using System.Collections.Specialized;
 using System.Net;
@@ -29,6 +28,7 @@ namespace zenmc
         private string passwordInput;
         private bool success; //Becomes true when correct login information is given, false if incorrect
         private string studentID;
+        private Button btnResetPassword;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -43,12 +43,14 @@ namespace zenmc
             Button loginButton = FindViewById<Button>(Resource.Id.loginBtn);
             loginButton.Click += loginButton_Click;
 
+            btnResetPassword = FindViewById<Button>(Resource.Id.btnResetPassword);
             Button registerButton = FindViewById<Button>(Resource.Id.registerBtn);
             registerButton.Click += (sender, e) =>
             {
                 var intent = new Intent(this, typeof(registration));
                 StartActivity(intent);
             };
+            btnResetPassword.Click += btnResetPassword_Click;
         }
 
         private void loginButton_Click(object sender, EventArgs e)
@@ -97,6 +99,13 @@ namespace zenmc
                     StartActivity(intent);
                 }
             });
+        }
+        void btnResetPassword_Click(object sender, EventArgs e)
+        {
+            FragmentTransaction transaction = FragmentManager.BeginTransaction();
+            //Show reset password dialog fragment
+            passwordReset resetDialog = new passwordReset();
+            resetDialog.Show(transaction, "resetDialog");
         }
     }
 }

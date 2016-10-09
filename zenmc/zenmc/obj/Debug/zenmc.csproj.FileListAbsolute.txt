@@ -24,6 +24,7 @@ C:\Users\James\documents\visual studio 2015\Projects\zenmc\zenmc\obj\Debug\res\d
 C:\Users\James\documents\visual studio 2015\Projects\zenmc\zenmc\obj\Debug\res\drawable\formgroup.xml
 C:\Users\James\documents\visual studio 2015\Projects\zenmc\zenmc\obj\Debug\R.cs.flag
 C:\Users\James\documents\visual studio 2015\Projects\zenmc\zenmc\obj\Debug\uploadflags.txt
+C:\Users\James\documents\visual studio 2015\Projects\zenmc\zenmc\obj\Debug\res\layout\passwordreset.xml
 C:\Users\James\documents\visual studio 2015\Projects\zenmc\zenmc\bin\Debug\zenmc.dll.mdb
 C:\Users\James\documents\visual studio 2015\Projects\zenmc\zenmc\bin\Debug\Java.Interop.dll.mdb
 C:\Users\James\documents\visual studio 2015\Projects\zenmc\zenmc\bin\Debug\Mono.Android.dll.mdb

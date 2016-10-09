@@ -75,74 +75,77 @@ namespace zenmc
 			// aapt resource value: 0x7f050013
 			public const int LoginPassword = 2131034131;
 			
-			// aapt resource value: 0x7f050040
-			public const int XbtnInsert = 2131034176;
+			// aapt resource value: 0x7f050043
+			public const int XbtnInsert = 2131034179;
 			
-			// aapt resource value: 0x7f050042
-			public const int XerrorLog = 2131034178;
-			
-			// aapt resource value: 0x7f05003c
-			public const int XetCity = 2131034172;
-			
-			// aapt resource value: 0x7f050035
-			public const int XetConfirmPassword = 2131034165;
-			
-			// aapt resource value: 0x7f050036
-			public const int XetContactName = 2131034166;
-			
-			// aapt resource value: 0x7f050037
-			public const int XetContactPhoneNumber = 2131034167;
+			// aapt resource value: 0x7f050045
+			public const int XerrorLog = 2131034181;
 			
 			// aapt resource value: 0x7f05003f
-			public const int XetCountry = 2131034175;
-			
-			// aapt resource value: 0x7f05002d
-			public const int XetEmail = 2131034157;
-			
-			// aapt resource value: 0x7f050032
-			public const int XetFemale = 2131034162;
-			
-			// aapt resource value: 0x7f05002c
-			public const int XetFullName = 2131034156;
-			
-			// aapt resource value: 0x7f050030
-			public const int XetGender = 2131034160;
-			
-			// aapt resource value: 0x7f050031
-			public const int XetMale = 2131034161;
-			
-			// aapt resource value: 0x7f050039
-			public const int XetMedicalConditions = 2131034169;
-			
-			// aapt resource value: 0x7f050034
-			public const int XetPassword = 2131034164;
-			
-			// aapt resource value: 0x7f050033
-			public const int XetPhoneNumber = 2131034163;
-			
-			// aapt resource value: 0x7f05003a
-			public const int XetPrescribedMedication = 2131034170;
+			public const int XetCity = 2131034175;
 			
 			// aapt resource value: 0x7f050038
-			public const int XetRelationship = 2131034168;
+			public const int XetConfirmPassword = 2131034168;
 			
-			// aapt resource value: 0x7f05003e
-			public const int XetState = 2131034174;
+			// aapt resource value: 0x7f050039
+			public const int XetContactName = 2131034169;
 			
-			// aapt resource value: 0x7f05003b
-			public const int XetStreetAddress = 2131034171;
+			// aapt resource value: 0x7f05003a
+			public const int XetContactPhoneNumber = 2131034170;
+			
+			// aapt resource value: 0x7f050042
+			public const int XetCountry = 2131034178;
+			
+			// aapt resource value: 0x7f050030
+			public const int XetEmail = 2131034160;
+			
+			// aapt resource value: 0x7f050035
+			public const int XetFemale = 2131034165;
+			
+			// aapt resource value: 0x7f05002f
+			public const int XetFullName = 2131034159;
+			
+			// aapt resource value: 0x7f050033
+			public const int XetGender = 2131034163;
+			
+			// aapt resource value: 0x7f050034
+			public const int XetMale = 2131034164;
+			
+			// aapt resource value: 0x7f05003c
+			public const int XetMedicalConditions = 2131034172;
+			
+			// aapt resource value: 0x7f050037
+			public const int XetPassword = 2131034167;
+			
+			// aapt resource value: 0x7f050036
+			public const int XetPhoneNumber = 2131034166;
 			
 			// aapt resource value: 0x7f05003d
-			public const int XetZipOrPostcode = 2131034173;
+			public const int XetPrescribedMedication = 2131034173;
+			
+			// aapt resource value: 0x7f05003b
+			public const int XetRelationship = 2131034171;
+			
+			// aapt resource value: 0x7f05001f
+			public const int XetResetPassword = 2131034143;
+			
+			// aapt resource value: 0x7f050041
+			public const int XetState = 2131034177;
+			
+			// aapt resource value: 0x7f05003e
+			public const int XetStreetAddress = 2131034174;
+			
+			// aapt resource value: 0x7f050040
+			public const int XetZipOrPostcode = 2131034176;
 			
 			// aapt resource value: 0x7f050010
 			public const int ZMCLabel = 2131034128;
 			
-			// aapt resource value: 0x7f05002e
-			public const int btnDate = 2131034158;
+			// aapt resource value: 0x7f050031
+			public const int btnDate = 2131034161;
 			
 			// aapt resource value: 0x7f050019
-			public const int button1 = 2131034137;
+			public const int btnResetPassword = 2131034137;
 			
 			// aapt resource value: 0x7f050001
 			public const int calendarView = 2131034113;
@@ -153,11 +156,11 @@ namespace zenmc
 			// aapt resource value: 0x7f05000f
 			public const int datePicker = 2131034127;
 			
-			// aapt resource value: 0x7f05002f
-			public const int displayDateOfBirth = 2131034159;
+			// aapt resource value: 0x7f050032
+			public const int displayDateOfBirth = 2131034162;
 			
-			// aapt resource value: 0x7f050044
-			public const int errormessageEdit = 2131034180;
+			// aapt resource value: 0x7f050047
+			public const int errormessageEdit = 2131034183;
 			
 			// aapt resource value: 0x7f050003
 			public const int eventView = 2131034115;
@@ -192,53 +195,56 @@ namespace zenmc
 			// aapt resource value: 0x7f050017
 			public const int loginProgressBar = 2131034135;
 			
-			// aapt resource value: 0x7f050043
-			public const int nameEdit = 2131034179;
-			
-			// aapt resource value: 0x7f050022
-			public const int prfDateOfBirth = 2131034146;
-			
-			// aapt resource value: 0x7f050026
-			public const int prfEmail = 2131034150;
-			
-			// aapt resource value: 0x7f050020
-			public const int prfFullName = 2131034144;
-			
-			// aapt resource value: 0x7f050028
-			public const int prfGender = 2131034152;
-			
-			// aapt resource value: 0x7f050024
-			public const int prfPhoneNumber = 2131034148;
-			
-			// aapt resource value: 0x7f050021
-			public const int prfTextDateOfBirth = 2131034145;
+			// aapt resource value: 0x7f050046
+			public const int nameEdit = 2131034182;
 			
 			// aapt resource value: 0x7f050025
-			public const int prfTextEmail = 2131034149;
-			
-			// aapt resource value: 0x7f05001f
-			public const int prfTextFullName = 2131034143;
-			
-			// aapt resource value: 0x7f050027
-			public const int prfTextGender = 2131034151;
-			
-			// aapt resource value: 0x7f050023
-			public const int prfTextPhoneNumber = 2131034147;
+			public const int prfDateOfBirth = 2131034149;
 			
 			// aapt resource value: 0x7f050029
-			public const int progressBar = 2131034153;
+			public const int prfEmail = 2131034153;
+			
+			// aapt resource value: 0x7f050023
+			public const int prfFullName = 2131034147;
+			
+			// aapt resource value: 0x7f05002b
+			public const int prfGender = 2131034155;
+			
+			// aapt resource value: 0x7f050027
+			public const int prfPhoneNumber = 2131034151;
+			
+			// aapt resource value: 0x7f050024
+			public const int prfTextDateOfBirth = 2131034148;
+			
+			// aapt resource value: 0x7f050028
+			public const int prfTextEmail = 2131034152;
+			
+			// aapt resource value: 0x7f050022
+			public const int prfTextFullName = 2131034146;
+			
+			// aapt resource value: 0x7f05002a
+			public const int prfTextGender = 2131034154;
+			
+			// aapt resource value: 0x7f050026
+			public const int prfTextPhoneNumber = 2131034150;
+			
+			// aapt resource value: 0x7f05002c
+			public const int progressBar = 2131034156;
 			
 			// aapt resource value: 0x7f050018
 			public const int registerBtn = 2131034136;
 			
-			// aapt resource value: 0x7f050041
-			public const int registerProgressBar = 2131034177;
+			// aapt resource value: 0x7f050044
+			public const int registerProgressBar = 2131034180;
 			
-			// aapt resource value: 0x7f05002a
-			public const int scrollView1 = 2131034154;
+			// aapt resource value: 0x7f050020
+			public const int resetPasswordProgressBar = 2131034144;
 			
-			// aapt resource value: 0x7f050045
-			public const int sendButton = 2131034181;
+			// aapt resource value: 0x7f05002d
+			public const int scrollView1 = 2131034157;
+			
+			// aapt resource value: 0x7f050048
+			public const int sendButton = 2131034184;
 			
 			// aapt resource value: 0x7f050006
 			public const int space1 = 2131034118;
@@ -252,8 +258,8 @@ namespace zenmc
 			// aapt resource value: 0x7f05000c
 			public const int space4 = 2131034124;
 			
-			// aapt resource value: 0x7f05002b
-			public const int textRequiredFields = 2131034155;
+			// aapt resource value: 0x7f05002e
+			public const int textRequiredFields = 2131034158;
 			
 			// aapt resource value: 0x7f050005
 			public const int textView1 = 2131034117;
@@ -275,6 +281,9 @@ namespace zenmc
 			
 			// aapt resource value: 0x7f050002
 			public const int txtDisplay = 2131034114;
+			
+			// aapt resource value: 0x7f050021
+			public const int txtResetError = 2131034145;
 			
 			// aapt resource value: 0x7f050000
 			public const int txtview1 = 2131034112;
@@ -311,13 +320,16 @@ namespace zenmc
 			public const int menu = 2130903045;
 			
 			// aapt resource value: 0x7f030006
-			public const int profile = 2130903046;
+			public const int passwordReset = 2130903046;
 			
 			// aapt resource value: 0x7f030007
-			public const int registration = 2130903047;
+			public const int profile = 2130903047;
 			
 			// aapt resource value: 0x7f030008
-			public const int smsTest = 2130903048;
+			public const int registration = 2130903048;
+			
+			// aapt resource value: 0x7f030009
+			public const int smsTest = 2130903049;
 			
 			static Layout()
 			{

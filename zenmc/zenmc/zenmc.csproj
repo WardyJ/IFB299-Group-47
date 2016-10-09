@@ -56,6 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="calendar.cs" />
+    <Compile Include="passwordReset.cs" />
     <Compile Include="contactPage.cs" />
     <Compile Include="dialogDate.cs" />
     <Compile Include="donations.cs" />
@@ -98,6 +99,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout-v21\dialogDate.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\passwordReset.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

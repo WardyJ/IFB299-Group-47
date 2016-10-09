@@ -2,6 +2,10 @@ zenmc.calendar, zenmc;md5ac68c4bca503c6022c7a6c0f0301971e.calendar
 zenmc.calendar, zenmc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md5ac68c4bca503c6022c7a6c0f0301971e.calendar
 zenmc.calendar;md5ac68c4bca503c6022c7a6c0f0301971e.calendar
 zenmc.calendar;md5ac68c4bca503c6022c7a6c0f0301971e.calendar
+zenmc.passwordReset, zenmc;md5ac68c4bca503c6022c7a6c0f0301971e.passwordReset
+zenmc.passwordReset, zenmc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md5ac68c4bca503c6022c7a6c0f0301971e.passwordReset
+zenmc.passwordReset;md5ac68c4bca503c6022c7a6c0f0301971e.passwordReset
+zenmc.passwordReset;md5ac68c4bca503c6022c7a6c0f0301971e.passwordReset
 zenmc.contactPage, zenmc;md5ac68c4bca503c6022c7a6c0f0301971e.contactPage
 zenmc.contactPage, zenmc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md5ac68c4bca503c6022c7a6c0f0301971e.contactPage
 zenmc.contactPage;md5ac68c4bca503c6022c7a6c0f0301971e.contactPage
