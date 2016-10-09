@@ -13,11 +13,9 @@ using Newtonsoft.Json;
 
 namespace zenmc
 {
-    class Student
+    public class Student
     {
-        [JsonProperty("StudentID")]
         public int StudentID { get; set; }
-        [JsonProperty("FullName")]
         public string FullName { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string PhoneNumber { get; set; }
@@ -25,5 +23,15 @@ namespace zenmc
         public string StudentType { get; set; }
         public string Gender { get; set; }
         public string PasswordHash { get; set; }
+        public string MedicalConditions { get; set; }
+        public string PrescribedMedication { get; set; }
+        public string ContactName { get; set; }
+        public string Relationship { get; set; }
+        public string ContactPhoneNumber { get; set; }
+        public string StreetAddress { get; set; }
+        public string City { get; set; }
+        public string ZipOrPostcode { get; set; }
+        public string State { get; set; }
+        public string Country { get; set; }
     }
 }

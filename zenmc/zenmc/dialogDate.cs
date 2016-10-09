@@ -32,6 +32,9 @@ namespace zenmc
         {
             DateTime currently = DateTime.Now;
             DatePickerDialog dialog = new DatePickerDialog(Activity, 3, this, 1980, 0, 1);
+            var origin = new DateTime(1970, 1, 1);
+            dialog.DatePicker.MaxDate = (long)(DateTime.Now.Date.AddYears(-18) - origin).TotalMilliseconds;
+            dialog.DatePicker.MinDate = (long)(DateTime.Now.Date.AddYears(-116) - origin).TotalMilliseconds;
             return dialog;
         }
 

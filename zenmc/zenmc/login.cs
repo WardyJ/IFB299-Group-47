@@ -107,5 +107,11 @@ namespace zenmc
             passwordReset resetDialog = new passwordReset();
             resetDialog.Show(transaction, "resetDialog");
         }
+
+        public override void OnBackPressed()
+        {
+            //Stop user from leaving the log in page with back button.
+            return;
+        }
     }
 }

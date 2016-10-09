@@ -2,6 +2,18 @@ zenmc.calendar, zenmc;md5ac68c4bca503c6022c7a6c0f0301971e.calendar
 zenmc.calendar, zenmc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md5ac68c4bca503c6022c7a6c0f0301971e.calendar
 zenmc.calendar;md5ac68c4bca503c6022c7a6c0f0301971e.calendar
 zenmc.calendar;md5ac68c4bca503c6022c7a6c0f0301971e.calendar
+zenmc.editProfile, zenmc;md5ac68c4bca503c6022c7a6c0f0301971e.editProfile
+zenmc.editProfile, zenmc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md5ac68c4bca503c6022c7a6c0f0301971e.editProfile
+zenmc.editProfile;md5ac68c4bca503c6022c7a6c0f0301971e.editProfile
+zenmc.editProfile;md5ac68c4bca503c6022c7a6c0f0301971e.editProfile
+zenmc.emergencyContact, zenmc;md5ac68c4bca503c6022c7a6c0f0301971e.emergencyContact
+zenmc.emergencyContact, zenmc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md5ac68c4bca503c6022c7a6c0f0301971e.emergencyContact
+zenmc.emergencyContact;md5ac68c4bca503c6022c7a6c0f0301971e.emergencyContact
+zenmc.emergencyContact;md5ac68c4bca503c6022c7a6c0f0301971e.emergencyContact
+zenmc.passwordChange, zenmc;md5ac68c4bca503c6022c7a6c0f0301971e.passwordChange
+zenmc.passwordChange, zenmc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md5ac68c4bca503c6022c7a6c0f0301971e.passwordChange
+zenmc.passwordChange;md5ac68c4bca503c6022c7a6c0f0301971e.passwordChange
+zenmc.passwordChange;md5ac68c4bca503c6022c7a6c0f0301971e.passwordChange
 zenmc.passwordReset, zenmc;md5ac68c4bca503c6022c7a6c0f0301971e.passwordReset
 zenmc.passwordReset, zenmc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md5ac68c4bca503c6022c7a6c0f0301971e.passwordReset
 zenmc.passwordReset;md5ac68c4bca503c6022c7a6c0f0301971e.passwordReset
@@ -34,6 +46,10 @@ zenmc.registration, zenmc;md5ac68c4bca503c6022c7a6c0f0301971e.registration
 zenmc.registration, zenmc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md5ac68c4bca503c6022c7a6c0f0301971e.registration
 zenmc.registration;md5ac68c4bca503c6022c7a6c0f0301971e.registration
 zenmc.registration;md5ac68c4bca503c6022c7a6c0f0301971e.registration
+zenmc.residentialAddress, zenmc;md5ac68c4bca503c6022c7a6c0f0301971e.residentialAddress
+zenmc.residentialAddress, zenmc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md5ac68c4bca503c6022c7a6c0f0301971e.residentialAddress
+zenmc.residentialAddress;md5ac68c4bca503c6022c7a6c0f0301971e.residentialAddress
+zenmc.residentialAddress;md5ac68c4bca503c6022c7a6c0f0301971e.residentialAddress
 zenmc.smsTest, zenmc;md5ac68c4bca503c6022c7a6c0f0301971e.smsTest
 zenmc.smsTest, zenmc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md5ac68c4bca503c6022c7a6c0f0301971e.smsTest
 zenmc.smsTest;md5ac68c4bca503c6022c7a6c0f0301971e.smsTest

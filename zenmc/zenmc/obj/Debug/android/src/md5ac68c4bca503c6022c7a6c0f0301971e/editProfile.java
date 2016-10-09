@@ -1,7 +1,7 @@
 package md5ac68c4bca503c6022c7a6c0f0301971e;
 
 
-public class login
+public class editProfile
 	extends android.app.Activity
 	implements
 		mono.android.IGCUserPeer
@@ -11,17 +11,16 @@ public class login
 	static {
 		__md_methods = 
 			"n_onCreate:(Landroid/os/Bundle;)V:GetOnCreate_Landroid_os_Bundle_Handler\n" +
-			"n_onBackPressed:()V:GetOnBackPressedHandler\n" +
 			"";
-		mono.android.Runtime.register ("zenmc.login, zenmc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", login.class, __md_methods);
+		mono.android.Runtime.register ("zenmc.editProfile, zenmc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", editProfile.class, __md_methods);
 	}
 
 
-	public login () throws java.lang.Throwable
+	public editProfile () throws java.lang.Throwable
 	{
 		super ();
-		if (getClass () == login.class)
-			mono.android.TypeManager.Activate ("zenmc.login, zenmc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "", this, new java.lang.Object[] {  });
+		if (getClass () == editProfile.class)
+			mono.android.TypeManager.Activate ("zenmc.editProfile, zenmc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "", this, new java.lang.Object[] {  });
 	}
 
 
@@ -31,14 +30,6 @@ public class login
 	}
 
 	private native void n_onCreate (android.os.Bundle p0);
-
-
-	public void onBackPressed ()
-	{
-		n_onBackPressed ();
-	}
-
-	private native void n_onBackPressed ();
 
 	private java.util.ArrayList refList;
 	public void monodroidAddReference (java.lang.Object obj)

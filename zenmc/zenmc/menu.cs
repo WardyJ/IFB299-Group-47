@@ -20,7 +20,7 @@ namespace zenmc
             string studentIDText = Intent.GetStringExtra("studentID");
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.menu);
-
+            
             Button profileButton = FindViewById<Button>(Resource.Id.gotoProfileBtn);
             profileButton.Click += (sender, e) =>
             {
@@ -33,7 +33,6 @@ namespace zenmc
             contactButton.Click += (sender, e) =>
             {
                 var intent = new Intent(this, typeof(contactPage));
-                //intent.PutStringArrayListExtra("phone_numbers", phoneNumbers);
                 StartActivity(intent);
             };
 
@@ -41,7 +40,6 @@ namespace zenmc
             donationButton.Click += (sender, e) =>
             {
                 var intent = new Intent(this, typeof(donations));
-                //intent.PutStringArrayListExtra("phone_numbers", phoneNumbers);
                 StartActivity(intent);
             };
 
@@ -49,17 +47,21 @@ namespace zenmc
             calendarButton.Click += (sender, e) =>
             {
                 var intent = new Intent(this, typeof(calendar));
-                //intent.PutStringArrayListExtra("phone_numbers", phoneNumbers);
                 StartActivity(intent);
             };
             Button smsTestButton = FindViewById<Button>(Resource.Id.gotoSmsTestBtn);
             smsTestButton.Click += (sender, e) =>
             {
                 var intent = new Intent(this, typeof(smsTest));
-                //intent.PutStringArrayListExtra("phone_numbers", phoneNumbers);
                 StartActivity(intent);
             };
-            // Create your application here
+            Button logOutButton = FindViewById<Button>(Resource.Id.gotoLogOutBtn);
+            logOutButton.Click += (sender, e) =>
+            {
+                var intent = new Intent(this, typeof(login));
+                StartActivity(intent);
+            };
+            
         }
     }
 }
