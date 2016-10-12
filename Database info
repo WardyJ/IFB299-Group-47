@@ -8,7 +8,12 @@ Online database info
 
 NEW DATABASE - since we lost another one. I set up Amazon EC2 for this one. If you have old database info in code you nee to replace it.
 
-Feel free to interact and change things to test the app I'll just overwrite everything at some point anyway
+Admins added to database
+Login to the app as owner with "theowner@zenmc.com.au" password "theowner"
+Login to the app as receptionist with "reception@zenmc.com.au" password "reception"
+You can add admin capabilities to the app, or ANYTHING.
+
+Feel free to interact and change things in the db to test the app with I'll just overwrite the database at some point anyway
 
 Server=ec2-52-62-115-138.ap-southeast-2.compute.amazonaws.com
 Port=3306
