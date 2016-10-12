@@ -20,7 +20,6 @@ namespace zenmc
         private TextView txtState;
         private TextView txtCountry;
         private Button btnBack;
-        private Uri uri = new Uri("http://ec2-52-62-115-138.ap-southeast-2.compute.amazonaws.com/resetpassword.php");
         
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {

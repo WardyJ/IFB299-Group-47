@@ -150,6 +150,15 @@ namespace zenmc
 			// aapt resource value: 0x7f050043
 			public const int XetResetPassword = 2131034179;
 			
+			// aapt resource value: 0x7f05006b
+			public const int XetSearchName = 2131034219;
+			
+			// aapt resource value: 0x7f050069
+			public const int XetSelectEmail = 2131034217;
+			
+			// aapt resource value: 0x7f050067
+			public const int XetSelectID = 2131034215;
+			
 			// aapt resource value: 0x7f050021
 			public const int XetState = 2131034145;
 			
@@ -189,6 +198,15 @@ namespace zenmc
 			// aapt resource value: 0x7f050054
 			public const int btnResidentialAddress = 2131034196;
 			
+			// aapt resource value: 0x7f05006c
+			public const int btnSearchName = 2131034220;
+			
+			// aapt resource value: 0x7f05006a
+			public const int btnSelectEmail = 2131034218;
+			
+			// aapt resource value: 0x7f050068
+			public const int btnSelectID = 2131034216;
+			
 			// aapt resource value: 0x7f050023
 			public const int btnUpdate = 2131034147;
 			
@@ -210,8 +228,8 @@ namespace zenmc
 			// aapt resource value: 0x7f050025
 			public const int editProfileProgressBar = 2131034149;
 			
-			// aapt resource value: 0x7f050065
-			public const int errormessageEdit = 2131034213;
+			// aapt resource value: 0x7f05006f
+			public const int errormessageEdit = 2131034223;
 			
 			// aapt resource value: 0x7f050003
 			public const int eventView = 2131034115;
@@ -249,8 +267,8 @@ namespace zenmc
 			// aapt resource value: 0x7f050035
 			public const int loginProgressBar = 2131034165;
 			
-			// aapt resource value: 0x7f050064
-			public const int nameEdit = 2131034212;
+			// aapt resource value: 0x7f05006e
+			public const int nameEdit = 2131034222;
 			
 			// aapt resource value: 0x7f050048
 			public const int prfDateOfBirth = 2131034184;
@@ -294,6 +312,9 @@ namespace zenmc
 			// aapt resource value: 0x7f050049
 			public const int prfTextPhoneNumber = 2131034185;
 			
+			// aapt resource value: 0x7f050065
+			public const int progressBar = 2131034213;
+			
 			// aapt resource value: 0x7f050036
 			public const int registerBtn = 2131034166;
 			
@@ -307,7 +328,10 @@ namespace zenmc
 			public const int scrollView1 = 2131034127;
 			
 			// aapt resource value: 0x7f050066
-			public const int sendButton = 2131034214;
+			public const int searchLayout = 2131034214;
+			
+			// aapt resource value: 0x7f050070
+			public const int sendButton = 2131034224;
 			
 			// aapt resource value: 0x7f050006
 			public const int space1 = 2131034118;
@@ -357,6 +381,9 @@ namespace zenmc
 			// aapt resource value: 0x7f050002
 			public const int txtDisplay = 2131034114;
 			
+			// aapt resource value: 0x7f05006d
+			public const int txtErrorLog = 2131034221;
+			
 			// aapt resource value: 0x7f050042
 			public const int txtPasswordError = 2131034178;
 			
@@ -365,6 +392,9 @@ namespace zenmc
 			
 			// aapt resource value: 0x7f050044
 			public const int txtResetError = 2131034180;
+			
+			// aapt resource value: 0x7f050064
+			public const int txtResultsLog = 2131034212;
 			
 			// aapt resource value: 0x7f050061
 			public const int txtState = 2131034209;
@@ -431,7 +461,13 @@ namespace zenmc
 			public const int residentialAddress = 2130903052;
 			
 			// aapt resource value: 0x7f03000d
-			public const int smsTest = 2130903053;
+			public const int searchName = 2130903053;
+			
+			// aapt resource value: 0x7f03000e
+			public const int selectProfile = 2130903054;
+			
+			// aapt resource value: 0x7f03000f
+			public const int smsTest = 2130903055;
 			
 			static Layout()
 			{

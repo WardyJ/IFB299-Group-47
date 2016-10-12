@@ -79,7 +79,16 @@ namespace zenmc
 
             progressBar = FindViewById<ProgressBar>(Resource.Id.editProfileProgressBar);
 
-            studentInfo = JsonConvert.DeserializeObject<List<Student>>(Intent.GetStringExtra("Student"));
+            if (Intent.HasExtra("Student"))
+            {
+                studentInfo = JsonConvert.DeserializeObject<List<Student>>(Intent.GetStringExtra("Student"));
+            }
+            else
+            {
+                studentInfo = JsonConvert.DeserializeObject<List<Student>>(Intent.GetStringExtra("Owner"));
+            }
+            
+
             etFullName.Text = studentInfo[0].FullName;
             etEmail.Text = studentInfo[0].Email;
             displayDate.Text = studentInfo[0].DateOfBirth.ToString("dd/MM/yyyy");
@@ -320,7 +329,15 @@ namespace zenmc
                     progressBar.Visibility = ViewStates.Invisible;
 
                     Intent intent = new Intent(this, typeof(profile));
-                    intent.PutExtra("Student", JsonConvert.SerializeObject(studentInfo));
+
+                    if (Intent.HasExtra("Student"))
+                    {
+                        intent.PutExtra("StudentEdit", JsonConvert.SerializeObject(studentInfo));
+                    }
+                    else
+                    {
+                        intent.PutExtra("OwnerEdit", JsonConvert.SerializeObject(studentInfo));
+                    }
                     StartActivity(intent);
                     Finish();
                 }
@@ -330,7 +347,16 @@ namespace zenmc
         void btnCancel_Click(object sender, EventArgs e)
         {
             Intent intent = new Intent(this, typeof(profile));
-            intent.PutExtra("Student", JsonConvert.SerializeObject(studentInfo));
+
+            if (Intent.HasExtra("Student"))
+            {
+                intent.PutExtra("StudentEdit", JsonConvert.SerializeObject(studentInfo));
+            }
+            else
+            {
+                intent.PutExtra("OwnerEdit", JsonConvert.SerializeObject(studentInfo));
+            }
+
             StartActivity(intent);
             Finish();
         }

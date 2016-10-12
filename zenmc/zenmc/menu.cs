@@ -15,18 +15,30 @@ namespace zenmc
     [Activity(Label = "Zen Meditation Centre", MainLauncher = false)]
     public class menu : Activity
     {
+        private string userID;
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            string studentIDText = Intent.GetStringExtra("studentID");
             base.OnCreate(savedInstanceState);
+
+            ISharedPreferences pref = Application.Context.GetSharedPreferences("UserInfo", FileCreationMode.Private);
+            userID = pref.GetString("UserID", string.Empty);
+            
             SetContentView(Resource.Layout.menu);
             
             Button profileButton = FindViewById<Button>(Resource.Id.gotoProfileBtn);
             profileButton.Click += (sender, e) =>
             {
-                var intent = new Intent(this, typeof(profile));
-                intent.PutExtra("studentID", studentIDText);
-                StartActivity(intent);
+                if(userID == "Owner" || userID == "Receptionist")
+                {
+                    var intent = new Intent(this, typeof(selectProfile));
+                    StartActivity(intent);
+                }
+                else
+                {
+                    var intent = new Intent(this, typeof(profile));
+                    intent.PutExtra("Student", userID);
+                    StartActivity(intent);
+                }
             };
 
             Button contactButton = FindViewById<Button>(Resource.Id.gotoContactBtn);
@@ -58,6 +70,12 @@ namespace zenmc
             Button logOutButton = FindViewById<Button>(Resource.Id.gotoLogOutBtn);
             logOutButton.Click += (sender, e) =>
             {
+                //clear stored user data
+                ISharedPreferencesEditor editor = pref.Edit();
+                editor.Clear();
+                editor.Apply();
+
+                //exit to log in screen
                 var intent = new Intent(this, typeof(login));
                 StartActivity(intent);
             };

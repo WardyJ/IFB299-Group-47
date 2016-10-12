@@ -27,7 +27,8 @@ namespace zenmc
         private string emailInput;
         private string passwordInput;
         private bool success; //Becomes true when correct login information is given, false if incorrect
-        private string studentID;
+        private bool waiting; //Will be true when waiting for the server
+        private string userID;
         private Button btnResetPassword;
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -55,19 +56,20 @@ namespace zenmc
 
         private void loginButton_Click(object sender, EventArgs e)
         {
-            emailInput = FindViewById<EditText>(Resource.Id.lgnEmail).Text;
-            passwordInput = FindViewById<EditText>(Resource.Id.lgnPassword).Text;
+            if(!waiting)
+            {
+                waiting = true;
+                emailInput = FindViewById<EditText>(Resource.Id.lgnEmail).Text.Trim();
+                passwordInput = FindViewById<EditText>(Resource.Id.lgnPassword).Text.Trim();
+                
+                parameters = new NameValueCollection();
+                parameters.Add("Email", emailInput);
+                parameters.Add("Password", passwordInput);
 
-
-
-
-            parameters = new NameValueCollection();
-            parameters.Add("Email", emailInput);
-            parameters.Add("Password", passwordInput);
-
-            progressBar.Visibility = ViewStates.Visible;
-            client.UploadValuesCompleted += client_UploadValuesCompleted;
-            client.UploadValuesAsync(uri, parameters);
+                progressBar.Visibility = ViewStates.Visible;
+                client.UploadValuesCompleted += client_UploadValuesCompleted;
+                client.UploadValuesAsync(uri, parameters);
+            }
         }
 
 
@@ -78,10 +80,10 @@ namespace zenmc
             RunOnUiThread(() =>
             {
 
-                studentID = System.Text.Encoding.UTF8.GetString(e.Result, 0, e.Result.Length);
-                studentID = studentID.Replace("\r", string.Empty).Replace("\n", string.Empty);
+                userID = Encoding.UTF8.GetString(e.Result, 0, e.Result.Length);
+                userID = userID.Replace("\r", string.Empty).Replace("\n", string.Empty);
 
-                if (studentID != "None")
+                if (userID != "None")
                 {
                     success = true;
                 }
@@ -94,10 +96,17 @@ namespace zenmc
                 }
                 else
                 {
+                    ISharedPreferences pref = Application.Context.GetSharedPreferences("UserInfo", FileCreationMode.Private);
+                    ISharedPreferencesEditor editor = pref.Edit();
+
+                    editor.PutString(userID, userID);
+                    editor.Apply();
+
                     var intent = new Intent(this, typeof(menu));
-                    intent.PutExtra("studentID", studentID);
                     StartActivity(intent);
+                    Finish();
                 }
+                waiting = false;
             });
         }
         void btnResetPassword_Click(object sender, EventArgs e)

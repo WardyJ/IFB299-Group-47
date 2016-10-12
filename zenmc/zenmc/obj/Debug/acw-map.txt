@@ -50,6 +50,14 @@ zenmc.residentialAddress, zenmc;md5ac68c4bca503c6022c7a6c0f0301971e.residentialA
 zenmc.residentialAddress, zenmc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md5ac68c4bca503c6022c7a6c0f0301971e.residentialAddress
 zenmc.residentialAddress;md5ac68c4bca503c6022c7a6c0f0301971e.residentialAddress
 zenmc.residentialAddress;md5ac68c4bca503c6022c7a6c0f0301971e.residentialAddress
+zenmc.searchName, zenmc;md5ac68c4bca503c6022c7a6c0f0301971e.searchName
+zenmc.searchName, zenmc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md5ac68c4bca503c6022c7a6c0f0301971e.searchName
+zenmc.searchName;md5ac68c4bca503c6022c7a6c0f0301971e.searchName
+zenmc.searchName;md5ac68c4bca503c6022c7a6c0f0301971e.searchName
+zenmc.selectProfile, zenmc;md5ac68c4bca503c6022c7a6c0f0301971e.selectProfile
+zenmc.selectProfile, zenmc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md5ac68c4bca503c6022c7a6c0f0301971e.selectProfile
+zenmc.selectProfile;md5ac68c4bca503c6022c7a6c0f0301971e.selectProfile
+zenmc.selectProfile;md5ac68c4bca503c6022c7a6c0f0301971e.selectProfile
 zenmc.smsTest, zenmc;md5ac68c4bca503c6022c7a6c0f0301971e.smsTest
 zenmc.smsTest, zenmc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md5ac68c4bca503c6022c7a6c0f0301971e.smsTest
 zenmc.smsTest;md5ac68c4bca503c6022c7a6c0f0301971e.smsTest

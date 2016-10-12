@@ -35,7 +35,6 @@ namespace zenmc
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.profile);
-            studentIDText = Intent.GetStringExtra("studentID");
             btnEmergencyContact = FindViewById<Button>(Resource.Id.btnEmergencyContact);
             btnResidentialAddress = FindViewById<Button>(Resource.Id.btnResidentialAddress);
             btnChangePassword = FindViewById<Button>(Resource.Id.btnChangePassword);
@@ -43,13 +42,32 @@ namespace zenmc
             btnEditProfile = FindViewById<Button>(Resource.Id.btnEditProfile);
 
 
+
             WebClient client = new WebClient();
+
+            
+
+            if(Intent.HasExtra("Student"))
+            {
+                studentIDText = Intent.GetStringExtra("Student");
+
+            }
+            else
+            {
+                studentIDText = Intent.GetStringExtra("Owner");
+            }
 
             parameters.Add("StudentID", studentIDText);
 
-            if( Intent.HasExtra("Student"))
+            if ( Intent.HasExtra("StudentEdit"))
             {
-                studentInfo = JsonConvert.DeserializeObject<List<Student>>(Intent.GetStringExtra("Student"));
+                studentInfo = JsonConvert.DeserializeObject<List<Student>>(Intent.GetStringExtra("StudentEdit"));
+                studentIDText = studentInfo[0].StudentID.ToString();
+                showProfileInfo();
+            }
+            else if (Intent.HasExtra("OwnerEdit"))
+            {
+                studentInfo = JsonConvert.DeserializeObject<List<Student>>(Intent.GetStringExtra("OwnerEdit"));
                 studentIDText = studentInfo[0].StudentID.ToString();
                 showProfileInfo();
             }
@@ -154,9 +172,19 @@ namespace zenmc
         private void btnEditProfile_Click(object sender, EventArgs e)
         {
             Intent intent = new Intent(this, typeof(editProfile));
-            intent.PutExtra("Student", JsonConvert.SerializeObject(studentInfo));
-            StartActivity(intent);
-            Finish();
+            if(Intent.HasExtra("Owner"))
+            {
+                intent.PutExtra("Owner", JsonConvert.SerializeObject(studentInfo));
+                StartActivity(intent);
+                Finish();
+            }
+            else
+            {
+                intent.PutExtra("Student", JsonConvert.SerializeObject(studentInfo));
+                StartActivity(intent);
+                Finish();
+            }
+            
         }
     }
 }

@@ -339,13 +339,17 @@ namespace zenmc
                 }
                 else
                 {
-
+                    ISharedPreferences pref = Application.Context.GetSharedPreferences("UserInfo", FileCreationMode.Private);
+                    ISharedPreferencesEditor editor = pref.Edit();
+                    editor.PutString("UserID", newID);
+                    editor.Apply();
+                    
 
                     SmsManager.Default.SendTextMessage(etPhoneNumber.Text, null, ("Confirmation message to " + etFullName.Text), null, null);
 
                     var intent = new Intent(this, typeof(menu));
-                    intent.PutExtra("studentID", newID);
                     StartActivity(intent);
+                    Finish();
 
                 }
 

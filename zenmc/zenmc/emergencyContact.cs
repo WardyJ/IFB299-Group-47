@@ -18,8 +18,7 @@ namespace zenmc
         private TextView txtRelationship;
         private TextView txtContactPhoneNumber;
         private Button btnBack;
-        //private Uri uri = new Uri("http://ec2-52-62-115-138.ap-southeast-2.compute.amazonaws.com/resetpassword.php");
-
+        
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             base.OnCreateView(inflater, container, savedInstanceState);

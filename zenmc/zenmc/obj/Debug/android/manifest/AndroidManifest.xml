@@ -20,6 +20,7 @@
     <activity android:label="Zen Meditation Centre" android:name="md5ac68c4bca503c6022c7a6c0f0301971e.menu" />
     <activity android:label="My Profile" android:name="md5ac68c4bca503c6022c7a6c0f0301971e.profile" />
     <activity android:icon="@drawable/icon" android:label="Registration" android:name="md5ac68c4bca503c6022c7a6c0f0301971e.registration" />
+    <activity android:label="Select Profile" android:name="md5ac68c4bca503c6022c7a6c0f0301971e.selectProfile" />
     <activity android:label="Report A Bug" android:name="md5ac68c4bca503c6022c7a6c0f0301971e.smsTest" />
     <provider android:name="mono.MonoRuntimeProvider" android:exported="false" android:initOrder="2147483647" android:authorities="zenmc.zenmc.mono.MonoRuntimeProvider.__mono_init__" />
     <!--suppress ExportedReceiver-->
