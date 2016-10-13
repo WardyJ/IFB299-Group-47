@@ -69,6 +69,7 @@ namespace zenmc
                 progressBar.Visibility = ViewStates.Visible;
                 client.UploadValuesCompleted += client_UploadValuesCompleted;
                 client.UploadValuesAsync(uri, parameters);
+                client.Dispose();
             }
         }
 
@@ -99,7 +100,7 @@ namespace zenmc
                     ISharedPreferences pref = Application.Context.GetSharedPreferences("UserInfo", FileCreationMode.Private);
                     ISharedPreferencesEditor editor = pref.Edit();
 
-                    editor.PutString(userID, userID);
+                    editor.PutString("UserID", userID);
                     editor.Apply();
 
                     var intent = new Intent(this, typeof(menu));

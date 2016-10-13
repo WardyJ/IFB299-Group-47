@@ -24,10 +24,10 @@
             android:textSize="20sp" />
         <TextView
             android:text=""
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/prfFullName"
-            android:textSize="20sp" />
+            android:id="@+id/prfFullName" />
         <TextView
             android:layout_marginTop="10sp"
             android:text="Date of Birth"
@@ -37,10 +37,10 @@
             android:textSize="20sp" />
         <TextView
             android:text=""
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/prfDateOfBirth"
-            android:textSize="20sp" />
+            android:id="@+id/prfDateOfBirth" />
         <TextView
             android:layout_marginTop="10sp"
             android:text="PhoneNumber"
@@ -50,10 +50,10 @@
             android:textSize="20sp" />
         <TextView
             android:text=""
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/prfPhoneNumber"
-            android:textSize="20sp" />
+            android:id="@+id/prfPhoneNumber" />
         <TextView
             android:layout_marginTop="10sp"
             android:text="Email"
@@ -63,10 +63,10 @@
             android:textSize="20sp" />
         <TextView
             android:text=""
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/prfEmail"
-            android:textSize="20sp" />
+            android:id="@+id/prfEmail" />
         <TextView
             android:layout_marginTop="10sp"
             android:text="Gender"
@@ -76,10 +76,10 @@
             android:textSize="20sp" />
         <TextView
             android:text=""
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/prfGender"
-            android:textSize="20sp" />
+            android:id="@+id/prfGender" />
         <TextView
             android:layout_marginTop="10sp"
             android:text="Medical Conditions"
@@ -89,10 +89,10 @@
             android:textSize="20sp" />
         <TextView
             android:text=""
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/prfMedical"
-            android:textSize="20sp" />
+            android:id="@+id/prfMedical" />
         <TextView
             android:layout_marginTop="10sp"
             android:text="Prescribed Medication"
@@ -102,10 +102,10 @@
             android:textSize="20sp" />
         <TextView
             android:text=""
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/prfMedication"
-            android:textSize="20sp" />
+            android:id="@+id/prfMedication" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">

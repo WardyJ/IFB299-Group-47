@@ -138,7 +138,7 @@ namespace zenmc
             addressbundle.PutString("city", city);
             addressbundle.PutString("zipOrPostcode", zipOrPostcode);
             addressbundle.PutString("state", state);
-            addressbundle.PutString("Country", country);
+            addressbundle.PutString("country", country);
 
             FragmentTransaction transaction = FragmentManager.BeginTransaction();
             residentialAddress addressDialog = new residentialAddress();

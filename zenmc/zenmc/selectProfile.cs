@@ -24,6 +24,8 @@ namespace zenmc
 
         WebClient client = new WebClient();
         public List<Student> studentInfo;
+        private int idCount;
+        private int emailCount;
         private int searchCount;
 
         private EditText etSelectID, etSelectEmail, etSearchName;
@@ -57,7 +59,8 @@ namespace zenmc
         {
             if (!waiting)
             {
-                searchCount = 0;
+                txtErrorLog.Text = "";
+                idCount = 0;
                 waiting = true;
                 if (etSelectID.Text == "")
                 {
@@ -68,8 +71,9 @@ namespace zenmc
                     parameters = new NameValueCollection();
                     parameters.Add("StudentID", etSelectID.Text);
                     progressBar.Visibility = ViewStates.Visible;
-                    client.UploadValuesCompleted += client_UploadValuesCompleted;
+                    client.UploadValuesCompleted += id_UploadValuesCompleted;
                     client.UploadValuesAsync(uri, parameters);
+                    client.Dispose();
                 }
             }
         }
@@ -78,7 +82,8 @@ namespace zenmc
         {
             if (!waiting)
             {
-                searchCount = 0;
+                txtErrorLog.Text = "";
+                emailCount = 0;
                 waiting = true;
                 if (etSelectEmail.Text == "")
                 {
@@ -90,8 +95,9 @@ namespace zenmc
                     parameters.Add("Email", etSelectEmail.Text);
                     progressBar.Visibility = ViewStates.Visible;
 
-                    client.UploadValuesCompleted += client_UploadValuesCompleted;
+                    client.UploadValuesCompleted += email_UploadValuesCompleted;
                     client.UploadValuesAsync(uri, parameters);
+                    client.Dispose();
                 }
             }
         }
@@ -100,6 +106,7 @@ namespace zenmc
         {
             if (!waiting)
             {
+                txtErrorLog.Text = "";
                 searchCount = 0;
                 waiting = true;
                 if (etSearchName.Text == "")
@@ -114,15 +121,52 @@ namespace zenmc
 
                     client.UploadValuesCompleted += search_UploadValuesCompleted;
                     client.UploadValuesAsync(uri, parameters);
+                    client.Dispose();
                 }
             }
         }
 
-        void client_UploadValuesCompleted(object sender, UploadValuesCompletedEventArgs e)
+        void id_UploadValuesCompleted(object sender, UploadValuesCompletedEventArgs e)
         {
-            if (searchCount < 1)
+            if (idCount < 1)
             {
-                searchCount += 1;
+                idCount += 1;
+                RunOnUiThread(() =>
+                {
+                    try
+                    {
+                        if (e.Result != null)
+                        {
+                            studentID = Encoding.UTF8.GetString(e.Result, 0, e.Result.Length);
+                            studentID = studentID.Replace("\r", string.Empty).Replace("\n", string.Empty);
+
+                            if (studentID == "None")
+                            {
+                                txtErrorLog.Text = "Error: There is no student with this ID.";
+                            }
+                            else
+                            {
+                                var intent = new Intent(this, typeof(profile));
+                                intent.PutExtra("Owner", studentID);
+                                StartActivity(intent);
+                            }
+                            waiting = false;
+                            progressBar.Visibility = ViewStates.Invisible;
+                        }
+                    }
+                    catch (System.Reflection.TargetInvocationException)
+                    {
+                        ;
+                    }
+                });
+            }
+        }
+
+        void email_UploadValuesCompleted(object sender, UploadValuesCompletedEventArgs e)
+        {
+            if (emailCount < 1)
+            {
+                emailCount += 1;
                 RunOnUiThread(() =>
                 {
                     if (e.Result != null)
@@ -132,7 +176,7 @@ namespace zenmc
 
                         if (studentID == "None")
                         {
-                            txtErrorLog.Text = "Error: There is no student with this ID or Email.";
+                            txtErrorLog.Text = "Error: There is no student with this email address.";
                         }
                         else
                         {

@@ -22,19 +22,21 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
         android:id="@+id/XetSelectEmail" />
     <Button
         android:text="Select by email address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btnSelectEmail" />
-  <EditText
-      android:text=""
-      android:hint="Name"
-      android:textAppearance="?android:attr/textAppearanceLarge"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:id="@+id/XetSearchName" />
+    <EditText
+        android:text=""
+        android:hint="Name"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/XetSearchName"
+        android:inputType="textPersonName" />
     <Button
         android:text="Search by Full Name"
         android:layout_width="match_parent"
