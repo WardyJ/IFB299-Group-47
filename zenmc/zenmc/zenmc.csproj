@@ -55,7 +55,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="calendar.cs" />
+    <Compile Include="Classes.cs" />
+    <Compile Include="course.cs" />
     <Compile Include="editProfile.cs" />
     <Compile Include="emergencyContact.cs" />
     <Compile Include="passwordChange.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="selectProfile.cs" />
     <Compile Include="smsTest.cs" />
     <Compile Include="student.cs" />
+    <Compile Include="calendar.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GettingStarted.Xamarin" />
@@ -98,9 +100,6 @@
     <AndroidResource Include="Resources\layout\contact.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\calendar.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
     <AndroidResource Include="Resources\layout\dialogDate.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
@@ -123,6 +122,12 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\searchName.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\calendar.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\course.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
@@ -158,6 +163,23 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\FormGroup.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\DefaultCalendarSelected.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\DefaultCalendarButton.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\OpenCourseCalendar.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\OpenCourseSelected.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\CourseInfoButton.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

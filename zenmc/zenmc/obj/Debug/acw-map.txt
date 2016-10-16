@@ -1,7 +1,7 @@
-zenmc.calendar, zenmc;md5ac68c4bca503c6022c7a6c0f0301971e.calendar
-zenmc.calendar, zenmc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md5ac68c4bca503c6022c7a6c0f0301971e.calendar
-zenmc.calendar;md5ac68c4bca503c6022c7a6c0f0301971e.calendar
-zenmc.calendar;md5ac68c4bca503c6022c7a6c0f0301971e.calendar
+zenmc.course, zenmc;md5ac68c4bca503c6022c7a6c0f0301971e.course
+zenmc.course, zenmc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md5ac68c4bca503c6022c7a6c0f0301971e.course
+zenmc.course;md5ac68c4bca503c6022c7a6c0f0301971e.course
+zenmc.course;md5ac68c4bca503c6022c7a6c0f0301971e.course
 zenmc.editProfile, zenmc;md5ac68c4bca503c6022c7a6c0f0301971e.editProfile
 zenmc.editProfile, zenmc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md5ac68c4bca503c6022c7a6c0f0301971e.editProfile
 zenmc.editProfile;md5ac68c4bca503c6022c7a6c0f0301971e.editProfile
@@ -62,3 +62,7 @@ zenmc.smsTest, zenmc;md5ac68c4bca503c6022c7a6c0f0301971e.smsTest
 zenmc.smsTest, zenmc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md5ac68c4bca503c6022c7a6c0f0301971e.smsTest
 zenmc.smsTest;md5ac68c4bca503c6022c7a6c0f0301971e.smsTest
 zenmc.smsTest;md5ac68c4bca503c6022c7a6c0f0301971e.smsTest
+zenmc.calendar, zenmc;md5ac68c4bca503c6022c7a6c0f0301971e.calendar
+zenmc.calendar, zenmc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md5ac68c4bca503c6022c7a6c0f0301971e.calendar
+zenmc.calendar;md5ac68c4bca503c6022c7a6c0f0301971e.calendar
+zenmc.calendar;md5ac68c4bca503c6022c7a6c0f0301971e.calendar

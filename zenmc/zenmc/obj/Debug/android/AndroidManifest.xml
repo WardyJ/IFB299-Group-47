@@ -7,7 +7,8 @@
   <uses-permission android:name="android.permission.INTERNET" />
   <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
   <application android:label="zenmc" android:icon="@drawable/icon" android:name="android.app.Application" android:allowBackup="true" android:debuggable="true">
-    <activity android:label="My Calendar" android:name="md5ac68c4bca503c6022c7a6c0f0301971e.calendar" />
+    <activity android:label="My Calendar" android:name="md5ac68c4bca503c6022c7a6c0f0301971e.calendar" android:screenOrientation="portrait" />
+    <activity android:label="Course Info" android:name="md5ac68c4bca503c6022c7a6c0f0301971e.course" />
     <activity android:icon="@drawable/icon" android:label="Edit Profile" android:name="md5ac68c4bca503c6022c7a6c0f0301971e.editProfile" />
     <activity android:label="Contact Us" android:name="md5ac68c4bca503c6022c7a6c0f0301971e.contactPage" />
     <activity android:label="Donation Info" android:name="md5ac68c4bca503c6022c7a6c0f0301971e.donations" />
