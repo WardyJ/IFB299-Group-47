@@ -47,8 +47,21 @@ namespace zenmc
 
         void btnBack_Click(object sender, EventArgs e)
         {
+            backToCalendar();
+         
+        }
+
+        public override void OnBackPressed()
+        {
+            backToCalendar();
+        }
+
+        void backToCalendar()
+        {
             var intent = new Intent(this, typeof(calendar));
+            //intent.PutExtra("StudentID", userID);
             StartActivity(intent);
+            Finish();
         }
     }
 }

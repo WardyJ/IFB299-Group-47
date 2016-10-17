@@ -59,6 +59,7 @@ namespace zenmc
             calendarButton.Click += (sender, e) =>
             {
                 var intent = new Intent(this, typeof(calendar));
+                intent.PutExtra("StudentID", userID);
                 StartActivity(intent);
             };
             Button smsTestButton = FindViewById<Button>(Resource.Id.gotoSmsTestBtn);

@@ -103,6 +103,13 @@ namespace zenmc
                     editor.PutString("UserID", userID);
                     editor.Apply();
 
+                    //Clear old calendar data to update
+                    ISharedPreferences calendarPref = Application.Context.GetSharedPreferences("CalendarInfo", FileCreationMode.Private);
+                    calendarPref = Application.Context.GetSharedPreferences("CalendarInfo", FileCreationMode.Private);
+                    editor = calendarPref.Edit();
+                    editor.Clear();
+                    editor.Commit();
+
                     var intent = new Intent(this, typeof(menu));
                     StartActivity(intent);
                     Finish();

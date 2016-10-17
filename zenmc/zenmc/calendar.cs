@@ -12,6 +12,7 @@ using Android.Widget;
 using System.Net;
 using System.Globalization;
 using Newtonsoft.Json;
+using System.Collections.Specialized;
 
 namespace zenmc
 {
@@ -29,14 +30,20 @@ namespace zenmc
             btnClassInfo3, btnCourseInfo, btnMealInfo;
         private int firstDayOfWeek, lastDayOfMonth, daysInMonth, month, year;
         private DateTime firstOfMonth, dateSelected;
+        private NameValueCollection parameters = new NameValueCollection();
+        private ISharedPreferences pref;
+        private ISharedPreferencesEditor editor;
 
 
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-            // set our view from the main layout resource
             SetContentView(Resource.Layout.calendar);
             txtDisplay = FindViewById<TextView>(Resource.Id.txtDisplay);
+
+            pref = Application.Context.GetSharedPreferences("CalendarInfo", FileCreationMode.Private);
+            pref = Application.Context.GetSharedPreferences("CalendarInfo", FileCreationMode.Private);
+            editor = pref.Edit();
 
             btnForward = FindViewById<Button>(Resource.Id.btnForward);
             btnBack = FindViewById<Button>(Resource.Id.btnBack);
@@ -57,9 +64,19 @@ namespace zenmc
 
             btnParams = FindViewById(Resource.Id.btn1).LayoutParameters;
 
-            client.DownloadDataCompleted += client_DownloadDataCompleted;
-            client.DownloadDataAsync(uri);
-            
+            parameters.Add("StudentID", Intent.GetStringExtra("StudentID"));
+
+            if(pref.Contains("CalendarSaved"))
+            {
+                initializeCalendar();
+                
+            }
+            else
+            {
+                client.DownloadDataCompleted += client_DownloadDataCompleted;
+                client.DownloadDataAsync(uri);
+                //client.UploadValuesAsync(new Uri("http://ec2-52-62-115-138.ap-southeast-2.compute.amazonaws.com/getcoursestatus.php"), parameters);
+            }
         }
 
         void client_DownloadDataCompleted(object sender, DownloadDataCompletedEventArgs e)
@@ -67,18 +84,32 @@ namespace zenmc
             RunOnUiThread(() =>
             {
                 string json = Encoding.UTF8.GetString(e.Result);
-
-                ISharedPreferences pref = Application.Context.GetSharedPreferences("CalendarInfo", FileCreationMode.Private);
-
-                ISharedPreferencesEditor editor = pref.Edit();
+                
+                editor = pref.Edit();
 
                 editor.PutString("ClassDetails", json);
                 editor.Apply();
                 editor = pref.Edit();
                 organizeDateData();
+                initializeCalendar();
+            });
+        }
 
-                
-                editor.PutString("DateSelectedID", (firstDayOfWeek + DateTime.Now.Day).ToString());
+        void initializeCalendar()
+        {
+            setDateValues();
+
+            populateRows();
+            
+            btnBack.Click += btnBack_Click;
+            btnForward.Click += btnForward_Click;
+            btnClassInfo1.Click += btnClassInfo1_Click;
+            btnClassInfo2.Click += btnClassInfo2_Click;
+            btnClassInfo3.Click += btnClassInfo3_Click;
+            btnMealInfo.Click += btnMealInfo_Click;
+            btnCourseInfo.Click += btnCourseInfo_Click;
+
+            editor.PutString("DateSelectedID", (firstDayOfWeek + DateTime.Now.Day).ToString());
                 editor.Apply();
 
                 editor = pref.Edit();
@@ -92,23 +123,42 @@ namespace zenmc
                 {
                     editor.PutString("previousDrawable", "default");
                 }
-
-                editor.Apply();
-
-                selectDate(firstDayOfWeek + DateTime.Now.Day);
+                
 
                 if (pref.Contains(new DateTime(year, month, firstDayOfWeek + DateTime.Now.Day).ToString("yyyy,MM,dd")))
                 {
                     addEventButtons();
                 }
-            });
+            editor.PutString("DateSelectedID", (firstDayOfWeek + DateTime.Now.Day).ToString());
+            editor.Apply();
+
+            editor = pref.Edit();
+
+            if (pref.Contains(new DateTime(year, month, firstDayOfWeek + DateTime.Now.Day).ToString("yyyy,MM,dd")))
+            {
+                editor.PutString("previousDrawable", "open");
+                addEventButtons();
+            }
+            else
+            {
+                editor.PutString("previousDrawable", "default");
+            }
+
+            editor.PutString("CalendarSaved", "true");
+            editor.Apply();
+
+            selectDate(firstDayOfWeek + DateTime.Now.Day);
+
+            if (pref.Contains(new DateTime(year, month, firstDayOfWeek + DateTime.Now.Day).ToString("yyyy,MM,dd")))
+            {
+                addEventButtons();
+            }
         }
 
         void organizeDateData()
         {
-            ISharedPreferences pref = Application.Context.GetSharedPreferences("CalendarInfo", FileCreationMode.Private);
             string json = pref.GetString("ClassDetails", string.Empty);
-            ISharedPreferencesEditor editor = pref.Edit();
+            editor = pref.Edit();
 
             classInfo = JsonConvert.DeserializeObject<List<Classes>>(json);
             
@@ -128,6 +178,10 @@ namespace zenmc
                 editor.PutString(date + "RecordingID", session.RecordingID);
                 editor.Apply();
             }
+        }
+
+        void setDateValues()
+        {
             year = 2016;
             month = DateTime.Now.Month;
 
@@ -140,17 +194,6 @@ namespace zenmc
             daysInMonth = DateTime.DaysInMonth(year, month);
             firstDayOfWeek = (int)firstOfMonth.DayOfWeek;
             lastDayOfMonth = DateTime.DaysInMonth(year, month);
-
-
-            populateRows();
-
-            btnBack.Click += btnBack_Click;
-            btnForward.Click += btnForward_Click;
-            btnClassInfo1.Click += btnClassInfo1_Click;
-            btnClassInfo2.Click += btnClassInfo2_Click;
-            btnClassInfo3.Click += btnClassInfo3_Click;
-            btnMealInfo.Click += btnMealInfo_Click;
-            btnCourseInfo.Click += btnCourseInfo_Click;
         }
 
         void populateRows()
@@ -192,12 +235,12 @@ namespace zenmc
                     btnDay.Click += btnDay_Click;
 
                     DateTime dayDate = new DateTime(year, month, dayOfMonth);
-                    ISharedPreferences pref = Application.Context.GetSharedPreferences("CalendarInfo", FileCreationMode.Private);
+                    
 
                     if (pref.Contains(dayDate.ToString("yyyy-MM-dd")))
                     {
                         btnDay.Background = GetDrawable(Resource.Drawable.OpenCourseCalendar);
-                        ISharedPreferencesEditor editor = pref.Edit();
+                        editor = pref.Edit();
                         btnDay.Click += btnEvent_Click;
                     }
                     else { btnDay.Background = GetDrawable(Resource.Drawable.DefaultCalendarButton); }
@@ -243,10 +286,9 @@ namespace zenmc
 
         void forgetCurrentSelection()
         {
-            ISharedPreferences pref = Application.Context.GetSharedPreferences("CalendarInfo", FileCreationMode.Private);
             if (pref.Contains("DateSelectedID"))
             {
-                ISharedPreferencesEditor editor = pref.Edit();
+                editor = pref.Edit();
                 editor.Remove("DateSelectedID");
                 editor.Apply();
             }
@@ -291,7 +333,6 @@ namespace zenmc
                     btnDay.Click += btnDay_Click;
 
                     DateTime dayDate = new DateTime(year, month, dayOfMonth);
-                    ISharedPreferences pref = Application.Context.GetSharedPreferences("CalendarInfo", FileCreationMode.Private);
                     
                     if (pref.Contains(dayDate.ToString("yyyy-MM-dd")))
                     {
@@ -329,7 +370,6 @@ namespace zenmc
 
         void selectDate(int buttonId)
         {            
-            ISharedPreferences pref = Application.Context.GetSharedPreferences("CalendarInfo", FileCreationMode.Private);
             string previousId = pref.GetString("DateSelectedID", null);
             if(previousId != null)
             {
@@ -343,19 +383,16 @@ namespace zenmc
                 {
                     btnPrevious.Background = GetDrawable(Resource.Drawable.OpenCourseCalendar);
                 }
-                
             }
 
             Button btn = FindViewById<Button>(buttonId);
             
-            
-
             dateSelected = new DateTime(year, month, Int32.Parse(btn.Text));
             string defaultDate = dateSelected.ToString("yyyy-MM-dd");
             string stringDate = dateSelected.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
             txtDisplay.Text = "Date: " + stringDate;
 
-            ISharedPreferencesEditor editor = pref.Edit();
+            editor = pref.Edit();
             editor.PutString("selectedDate", defaultDate);
             if (pref.GetString(defaultDate + "Status", null) == "open")
             {
@@ -420,13 +457,13 @@ namespace zenmc
 
         void btnCourseInfo_Click(object sender, EventArgs e)
         {
-            ISharedPreferences pref = Application.Context.GetSharedPreferences("CalendarInfo", FileCreationMode.Private);
             string dateSelected = pref.GetString("dateSelected", null);
             string courseID = pref.GetString(dateSelected + "CourseID", null);
 
             var intent = new Intent(this, typeof(course));
             intent.PutExtra("CourseID", courseID);
             StartActivity(intent);
+            Finish();
         }
     }
 }
