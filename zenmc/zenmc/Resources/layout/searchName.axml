@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_alignParentTop="true"
+    android:id="@+id/top"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+  <TextView
+     android:text="Search Results"
+     android:textAppearance="?android:attr/textAppearanceLarge"
+     android:layout_alignParentTop="true"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:layout_marginLeft="10sp"
+   android:layout_marginRight="10sp"
+     android:id="@+id/textView1"
+     android:gravity="center" />
+  <TextView
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity ="center"
+        android:layout_below="@id/textView1"
+        android:id="@+id/txtResultsLog" />
+  <ProgressBar
+      android:visibility="invisible"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_below="@id/txtResultsLog"
+      android:id="@+id/progressBar" />
+  <ScrollView
+        android:layout_marginLeft="10sp"
+        android:layout_marginRight="10sp"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/scroll"
+        android:layout_above="@id/btnBack"
+         android:layout_below="@id/progressBar">
+  <LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/searchLayout"/>
+  </ScrollView>
+    <Button
+        android:text="Back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/btnBack" />
+</RelativeLayout>
+

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="5sp"
+    android:layout_marginRight="5sp">
+    <ScrollView
+        android:layout_marginLeft="10sp"
+        android:layout_marginRight="10sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView1">
+      <TableLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:stretchColumns="1">
+        <TextView
+            android:layout_marginTop="10sp"
+            android:text="FullName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/prfTextFullName"
+            android:textSize="20sp" />
+        <TextView
+            android:text=""
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/prfFullName" />
+        <TextView
+            android:layout_marginTop="10sp"
+            android:text="Date of Birth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/prfTextDateOfBirth"
+            android:textSize="20sp" />
+        <TextView
+            android:text=""
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/prfDateOfBirth" />
+        <TextView
+            android:layout_marginTop="10sp"
+            android:text="PhoneNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/prfTextPhoneNumber"
+            android:textSize="20sp" />
+        <TextView
+            android:text=""
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/prfPhoneNumber" />
+        <TextView
+            android:layout_marginTop="10sp"
+            android:text="Email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/prfTextEmail"
+            android:textSize="20sp" />
+        <TextView
+            android:text=""
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/prfEmail" />
+        <TextView
+            android:layout_marginTop="10sp"
+            android:text="Gender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/prfTextGender"
+            android:textSize="20sp" />
+        <TextView
+            android:text=""
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/prfGender" />
+        <TextView
+            android:layout_marginTop="10sp"
+            android:text="Medical Conditions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/prfTextMedical"
+            android:textSize="20sp" />
+        <TextView
+            android:text=""
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/prfMedical" />
+        <TextView
+            android:layout_marginTop="10sp"
+            android:text="Prescribed Medication"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/prfTextMedication"
+            android:textSize="20sp" />
+        <TextView
+            android:text=""
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/prfMedication" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+          <Button
+              android:id="@+id/btnEmergencyContact"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:text="Emergency Contact" />
+          <Button
+              android:id="@+id/btnResidentialAddress"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:text="Residential Address" />
+          <Button
+              android:id="@+id/btnChangePassword"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:text="Change Password" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+          <Button
+              android:id="@+id/btnMenu"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:text="Menu" />
+          <Button
+              android:id="@+id/btnEditProfile"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:text="Edit Profile" />
+        </LinearLayout>
+      </TableLayout>
+    </ScrollView>
+</LinearLayout>

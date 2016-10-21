@@ -1,19 +1,41 @@
+There is now a sqlite database on the app to store data so the app doesn't have to connect to the online database
+every time it needs to pull data.
+
 Database so far has all table layouts and everything is populated except ClassEnrollment (which I don't think we should use but our
 user stories for some reason have class enrollment) and meals
 
 Current database dump should be on github, doesn't have a CREATE SCHEMA statement so you have to make a database schema and import it into that
 See erdplus-diagram if you want to see the layout
 
-Online database info
+Database layout has changed and all course and class dates have been pushed forward half a year
 
-NEW DATABASE - since we lost another one. I set up Amazon EC2 for this one. If you have old database info in code you nee to replace it.
+Online database info
 
 Admins added to database
 Login to the app as owner with "theowner@zenmc.com.au" password "theowner"
-Login to the app as receptionist with "reception@zenmc.com.au" password "reception"
-You can add admin capabilities to the app, or ANYTHING.
+Login to the app as receptionist with "reception@zenmc.com.au" password "reception" can edit student profiles
+You can add admin capabilities to the app.
 
-Feel free to interact and change things in the db to test the app with I'll just overwrite the database at some point anyway
+Old students added to database
+You can test old student course registration with (email password):
+Men:
+steve@email.com
+stevesteve
+
+bob@email.com
+bobbob
+
+son@email.com
+sonson
+
+Women:
+jill@email.com
+jilljill
+
+mary@email.com
+marymary
+
+Feel free to interact and change things in the db to test the app with just don't change admin or old student info
 
 Server=ec2-52-62-115-138.ap-southeast-2.compute.amazonaws.com
 Port=3306
