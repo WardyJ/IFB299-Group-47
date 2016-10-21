@@ -12,7 +12,7 @@ using Android.Widget;
 
 namespace zenmc
 {
-    [Activity(Label = "Contact Us")]
+    [Activity(Label = "Contact Us", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class contactPage : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)

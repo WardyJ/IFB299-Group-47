@@ -9,59 +9,25 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using System.Security.Cryptography;
-using System.Collections.Specialized;
-using System.Net;
+using SQLite;
 
 namespace zenmc
 {
-    [Activity(Label = "Course Info")]
-    public class course : Activity
+    public class Course
     {
-        private Uri uri = new Uri("http://ec2-52-62-115-138.ap-southeast-2.compute.amazonaws.com/login.php");
-        private NameValueCollection parameters;
-        private ProgressBar progressBar;
-        private TextView txtCourseName, txtDescription, txtCommencement;
+        [PrimaryKey]
+        public string CourseID { get; set; }
 
-        WebClient client = new WebClient();
-
-        
-        private Button btnBack;
-
-        protected override void OnCreate(Bundle savedInstanceState)
-        {
-            base.OnCreate(savedInstanceState);
-
-
-            SetContentView(Resource.Layout.course);
-
-            txtCourseName = FindViewById<TextView>(Resource.Id.txtCourseName);
-            txtDescription = FindViewById<TextView>(Resource.Id.txtDescription);
-
-
-            btnBack = FindViewById<Button>(Resource.Id.btnBack);
-
-            btnBack.Click += btnBack_Click;
-
-        }
-
-        void btnBack_Click(object sender, EventArgs e)
-        {
-            backToCalendar();
-         
-        }
-
-        public override void OnBackPressed()
-        {
-            backToCalendar();
-        }
-
-        void backToCalendar()
-        {
-            var intent = new Intent(this, typeof(calendar));
-            //intent.PutExtra("StudentID", userID);
-            StartActivity(intent);
-            Finish();
-        }
+        public string CourseName { get; set; }
+        public string Length { get; set; }
+        public string CommencementDate { get; set; }
+        public string Description { get; set; }
+        public string MaleStudents { get; set; }
+        public string FemaleStudents { get; set; }
+        public string MaleManagers { get; set; }
+        public string FemaleManagers { get; set; }
+        public string MaleTAs { get; set; }
+        public string FemaleTAs { get; set; }
+        public string KitchenHelp { get; set; }
     }
 }

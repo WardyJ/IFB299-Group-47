@@ -18,7 +18,7 @@ using System.Globalization;
 
 namespace zenmc
 {
-    [Activity(Label = "Registration", Icon = "@drawable/icon")]
+    [Activity(Label = "Registration", Icon = "@drawable/zenicon", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class registration : Activity
     {
         //All user input will be assigned to these variables

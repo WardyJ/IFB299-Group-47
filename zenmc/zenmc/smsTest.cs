@@ -13,7 +13,7 @@ using Android.Telephony;
 
 namespace zenmc
 {
-    [Activity(Label = "Report A Bug")]
+    [Activity(Label = "Report A Bug", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class smsTest : Activity
     {
         EditText errormessageEdit;

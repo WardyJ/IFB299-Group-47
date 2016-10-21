@@ -15,7 +15,7 @@ using System.Net;
 
 namespace zenmc
 {
-    [Activity(Label = "Login", MainLauncher = true)]
+    [Activity(Label = "Login",ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class login : Activity
     {
         private Uri uri = new Uri("http://ec2-52-62-115-138.ap-southeast-2.compute.amazonaws.com/login.php");
@@ -100,13 +100,14 @@ namespace zenmc
                     ISharedPreferences pref = Application.Context.GetSharedPreferences("UserInfo", FileCreationMode.Private);
                     ISharedPreferencesEditor editor = pref.Edit();
 
+                    editor.Clear();
+                    editor.Apply();
                     editor.PutString("UserID", userID);
                     editor.Apply();
 
                     //Clear old calendar data to update
-                    ISharedPreferences calendarPref = Application.Context.GetSharedPreferences("CalendarInfo", FileCreationMode.Private);
-                    calendarPref = Application.Context.GetSharedPreferences("CalendarInfo", FileCreationMode.Private);
-                    editor = calendarPref.Edit();
+                    ISharedPreferences enrollmentPref = Application.Context.GetSharedPreferences("EnrollmentInfo", FileCreationMode.Private);
+                    editor = enrollmentPref.Edit();
                     editor.Clear();
                     editor.Commit();
 

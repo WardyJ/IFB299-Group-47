@@ -13,26 +13,35 @@ using System.Net;
 using System.Globalization;
 using Newtonsoft.Json;
 using System.Collections.Specialized;
+using Android.Preferences;
 
 namespace zenmc
 {
-    [Activity(Label = "My Calendar")]
+    [Activity(Label = "My Calendar", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class calendar : Activity
     {
-        private Uri uri = new Uri("http://ec2-52-62-115-138.ap-southeast-2.compute.amazonaws.com/datetest.php");
+        private Uri uri = new Uri("http://ec2-52-62-115-138.ap-southeast-2.compute.amazonaws.com/enrollmentinfo.php");
+        private Uri infoUri = new Uri("http://ec2-52-62-115-138.ap-southeast-2.compute.amazonaws.com/getinfo.php");
 
-        WebClient client = new WebClient();
-        public List<Classes> classInfo;
+        WebClient client;
+        WebClient studentClient;
         private LinearLayout row1, row2, row3, row4, row5, row6, row7;
         private TextView txtMonth, txtDisplay;
         ViewGroup.LayoutParams btnParams;
         private Button btnBack, btnForward, btnClassInfo1, btnClassInfo2, 
             btnClassInfo3, btnCourseInfo, btnMealInfo;
-        private int firstDayOfWeek, lastDayOfMonth, daysInMonth, month, year;
+        private int firstDayOfWeek, lastDayOfMonth, daysInMonth, initialDay, month, year;
         private DateTime firstOfMonth, dateSelected;
         private NameValueCollection parameters = new NameValueCollection();
-        private ISharedPreferences pref;
+        private NameValueCollection infoParameters = new NameValueCollection();
+        private ISharedPreferences pref, enrollmentPref, userPref;
         private ISharedPreferencesEditor editor;
+        private Database database;
+
+        private const int maxStudents = 26;
+
+        public List<Student> studentInfo;
+        public List<EnrollmentDetails> enrollmentInfo;
 
 
         protected override void OnCreate(Bundle bundle)
@@ -41,9 +50,12 @@ namespace zenmc
             SetContentView(Resource.Layout.calendar);
             txtDisplay = FindViewById<TextView>(Resource.Id.txtDisplay);
 
-            pref = Application.Context.GetSharedPreferences("CalendarInfo", FileCreationMode.Private);
-            pref = Application.Context.GetSharedPreferences("CalendarInfo", FileCreationMode.Private);
-            editor = pref.Edit();
+            database = new Database();
+
+            pref = PreferenceManager.GetDefaultSharedPreferences(this);
+            userPref = Application.Context.GetSharedPreferences("UserInfo", FileCreationMode.Private);
+
+            enrollmentPref = Application.Context.GetSharedPreferences("EnrollmentInfo", FileCreationMode.Private);
 
             btnForward = FindViewById<Button>(Resource.Id.btnForward);
             btnBack = FindViewById<Button>(Resource.Id.btnBack);
@@ -61,36 +73,62 @@ namespace zenmc
             row6 = FindViewById<LinearLayout>(Resource.Id.row6);
             row7 = FindViewById<LinearLayout>(Resource.Id.row7);
             txtMonth = FindViewById<TextView>(Resource.Id.txtMonth);
+            
 
             btnParams = FindViewById(Resource.Id.btn1).LayoutParameters;
+            
+            string studentID = userPref.GetString("CStudentID", null);
+            parameters.Add("StudentID", studentID);
 
-            parameters.Add("StudentID", Intent.GetStringExtra("StudentID"));
+            infoParameters.Add("StudentID", studentID);
+            
+            //if(!pref.Contains("CalendarSaved"))
+            //{
+                getStudentInfo();
 
-            if(pref.Contains("CalendarSaved"))
-            {
-                initializeCalendar();
-                
-            }
-            else
-            {
-                client.DownloadDataCompleted += client_DownloadDataCompleted;
-                client.DownloadDataAsync(uri);
-                //client.UploadValuesAsync(new Uri("http://ec2-52-62-115-138.ap-southeast-2.compute.amazonaws.com/getcoursestatus.php"), parameters);
-            }
+            client = new WebClient();
+                string json = Encoding.UTF8.GetString(client.UploadValues(uri, parameters));
+                client.Dispose();
+
+                editor = pref.Edit();
+
+                editor.PutString("EnrollmentDetails", json);
+                editor.Apply();
+                editor = pref.Edit();
+                organizeEnrollmentData();
+            //}
+            
+            initializeCalendar();
         }
 
-        void client_DownloadDataCompleted(object sender, DownloadDataCompletedEventArgs e)
+        void getStudentInfo()
+        {
+            studentClient = new WebClient();
+            string json = Encoding.UTF8.GetString(studentClient.UploadValues(infoUri, infoParameters));
+            studentClient.Dispose();
+            studentInfo = JsonConvert.DeserializeObject<List<Student>>(json);
+
+            editor = enrollmentPref.Edit();
+            editor.Clear();
+            editor.Apply();
+            editor.PutString("Gender", studentInfo[0].Gender);
+            editor.PutString("Type", studentInfo[0].StudentType);
+            editor.Apply();
+        }
+
+        void client_UploadValuesCompleted(object sender, UploadValuesCompletedEventArgs e)
         {
             RunOnUiThread(() =>
             {
                 string json = Encoding.UTF8.GetString(e.Result);
-                
+
                 editor = pref.Edit();
 
-                editor.PutString("ClassDetails", json);
+                editor.PutString("EnrollmentDetails", json);
                 editor.Apply();
                 editor = pref.Edit();
-                organizeDateData();
+                organizeEnrollmentData();
+
                 initializeCalendar();
             });
         }
@@ -109,86 +147,58 @@ namespace zenmc
             btnMealInfo.Click += btnMealInfo_Click;
             btnCourseInfo.Click += btnCourseInfo_Click;
 
-            editor.PutString("DateSelectedID", (firstDayOfWeek + DateTime.Now.Day).ToString());
-                editor.Apply();
-
-                editor = pref.Edit();
-
-                if (pref.Contains(new DateTime(year, month, firstDayOfWeek + DateTime.Now.Day).ToString("yyyy,MM,dd")))
-                {
-                    editor.PutString("previousDrawable", "open");
-                    addEventButtons();
-                }
-                else
-                {
-                    editor.PutString("previousDrawable", "default");
-                }
-                
-
-                if (pref.Contains(new DateTime(year, month, firstDayOfWeek + DateTime.Now.Day).ToString("yyyy,MM,dd")))
-                {
-                    addEventButtons();
-                }
-            editor.PutString("DateSelectedID", (firstDayOfWeek + DateTime.Now.Day).ToString());
-            editor.Apply();
-
-            editor = pref.Edit();
-
-            if (pref.Contains(new DateTime(year, month, firstDayOfWeek + DateTime.Now.Day).ToString("yyyy,MM,dd")))
-            {
-                editor.PutString("previousDrawable", "open");
-                addEventButtons();
-            }
-            else
-            {
-                editor.PutString("previousDrawable", "default");
-            }
+            string classDate = new DateTime(year, month, firstDayOfWeek + DateTime.Now.Day).ToString("yyyy,MM,dd");
 
             editor.PutString("CalendarSaved", "true");
             editor.Apply();
 
-            selectDate(firstDayOfWeek + DateTime.Now.Day);
-
-            if (pref.Contains(new DateTime(year, month, firstDayOfWeek + DateTime.Now.Day).ToString("yyyy,MM,dd")))
-            {
-                addEventButtons();
-            }
+            selectDate(firstDayOfWeek + initialDay);
         }
 
-        void organizeDateData()
+        
+        void organizeEnrollmentData()
         {
-            string json = pref.GetString("ClassDetails", string.Empty);
-            editor = pref.Edit();
+            string json = pref.GetString("EnrollmentDetails", string.Empty);
+            editor = enrollmentPref.Edit();
 
-            classInfo = JsonConvert.DeserializeObject<List<Classes>>(json);
-            
-            foreach(Classes session in classInfo)
+            enrollmentInfo = JsonConvert.DeserializeObject<List<EnrollmentDetails>>(json);
+            int count = 0;
+            foreach (EnrollmentDetails enrollment in enrollmentInfo)
             {
-                string date = session.DateandTime;
-                date = Convert.ToDateTime(date).ToString("yyyy-MM-dd");
-                editor.PutString(date, date);
-                editor.PutString(date + "CourseID", session.CourseID);
-                editor.PutString(date + "Status", "open");
-                editor.PutString(date + "CourseName", session.CourseName);
-                editor.PutString(date + "ClassID", session.ClassID);
-                editor.PutString(date + "ClassType", session.ClassType);
-                editor.PutString(date + "Length", session.Length);
-                editor.PutString(date + "Description", session.Description);
-                editor.PutString(date + "DateandTime", session.DateandTime);
-                editor.PutString(date + "RecordingID", session.RecordingID);
+                string courseID = enrollment.CourseID;
+                editor.PutString(courseID + "Role", enrollment.Role);
                 editor.Apply();
+                count += 1;
             }
+            editor = pref.Edit();
+            editor.PutString("CourseHistory", count.ToString());
+            editor.Apply();
         }
 
         void setDateValues()
         {
-            year = 2016;
-            month = DateTime.Now.Month;
+            DateTime date;
+
+            if (pref.Contains("DateSelected"))
+            {
+                date = DateTime.Parse(pref.GetString("DateSelected", null));
+                initialDay = date.Day;
+                month = date.Month;
+                year = date.Year;
+            }
+            else
+            {
+                date = DateTime.Now;
+                initialDay = date.Day;
+                month = date.Month;
+                year = date.Year;
+            }
+            
 
             firstOfMonth = new DateTime(year, month, 1);
 
             txtMonth.Text = new DateTime(year, month, 1)
-    .ToString("MMMM", CultureInfo.InvariantCulture);
+    .ToString("MMMM", CultureInfo.InvariantCulture) + " " + year;
 
 
             daysInMonth = DateTime.DaysInMonth(year, month);
@@ -237,11 +247,10 @@ namespace zenmc
                     DateTime dayDate = new DateTime(year, month, dayOfMonth);
                     
 
-                    if (pref.Contains(dayDate.ToString("yyyy-MM-dd")))
+                    if (database.checkDate(dayDate.ToString("yyyy-MM-dd")))
                     {
-                        btnDay.Background = GetDrawable(Resource.Drawable.OpenCourseCalendar);
-                        editor = pref.Edit();
-                        btnDay.Click += btnEvent_Click;
+                        string status = getStatus(dayDate.ToString("yyyy-MM-dd"));
+                        setStatus(status, btnDay, false);
                     }
                     else { btnDay.Background = GetDrawable(Resource.Drawable.DefaultCalendarButton); }
                 }
@@ -262,26 +271,81 @@ namespace zenmc
             }
         }
 
+        void setStatus(string status, Button btn, bool selection)
+        {
+            if (status == "Closed")
+            {
+                if(selection)
+                {
+                    btn.Background = GetDrawable(Resource.Drawable.ClosedCourseSelected);
+                }
+                else { btn.Background = GetDrawable(Resource.Drawable.ClosedCourseCalendar); }
+                
+            }
+            else if (status == "Registered")
+            {
+                if(selection)
+                {
+                    btn.Background = GetDrawable(Resource.Drawable.RegisteredCourseSelected);
+                }
+                else { btn.Background = GetDrawable(Resource.Drawable.RegisteredCourseCalendar); }
+            }
+            else if (status == "Full")
+            {
+                if (selection)
+                {
+                    btn.Background = GetDrawable(Resource.Drawable.FullCourseSelected);
+                }                
+                else{ btn.Background = GetDrawable(Resource.Drawable.FullCourseCalendar); }
+            }
+            else if (status == "Open")
+            {
+                if (selection)
+                {
+                    btn.Background = GetDrawable(Resource.Drawable.OpenCourseSelected);
+                }
+                else { btn.Background = GetDrawable(Resource.Drawable.OpenCourseCalendar); }
+            }            
+            else
+            {
+                if(selection)
+                {
+                    btn.Background = GetDrawable(Resource.Drawable.DefaultCalendarSelected);
+                }
+                else { btn.Background = GetDrawable(Resource.Drawable.DefaultCalendarButton); }
+            }
+        } 
+
         void btnBack_Click(object sender, EventArgs e)
         {
             forgetCurrentSelection();
             if(month > 1)
             {
-                month -= 1;
-                getMonthValues();
-                repopulateRows();
+                month -= 1;                
             }
+            else
+            {
+                month = 12;
+                year -= 1;
+            }
+            getMonthValues();
+            repopulateRows();
         }
 
         void btnForward_Click(object sender, EventArgs e)
         {
             forgetCurrentSelection();
-            if(month < 12)
+            if (month < 12)
             {
-                month += 1;
-                getMonthValues();
-               repopulateRows();
+                month += 1;                
             }
+            else
+            {
+                year += 1;
+                month = 1;
+            }
+            getMonthValues();
+            repopulateRows();
         }
 
         void forgetCurrentSelection()
@@ -299,12 +363,12 @@ namespace zenmc
             firstOfMonth = new DateTime(year, month, 1);
 
             txtMonth.Text = new DateTime(year, month, 1)
-    .ToString("MMMM", CultureInfo.InvariantCulture);
+    .ToString("MMMM", CultureInfo.InvariantCulture) + " " + year;
 
 
             daysInMonth = DateTime.DaysInMonth(year, month);
             firstDayOfWeek = (int)firstOfMonth.DayOfWeek;
-            lastDayOfMonth = DateTime.DaysInMonth(2016, month);
+            lastDayOfMonth = DateTime.DaysInMonth(year, month);
         }
 
         void repopulateRows()
@@ -325,7 +389,6 @@ namespace zenmc
                 day += 1;
                 Button btnDay = FindViewById<Button>(day);
                 btnDay.Click -= btnDay_Click;
-                btnDay.Click -= btnEvent_Click;
                 if (day >= firstDayOfWeek + 1 && day <= firstDayOfWeek + lastDayOfMonth)
                 {
                     int dayOfMonth = day - firstDayOfWeek;
@@ -334,13 +397,8 @@ namespace zenmc
 
                     DateTime dayDate = new DateTime(year, month, dayOfMonth);
                     
-                    if (pref.Contains(dayDate.ToString("yyyy-MM-dd")))
-                    {
-                        btnDay.Background = GetDrawable(Resource.Drawable.OpenCourseCalendar);
-                        btnDay.Click -= btnDay_Click;
-                        btnDay.Click += btnEvent_Click;
-                    }
-                    else { btnDay.Background = GetDrawable(Resource.Drawable.DefaultCalendarButton); }
+                    string status = getStatus(dayDate.ToString("yyyy-MM-dd"));
+                    setStatus(status, btnDay, false);                    
                 }
                 else
                 {
@@ -363,58 +421,85 @@ namespace zenmc
 
         void btnDay_Click(object sender, EventArgs e)
         {
+            
             removeEventButtons();
             Button btn = (Button)sender;
             selectDate(btn.Id); 
         }
 
         void selectDate(int buttonId)
-        {            
-            string previousId = pref.GetString("DateSelectedID", null);
-            if(previousId != null)
-            {
-                Button btnPrevious = FindViewById<Button>(Int32.Parse(previousId));
-                string previousDrawable = pref.GetString("previousDrawable", string.Empty);
-                if(previousDrawable == "default")
-                {
-                    btnPrevious.Background = GetDrawable(Resource.Drawable.DefaultCalendarButton);
-                }
-                else if(previousDrawable == "open")
-                {
-                    btnPrevious.Background = GetDrawable(Resource.Drawable.OpenCourseCalendar);
-                }
-            }
-
-            Button btn = FindViewById<Button>(buttonId);
+        {
+            string status;
+            string courseID; 
             
-            dateSelected = new DateTime(year, month, Int32.Parse(btn.Text));
-            string defaultDate = dateSelected.ToString("yyyy-MM-dd");
-            string stringDate = dateSelected.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
-            txtDisplay.Text = "Date: " + stringDate;
 
+            Button btnCurrent = FindViewById<Button>(buttonId);
+
+            if (pref.Contains("DateSelectedID"))
+            {
+                deselectDate();
+            }
+            
+
+            dateSelected = new DateTime(year, month, Int32.Parse(btnCurrent.Text));
+            string defaultDate = dateSelected.ToString("yyyy-MM-dd");
+
+            string reformattedDate = dateSelected.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
+            txtDisplay.Text = "Date: " + reformattedDate;
+
+            courseID = database.getCourseID(defaultDate);
+            status = getStatus(defaultDate);
+            
+            setStatus(status, btnCurrent, true);
+            
             editor = pref.Edit();
-            editor.PutString("selectedDate", defaultDate);
-            if (pref.GetString(defaultDate + "Status", null) == "open")
-            {
-                editor.PutString("previousDrawable", "open");
-                btn.Background = GetDrawable(Resource.Drawable.OpenCourseSelected);
-            }
-            else
-            {
-                editor.PutString("previousDrawable", "default");
-                btn.Background = GetDrawable(Resource.Drawable.DefaultCalendarSelected);
-            }
             
             editor.PutString("DateSelectedID", buttonId.ToString());
-            editor.PutString("DateSelected", dateSelected.ToString());
+            editor.PutString("DateSelected", defaultDate);
             editor.Apply();
+
+            if (database.checkDate(defaultDate))
+            {
+                addEventButtons();
+            }
         }
 
-        void btnEvent_Click(object sender, EventArgs e)
+        void deselectDate()
         {
-            Button btn = (Button)sender;
-            selectDate(btn.Id);
-            addEventButtons();
+            string previousId = pref.GetString("DateSelectedID", null);
+            string previousDate = pref.GetString("DateSelected", null);
+            string courseID = database.getCourseID(previousDate);
+            Button btnPrevious = FindViewById<Button>(Int32.Parse(previousId));
+            string status = getStatus(previousDate);
+            setStatus(status, btnPrevious, false);
+        }
+
+        string getStatus(string date)
+        {
+            if(!database.checkDate(date))
+            {
+                return "Default";
+            }
+
+            string courseID = database.getCourseID(date);
+            bool registered = enrollmentPref.Contains(courseID + "Role");
+            if(registered)
+            {
+                return "Registered";
+            }
+            DateTime commencementDate = DateTime.Parse(database.getCourseDetail(courseID, "CommencementDate"));
+            if(DateTime.Now >= commencementDate)
+            {
+                return "Closed";
+            }
+            int numFemales = Int32.Parse(database.getCourseDetail(courseID, "FemaleStudents"));
+            int numMales = Int32.Parse(database.getCourseDetail(courseID, "MaleStudents"));
+            string gender = enrollmentPref.GetString("Gender", null);
+            if(gender == "Male" && numMales >= maxStudents || gender == "Female" && numFemales >= maxStudents)
+            {
+                return "Full";
+            }
+            return "Open";
         }
 
         void addEventButtons()
@@ -437,17 +522,40 @@ namespace zenmc
 
         void btnClassInfo1_Click(object sender, EventArgs e)
         {
-
+            displayClassInfo(1);
         }
 
         void btnClassInfo2_Click(object sender, EventArgs e)
         {
-
+            displayClassInfo(2);
         }
 
         void btnClassInfo3_Click(object sender, EventArgs e)
         {
+            displayClassInfo(3);
+        }
 
+        void displayClassInfo(int classNumber)
+        {
+            string date = pref.GetString("DateSelected", null);
+            string type = database.getClassDetail(date, classNumber, "ClassType");
+            string description = database.getClassDetail(date, classNumber, "Description");
+            string dateAndTime = database.getClassDetail(date, classNumber, "DateandTime");
+            string length = database.getClassDetail(date, classNumber, "Length");
+
+            string time = dateAndTime.Substring(11, 5);
+
+            Bundle classBundle = new Bundle();
+            classBundle.PutString("Type", type);
+            classBundle.PutString("Description", description);
+            classBundle.PutString("Time", time);
+            classBundle.PutString("Length", length);
+
+            FragmentTransaction transaction = FragmentManager.BeginTransaction();
+            classDialog dialog = new classDialog();
+            dialog.Arguments = classBundle;
+            //Show class dialog fragment
+            dialog.Show(transaction, "ClassDialog");
         }
 
         void btnMealInfo_Click(object sender, EventArgs e)
@@ -456,11 +564,12 @@ namespace zenmc
         }
 
         void btnCourseInfo_Click(object sender, EventArgs e)
-        {
-            string dateSelected = pref.GetString("dateSelected", null);
-            string courseID = pref.GetString(dateSelected + "CourseID", null);
+        {            
+            string dateSelected = pref.GetString("DateSelected", null);
+            string courseID = database.getCourseID(dateSelected);
+            forgetCurrentSelection();//Instead go back to current date when users navigate back to calendar again
 
-            var intent = new Intent(this, typeof(course));
+            var intent = new Intent(this, typeof(coursePage));
             intent.PutExtra("CourseID", courseID);
             StartActivity(intent);
             Finish();

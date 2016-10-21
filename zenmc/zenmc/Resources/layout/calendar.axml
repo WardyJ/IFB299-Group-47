@@ -75,18 +75,21 @@
         android:layout_height="wrap_content">
     <Button
             android:id="@+id/btnClassInfo1"
+            android:visibility="invisible"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Class 1" />
     <Button
             android:id="@+id/btnClassInfo2"
+            android:visibility="invisible"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Class 2" />
     <Button
             android:id="@+id/btnClassInfo3"
+            android:visibility="invisible"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -98,16 +101,18 @@
         android:layout_height="wrap_content">
     <Button
             android:id="@+id/btnMealInfo"
+            android:visibility="invisible"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Meals" />
     <Button
             android:id="@+id/btnCourseInfo"
+            android:visibility="invisible"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/CourseInfoButton"
-            android:text="CourseInfo" />
+            android:text="Course Information" />
   </LinearLayout>
     <LinearLayout
         android:id="@+id/ll_row1"

@@ -100,6 +100,7 @@ class MonoPackageManager_Resources {
 		/* We need to ensure that "zenmc.dll" comes first in this list. */
 		"zenmc.dll",
 		"Newtonsoft.Json.dll",
+		"SQLitePCL.raw.dll",
 		"System.Threading.dll",
 		"System.Runtime.dll",
 		"System.Collections.dll",

@@ -16,7 +16,7 @@ using Newtonsoft.Json;
 
 namespace zenmc
 {
-    [Activity(Label = "My Profile")]
+    [Activity(Label = "My Profile", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class profile : Activity
     {
         public List<Student> studentInfo;

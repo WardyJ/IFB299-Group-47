@@ -8,7 +8,7 @@ if (isset($_POST['FullName']) && isset($_POST['DateOfBirth']) && isset($_POST['P
 {
 	//POST students table variables
 	$FullName = $_POST['FullName'];
-	$DateOfBirth = $_POST['DateOfBirth'];//date_create_from_format('Y-m-d',$_POST['DateOfBirth']);
+	$DateOfBirth = $_POST['DateOfBirth'];
 	$PhoneNumber = $_POST['PhoneNumber'];
 	$Email = $_POST['Email'];
 	$Gender = $_POST['Gender'];

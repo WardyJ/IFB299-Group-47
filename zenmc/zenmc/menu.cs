@@ -12,7 +12,7 @@ using Android.Widget;
 
 namespace zenmc
 {
-    [Activity(Label = "Zen Meditation Centre", MainLauncher = false)]
+    [Activity(Label = "Zen Meditation Centre", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class menu : Activity
     {
         private string userID;
@@ -59,7 +59,9 @@ namespace zenmc
             calendarButton.Click += (sender, e) =>
             {
                 var intent = new Intent(this, typeof(calendar));
-                intent.PutExtra("StudentID", userID);
+                ISharedPreferencesEditor editor = pref.Edit();
+                editor.PutString("CStudentID", userID);
+                editor.Apply();
                 StartActivity(intent);
             };
             Button smsTestButton = FindViewById<Button>(Resource.Id.gotoSmsTestBtn);

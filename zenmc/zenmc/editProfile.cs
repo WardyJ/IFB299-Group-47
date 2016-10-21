@@ -16,7 +16,7 @@ using System.Text;
 
 namespace zenmc
 {
-    [Activity(Label = "Edit Profile", Icon = "@drawable/icon")]
+    [Activity(Label = "Edit Profile", Icon = "@drawable/zenicon", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class editProfile : Activity
     {
         public List<Student> studentInfo;

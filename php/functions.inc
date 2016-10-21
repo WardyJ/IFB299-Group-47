@@ -13,4 +13,11 @@ function randomPassword()
 	return $result;
 }
 
+function getGender($studentID, $pdo)
+{
+	$stmt = ("SELECT Gender FROM meditationcentre.students WHERE StudentID = $studentID");
+	$gender = $pdo->query($stmt)->fetch(PDO::FETCH_COLUMN);
+	return $gender;
+}
+
 ?>

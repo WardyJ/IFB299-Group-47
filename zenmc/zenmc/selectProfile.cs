@@ -16,7 +16,7 @@ using Newtonsoft.Json;
 
 namespace zenmc
 {
-    [Activity(Label = "Select Profile")]
+    [Activity(Label = "Select Profile", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class selectProfile : Activity
     {
         private Uri uri = new Uri("http://ec2-52-62-115-138.ap-southeast-2.compute.amazonaws.com/findstudent.php");
