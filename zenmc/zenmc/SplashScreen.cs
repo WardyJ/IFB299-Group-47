@@ -50,7 +50,7 @@ namespace zenmc
             Directory.CreateDirectory(folder);
             string databaseFileName = Path.Combine(folder, "Zen.db");
             SQLite3.Config(SQLite3.ConfigOption.Serialized);
-            //database.Reset(); //if database changed outside the app.
+            database.Reset(); 
 
             database.createDatabase();
 

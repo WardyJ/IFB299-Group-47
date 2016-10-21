@@ -52,6 +52,7 @@ C:\Users\James\documents\visual studio 2015\Projects\zenmc\zenmc\obj\Debug\res\d
 C:\Users\James\documents\visual studio 2015\Projects\zenmc\zenmc\obj\Debug\res\drawable\courseedittext.xml
 C:\Users\James\documents\visual studio 2015\Projects\zenmc\zenmc\obj\Debug\R.cs.flag
 C:\Users\James\documents\visual studio 2015\Projects\zenmc\zenmc\obj\Debug\uploadflags.txt
+C:\Users\James\documents\visual studio 2015\Projects\zenmc\zenmc\obj\Debug\res\layout\classdialog.xml
 C:\Users\James\documents\visual studio 2015\Projects\zenmc\zenmc\bin\Debug\zenmc.dll.mdb
 C:\Users\James\documents\visual studio 2015\Projects\zenmc\zenmc\bin\Debug\Java.Interop.dll.mdb
 C:\Users\James\documents\visual studio 2015\Projects\zenmc\zenmc\bin\Debug\Mono.Android.dll.mdb
@@ -86,6 +87,5 @@ C:\Users\James\documents\visual studio 2015\Projects\zenmc\zenmc\obj\Debug\andro
 C:\Users\James\documents\visual studio 2015\Projects\zenmc\zenmc\obj\Debug\android\assets\System.Xml.dll.mdb
 C:\Users\James\documents\visual studio 2015\Projects\zenmc\zenmc\obj\Debug\android\assets\System.Xml.Linq.dll.mdb
 C:\Users\James\documents\visual studio 2015\Projects\zenmc\zenmc\obj\Debug\android\assets\zenmc.dll.mdb
-C:\Users\James\documents\visual studio 2015\Projects\zenmc\zenmc\obj\Debug\res\layout\classdialog.xml
 C:\Users\James\documents\visual studio 2015\Projects\zenmc\zenmc\obj\Debug\zenmc.dll.mdb
 C:\Users\James\documents\visual studio 2015\Projects\zenmc\zenmc\bin\Debug\zenmc.dll.mdb

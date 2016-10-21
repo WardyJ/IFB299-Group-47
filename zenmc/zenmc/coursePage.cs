@@ -128,7 +128,6 @@ namespace zenmc
 
             btnDescriptionPressed = false;
             btnRegisterPressed = false;
-            int courseHistory = Int32.Parse(pref.GetString("CourseHistory", null));
 
 
             DateTime commencementDateTime = DateTime.Parse(commencementDate);
@@ -139,7 +138,7 @@ namespace zenmc
                 txtCourseRequirements.Visibility = ViewStates.Visible;
                 btnRegister.Visibility = ViewStates.Gone;
             }
-            else if (courseLength != "10" && courseHistory < 3)
+            else if (courseLength != "10" && userPref.GetString("Type", null) =="New")
             {
                 txtCourseRequirements.Text = "You are unable to register for this course until you have completed at least three ten day courses.";
                 btnRegister.Visibility = ViewStates.Gone;
@@ -294,7 +293,7 @@ namespace zenmc
             parameters.Add("CourseHistoryThree", etCourseBG3.Text);
             parameters.Add("CourseHistoryFour", etCourseBG4.Text);
             parameters.Add("CourseHistoryFive", etCourseBG5.Text);
-            parameters.Add("Role", "Student");
+            parameters.Add("Role", role);
         }
 
         void setRadioVisibility()
@@ -361,14 +360,49 @@ namespace zenmc
         void updateSQLite(string result)
         {
             string query;
-
-            if(enrollmentPref.Contains(courseID + "Role"))//if they already had a role, remove a student from course table
+            if (enrollmentPref.Contains(courseID + "Role"))//if they already had a role, remove a student from course table
             {
-                query = "UPDATE Course SET " + result + " = " + result + " - 1 WHERE CourseID = " + courseID;
+                if (result == "MaleStudents")
+                {
+                    numMaleStudents = (Int32.Parse(numMaleStudents) - 1).ToString();
+                    query = "UPDATE Course SET MaleStudents = '" + numMaleStudents + "' WHERE CourseID = " + courseID;
+                }
+                else if (result == "FemaleStudents")
+                {
+                    numFemaleStudents = (Int32.Parse(numFemaleStudents) - 1).ToString();
+                    query = "UPDATE Course SET FemaleStudents = '" + numFemaleStudents + "' WHERE CourseID = " + courseID;
+                }
+                else if (result == "KitchenHelp")
+                {
+                    numKitchenHelp = (Int32.Parse(numKitchenHelp) - 1).ToString();
+                    query = "UPDATE Course SET KitchenHelp = '" + numKitchenHelp + "' WHERE CourseID = " + courseID;
+                }
+                else
+                {
+                    query = "UPDATE Course SET " + result + " = '0' WHERE CourseID = " + courseID;
+                }
             }
             else//if they didn't have a role, add a student to course table
             {
-                query = "UPDATE Course SET " + result + " = " + result + " + 1 WHERE CourseID = " + courseID;
+                if (result == "MaleStudents")
+                {
+                    numMaleStudents = (Int32.Parse(numMaleStudents) + 1).ToString();
+                    query = "UPDATE Course SET MaleStudents = '" + numMaleStudents + "' WHERE CourseID = " + courseID;
+                }
+                else if (result == "FemaleStudents")
+                {
+                    numFemaleStudents = (Int32.Parse(numFemaleStudents) + 1).ToString();
+                    query = "UPDATE Course SET FemaleStudents = '" + numFemaleStudents + "' WHERE CourseID = " + courseID;
+                }
+                else if (result == "KitchenHelp")
+                {
+                    numKitchenHelp = (Int32.Parse(numKitchenHelp) + 1).ToString();
+                    query = "UPDATE Course SET KitchenHelp = '" + numKitchenHelp + "' WHERE CourseID = " + courseID;
+                }
+                else
+                {
+                    query = "UPDATE Course SET " + result + " = '1' WHERE CourseID = " + courseID;
+                }
             }
             database.updateCourseDetails(courseID, query);
         }

@@ -13,10 +13,29 @@ Online database info
 
 Admins added to database
 Login to the app as owner with "theowner@zenmc.com.au" password "theowner"
-Login to the app as receptionist with "reception@zenmc.com.au" password "reception"
-You can add admin capabilities to the app, or ANYTHING.
+Login to the app as receptionist with "reception@zenmc.com.au" password "reception" can edit student profiles
+You can add admin capabilities to the app.
 
-Feel free to interact and change things in the db to test the app with I'll just overwrite the database at some point anyway
+Old students added to database
+You can test old student course registration with (email password):
+Men:
+steve@email.com
+stevesteve
+
+bob@email.com
+bobbob
+
+son@email.com
+sonson
+
+Women:
+jill@email.com
+jilljill
+
+mary@email.com
+marymary
+
+Feel free to interact and change things in the db to test the app with just don't change admin or old student info
 
 Server=ec2-52-62-115-138.ap-southeast-2.compute.amazonaws.com
 Port=3306
