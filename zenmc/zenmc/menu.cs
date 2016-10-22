@@ -61,6 +61,7 @@ namespace zenmc
                 var intent = new Intent(this, typeof(calendar));
                 ISharedPreferencesEditor editor = pref.Edit();
                 editor.PutString("CStudentID", userID);
+                editor.PutString("NewInfo", "true");
                 editor.Apply();
                 StartActivity(intent);
             };

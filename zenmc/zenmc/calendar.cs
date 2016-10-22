@@ -81,9 +81,12 @@ namespace zenmc
             parameters.Add("StudentID", studentID);
 
             infoParameters.Add("StudentID", studentID);
-            
-            //if(!pref.Contains("CalendarSaved"))
-            //{
+
+            //If first time coming to calendar with this student id, get student information
+            if (userPref.GetString("NewInfo", null) == "true")
+            {
+                editor = userPref.Edit();
+                editor.PutString("NewInfo", "false");
                 getStudentInfo();
 
             client = new WebClient();
@@ -96,7 +99,7 @@ namespace zenmc
                 editor.Apply();
                 editor = pref.Edit();
                 organizeEnrollmentData();
-            //}
+            }
             
             initializeCalendar();
         }
@@ -107,10 +110,7 @@ namespace zenmc
             string json = Encoding.UTF8.GetString(studentClient.UploadValues(infoUri, infoParameters));
             studentClient.Dispose();
             studentInfo = JsonConvert.DeserializeObject<List<Student>>(json);
-
-            editor = enrollmentPref.Edit();
-            editor.Clear();
-            editor.Apply();
+            
             editor.PutString("Gender", studentInfo[0].Gender);
             editor.PutString("Type", studentInfo[0].StudentType);
             editor.Apply();
@@ -149,9 +149,6 @@ namespace zenmc
 
             string classDate = new DateTime(year, month, firstDayOfWeek + DateTime.Now.Day).ToString("yyyy,MM,dd");
 
-            editor.PutString("CalendarSaved", "true");
-            editor.Apply();
-
             selectDate(firstDayOfWeek + initialDay);
         }
 
@@ -162,16 +159,11 @@ namespace zenmc
             editor = enrollmentPref.Edit();
 
             enrollmentInfo = JsonConvert.DeserializeObject<List<EnrollmentDetails>>(json);
-            int count = 0;
             foreach (EnrollmentDetails enrollment in enrollmentInfo)
             {
                 string courseID = enrollment.CourseID;
                 editor.PutString(courseID + "Role", enrollment.Role);
-                editor.Apply();
-                count += 1;
             }
-            editor = pref.Edit();
-            editor.PutString("CourseHistory", count.ToString());
             editor.Apply();
         }
 
@@ -445,7 +437,7 @@ namespace zenmc
             string defaultDate = dateSelected.ToString("yyyy-MM-dd");
 
             string reformattedDate = dateSelected.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
-            txtDisplay.Text = "Date: " + reformattedDate;
+            txtDisplay.Text = reformattedDate + "      ";
 
             courseID = database.getCourseID(defaultDate);
             status = getStatus(defaultDate);
@@ -494,7 +486,7 @@ namespace zenmc
             }
             int numFemales = Int32.Parse(database.getCourseDetail(courseID, "FemaleStudents"));
             int numMales = Int32.Parse(database.getCourseDetail(courseID, "MaleStudents"));
-            string gender = enrollmentPref.GetString("Gender", null);
+            string gender = userPref.GetString("Gender", null);
             if(gender == "Male" && numMales >= maxStudents || gender == "Female" && numFemales >= maxStudents)
             {
                 return "Full";
