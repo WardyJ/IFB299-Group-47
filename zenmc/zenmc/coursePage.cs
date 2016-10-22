@@ -129,7 +129,6 @@ namespace zenmc
             btnDescriptionPressed = false;
             btnRegisterPressed = false;
 
-
             DateTime commencementDateTime = DateTime.Parse(commencementDate);
             ////already registered?
             if (DateTime.Now >= commencementDateTime)
@@ -140,7 +139,7 @@ namespace zenmc
             }
             else if (courseLength != "10" && userPref.GetString("Type", null) =="New")
             {
-                txtCourseRequirements.Text = "You are unable to register for this course until you have completed at least three ten day courses.";
+                txtCourseRequirements.Text = "You are unable to register for this course until you have completed at least one ten day course.";
                 btnRegister.Visibility = ViewStates.Gone;
                 txtCourseRequirements.Visibility = ViewStates.Visible;
             }
@@ -298,7 +297,7 @@ namespace zenmc
 
         void setRadioVisibility()
         {
-            string gender = enrollmentPref.GetString("Gender", null);
+            string gender = userPref.GetString("Gender", null);
 
             if (gender == "Male")
             {
@@ -306,11 +305,11 @@ namespace zenmc
                 {
                     btnStudent.Visibility = ViewStates.Gone;
                 }
-                if(maleManager == "Yes")
+                if(maleManager == "Yes" || userPref.GetString("Type", null) == "New")
                 {
                     btnManager.Visibility = ViewStates.Gone;
                 }
-                if(maleTA == "Yes")
+                if(maleTA == "Yes" || userPref.GetString("Type", null) == "New")
                 {
                     btnAssistantTeacher.Visibility = ViewStates.Gone;
                 }
@@ -321,16 +320,16 @@ namespace zenmc
                 {
                     btnStudent.Visibility = ViewStates.Gone;
                 }
-                if (femaleManager == "Yes")
+                if (femaleManager == "Yes" || userPref.GetString("Type", null) == "New")
                 {
                     btnManager.Visibility = ViewStates.Gone;
                 }
-                if (femaleTA == "Yes")
+                if (femaleTA == "Yes" || userPref.GetString("Type", null) == "New")
                 {
                     btnAssistantTeacher.Visibility = ViewStates.Gone;
                 }
             }
-            if(Int32.Parse(numKitchenHelp) > 9)
+            if(Int32.Parse(numKitchenHelp) > 9 || userPref.GetString("Type", null) == "New")
             {
                 btnKitchenHelp.Visibility = ViewStates.Gone;
             }
@@ -352,6 +351,7 @@ namespace zenmc
                 else
                 {
                     updateSQLite(result);
+                    updatePreferences(result);
                     backToCalendar();
                 }                
             });
@@ -405,6 +405,21 @@ namespace zenmc
                 }
             }
             database.updateCourseDetails(courseID, query);
+        }
+
+        void updatePreferences(string result)
+        {
+            ISharedPreferencesEditor editor = enrollmentPref.Edit();
+
+            if (enrollmentPref.Contains(courseID + "Role"))//already has a role
+            {
+                editor.Remove(courseID + "Role");                
+            }
+            else
+            {
+                editor.PutString(courseID + "Role", role);
+            }
+            editor.Apply();
         }
     }
 }
