@@ -651,7 +651,27 @@ namespace zenmc
 
         void btnMealInfo_Click(object sender, EventArgs e)
         {
+            string date = pref.GetString("DateSelected", null);
+            string time1 = database.getMealDetails(date, 1, "DateandTime");
+            string time2 = database.getMealDetails(date, 2, "DateandTime");
+            string time3 = database.getMealDetails(date, 3, "DateandTime");
+            string details1 = database.getMealDetails(date, 1, "Details");
+            string details2 = database.getMealDetails(date, 2, "Details");
+            string details3 = database.getMealDetails(date, 3, "Details");
+/*
+            Bundle classBundle = new Bundle();
+            mealBundle.PutString("Time1", time1);
+            mealBundle.PutString("Time2", time2);
+            mealBundle.PutString("Time3", time3);
+            mealBundle.PutString("Details1", details1);
+            mealBundle.PutString("Details1", details1);
+            mealBundle.PutString("Details1", details1);
 
+            FragmentTransaction transaction = FragmentManager.BeginTransaction();
+            mealDialog dialog = new mealDialog();
+            dialog.Arguments = mealBundle;
+            //Show class dialog fragment
+            dialog.Show(transaction, "ClassDialog");*/
         }
 
         /// <summary>

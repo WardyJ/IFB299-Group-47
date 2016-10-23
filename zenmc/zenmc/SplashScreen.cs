@@ -23,14 +23,17 @@ namespace zenmc
     {
         private Uri uri = new Uri("http://ec2-52-62-115-138.ap-southeast-2.compute.amazonaws.com/classinfo.php");
         private Uri courseUri = new Uri("http://ec2-52-62-115-138.ap-southeast-2.compute.amazonaws.com/courseinfo.php");
+        private Uri mealUri = new Uri("http://ec2-52-62-115-138.ap-southeast-2.compute.amazonaws.com/mealinfo.php");
         private WebClient client = new WebClient();
         private WebClient courseClient = new WebClient();
+        private WebClient mealClient = new WebClient();
 
         private ISharedPreferences pref;
         private ISharedPreferencesEditor editor;
 
         public List<Class> classInfo;
         public List<Course> courseInfo;
+        public List<Meal> mealInfo;
 
         private Database database = new Database();
 
@@ -50,7 +53,7 @@ namespace zenmc
             Directory.CreateDirectory(folder);
             string databaseFileName = Path.Combine(folder, "Zen.db");
             SQLite3.Config(SQLite3.ConfigOption.Serialized);
-            database.Reset(); 
+            //database.Reset(); if db structure changes
 
             database.createDatabase();
 
@@ -104,6 +107,27 @@ namespace zenmc
                 editor = pref.Edit();
                 organizeCourseData();
 
+                mealClient.DownloadDataCompleted += meal_DownloadDataCompleted;
+                mealClient.DownloadDataAsync(mealUri);
+                mealClient.Dispose();
+
+                
+            });
+        }
+
+        void meal_DownloadDataCompleted(object sender, DownloadDataCompletedEventArgs e)
+        {
+            RunOnUiThread(() =>
+            {
+                string json = Encoding.UTF8.GetString(e.Result);
+
+                editor = pref.Edit();
+
+                editor.PutString("MealDetails", json);
+                editor.Apply();
+                editor = pref.Edit();
+                organizeMealData();
+
                 var intent = new Intent(this, typeof(login));
                 StartActivity(intent);
             });
@@ -116,7 +140,6 @@ namespace zenmc
         void organizeClassData()
         {
             string json = pref.GetString("ClassDetails", string.Empty);
-            editor = pref.Edit();
 
             classInfo = JsonConvert.DeserializeObject<List<Class>>(json);
 
@@ -135,15 +158,28 @@ namespace zenmc
         void organizeCourseData()
         {
             string json = pref.GetString("CourseDetails", string.Empty);
-            editor = pref.Edit();
 
             courseInfo = JsonConvert.DeserializeObject<List<Course>>(json);
 
             foreach (Course course in courseInfo)
             {
                 database.insertCourse(course);
-                
-                editor.Apply();
+            }
+        }
+
+        /// <summary>
+        /// The json string returned from the server is deserialized into a list of meal objects
+        /// which are then inserted into the database
+        /// </summary>
+        void organizeMealData()
+        {
+            string json = pref.GetString("MealDetails", string.Empty);
+
+            mealInfo = JsonConvert.DeserializeObject<List<Meal>>(json);
+
+            foreach (Meal meal in mealInfo)
+            {
+                database.insertMeal(meal);
             }
         }
     }

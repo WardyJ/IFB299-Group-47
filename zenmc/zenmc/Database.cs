@@ -30,6 +30,7 @@ namespace zenmc
                 {
                     database.CreateTable<Class>();
                     database.CreateTable<Course>();
+                    database.CreateTable<Meal>();
                     database.Close();
                     return "Database created";
                 }
@@ -50,7 +51,7 @@ namespace zenmc
             SQLiteConnection conn = new SQLiteConnection(path, SQLiteOpenFlags.Create | SQLiteOpenFlags.ReadWrite, true);
             try
             {
-                conn.Insert(aClass);
+                conn.InsertOrReplace(aClass);
                 conn.Close();
                 return "Updated";
             }
@@ -69,6 +70,7 @@ namespace zenmc
 
             conn.Execute("DROP TABLE IF EXISTS Class");
             conn.Execute("DROP TABLE IF EXISTS Course");
+            conn.Execute("DROP TABLE IF EXISTS Meal");
             conn.Close();
         }
 
@@ -82,7 +84,7 @@ namespace zenmc
             SQLiteConnection conn = new SQLiteConnection(path, SQLiteOpenFlags.Create | SQLiteOpenFlags.ReadWrite, true);
             try
             {
-                conn.Insert(course);
+                conn.InsertOrReplace(course);
                 conn.Close();
                 return "Updated";
             }
@@ -90,6 +92,14 @@ namespace zenmc
             {
                 return ex.Message;
             }
+        }
+
+        public void insertMeal(Meal meal)
+        {
+            SQLiteConnection conn = new SQLiteConnection(path, SQLiteOpenFlags.Create | SQLiteOpenFlags.ReadWrite, true);
+            
+            conn.InsertOrReplace(meal);
+            conn.Close();
         }
 
         /// <summary>
@@ -120,6 +130,16 @@ namespace zenmc
             var conn = new SQLiteConnection(path, SQLiteOpenFlags.Create | SQLiteOpenFlags.ReadWrite, true);
 
             string stmt = "SELECT " + classDetail + " FROM Class WHERE substr(DateandTime, 1, 10) = '" + date + "' ORDER BY ClassID LIMIT " + classNumber + "-1, 1";
+            string result = conn.ExecuteScalar<string>(stmt);
+            conn.Close();
+            return result;
+        }
+
+        public string getMealDetails(string date, int mealNumber, string mealDetail)
+        {
+            var conn = new SQLiteConnection(path, SQLiteOpenFlags.Create | SQLiteOpenFlags.ReadWrite, true);
+
+            string stmt = "SELECT " + mealDetail + " FROM Meal WHERE substr(DateandTime, 1, 10) = '" + date + "' ORDER BY DateandTime LIMIT " + mealNumber + "-1, 1";
             string result = conn.ExecuteScalar<string>(stmt);
             conn.Close();
             return result;

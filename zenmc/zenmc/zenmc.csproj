@@ -68,6 +68,7 @@
     <Compile Include="editProfile.cs" />
     <Compile Include="emergencyContact.cs" />
     <Compile Include="EnrollmentDetails.cs" />
+    <Compile Include="Meal.cs" />
     <Compile Include="passwordChange.cs" />
     <Compile Include="passwordReset.cs" />
     <Compile Include="contactPage.cs" />
