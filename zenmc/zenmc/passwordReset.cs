@@ -16,11 +16,14 @@ using Newtonsoft.Json;
 
 namespace zenmc
 {
+    /// <summary>
+    /// Dialog fragment with controls allowing user to reset their password.
+    /// </summary>
     class passwordReset : DialogFragment
     {
         private string email;
         private EditText etResetPassword;
-        private Button btnResetPassword;
+        private Button btnResetPassword, btnBack;
         private ProgressBar progressBar;
         private TextView txtResetError;
         private Uri uri = new Uri("http://ec2-52-62-115-138.ap-southeast-2.compute.amazonaws.com/resetpassword.php");
@@ -34,13 +37,22 @@ namespace zenmc
 
             etResetPassword = (EditText) view.FindViewById<EditText>(Resource.Id.XetResetPassword);
             btnResetPassword = view.FindViewById<Button>(Resource.Id.btnResetPassword);
+            btnBack = view.FindViewById<Button>(Resource.Id.btnBack);
             progressBar = view.FindViewById<ProgressBar>(Resource.Id.resetPasswordProgressBar);
             txtResetError = view.FindViewById<TextView>(Resource.Id.txtResetError);
+
             btnResetPassword.Click += btnResetPassword_Click;
+            btnBack.Click += btnBack_Click;
 
             return view;
         }
 
+        /// <summary>
+        /// Event that occurs when password reset button is clicked. Uploads user input to the
+        /// server.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void btnResetPassword_Click(object sender, EventArgs e)
         {
             WebClient client = new WebClient();
@@ -55,9 +67,25 @@ namespace zenmc
             client.UploadValuesAsync(uri, parameters);
             client.Dispose();
         }
+
+        /// <summary>
+        /// Event that occurs when back button is clicked. Closes the dialog fragment.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void btnBack_Click(object sender, EventArgs e)
+        {
+            Dismiss();
+        }
+
+        /// <summary>
+        /// Event that occurs when user input is uploaded. If an error value is returned, an
+        /// error message is displayed. Otherwise, a success message is displayed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void client_UploadValuesCompleted(object sender, UploadValuesCompletedEventArgs e)
         {
-
             Activity.RunOnUiThread(() =>
             {
                 string result = System.Text.Encoding.UTF8.GetString(e.Result, 0, e.Result.Length);

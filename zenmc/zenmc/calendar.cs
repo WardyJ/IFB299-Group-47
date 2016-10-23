@@ -31,6 +31,7 @@ namespace zenmc
         private Button btnBack, btnForward, btnClassInfo1, btnClassInfo2, 
             btnClassInfo3, btnCourseInfo, btnMealInfo;
         private int firstDayOfWeek, lastDayOfMonth, daysInMonth, initialDay, month, year;
+        private const int daysInWeek = 7;
         private DateTime firstOfMonth, dateSelected;
         private NameValueCollection parameters = new NameValueCollection();
         private NameValueCollection infoParameters = new NameValueCollection();
@@ -47,16 +48,39 @@ namespace zenmc
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-            SetContentView(Resource.Layout.calendar);
-            txtDisplay = FindViewById<TextView>(Resource.Id.txtDisplay);
+            SetContentView(Resource.Layout.calendar);            
 
             database = new Database();
 
             pref = PreferenceManager.GetDefaultSharedPreferences(this);
             userPref = Application.Context.GetSharedPreferences("UserInfo", FileCreationMode.Private);
-
             enrollmentPref = Application.Context.GetSharedPreferences("EnrollmentInfo", FileCreationMode.Private);
+            
+            setLayoutResources();            
+            
+            string studentID = userPref.GetString("CStudentID", null);
+            parameters.Add("StudentID", studentID);
 
+            infoParameters.Add("StudentID", studentID);
+
+            //If first time coming to calendar with this student id, get student information
+            if (studentID != "Owner" && studentID != "Reception" 
+                && userPref.GetString("NewInfo", null) == "true")
+            {
+                getStudentInfo();
+                getEnrollmentData();        
+                organizeEnrollmentData();
+            }
+                        
+            initializeCalendar();
+        }
+
+        /// <summary>
+        /// Finds all of the controls in the layout and assigns them to variables so they
+        /// can be referenced later and subscribes buttons to events
+        /// </summary>
+        void setLayoutResources()
+        {
             btnForward = FindViewById<Button>(Resource.Id.btnForward);
             btnBack = FindViewById<Button>(Resource.Id.btnBack);
             btnClassInfo1 = FindViewById<Button>(Resource.Id.btnClassInfo1);
@@ -65,80 +89,6 @@ namespace zenmc
             btnMealInfo = FindViewById<Button>(Resource.Id.btnMealInfo);
             btnCourseInfo = FindViewById<Button>(Resource.Id.btnCourseInfo);
 
-            row1 = FindViewById<LinearLayout>(Resource.Id.row1);
-            row2 = FindViewById<LinearLayout>(Resource.Id.row2);
-            row3 = FindViewById<LinearLayout>(Resource.Id.row3);
-            row4 = FindViewById<LinearLayout>(Resource.Id.row4);
-            row5 = FindViewById<LinearLayout>(Resource.Id.row5);
-            row6 = FindViewById<LinearLayout>(Resource.Id.row6);
-            row7 = FindViewById<LinearLayout>(Resource.Id.row7);
-            txtMonth = FindViewById<TextView>(Resource.Id.txtMonth);
-            
-
-            btnParams = FindViewById(Resource.Id.btn1).LayoutParameters;
-            
-            string studentID = userPref.GetString("CStudentID", null);
-            parameters.Add("StudentID", studentID);
-
-            infoParameters.Add("StudentID", studentID);
-
-            //If first time coming to calendar with this student id, get student information
-            if (userPref.GetString("NewInfo", null) == "true")
-            {
-                editor = userPref.Edit();
-                editor.PutString("NewInfo", "false");
-                getStudentInfo();
-
-            client = new WebClient();
-                string json = Encoding.UTF8.GetString(client.UploadValues(uri, parameters));
-                client.Dispose();
-
-                editor = pref.Edit();
-
-                editor.PutString("EnrollmentDetails", json);
-                editor.Apply();
-                editor = pref.Edit();
-                organizeEnrollmentData();
-            }
-            
-            initializeCalendar();
-        }
-
-        void getStudentInfo()
-        {
-            studentClient = new WebClient();
-            string json = Encoding.UTF8.GetString(studentClient.UploadValues(infoUri, infoParameters));
-            studentClient.Dispose();
-            studentInfo = JsonConvert.DeserializeObject<List<Student>>(json);
-            
-            editor.PutString("Gender", studentInfo[0].Gender);
-            editor.PutString("Type", studentInfo[0].StudentType);
-            editor.Apply();
-        }
-
-        void client_UploadValuesCompleted(object sender, UploadValuesCompletedEventArgs e)
-        {
-            RunOnUiThread(() =>
-            {
-                string json = Encoding.UTF8.GetString(e.Result);
-
-                editor = pref.Edit();
-
-                editor.PutString("EnrollmentDetails", json);
-                editor.Apply();
-                editor = pref.Edit();
-                organizeEnrollmentData();
-
-                initializeCalendar();
-            });
-        }
-
-        void initializeCalendar()
-        {
-            setDateValues();
-
-            populateRows();
-            
             btnBack.Click += btnBack_Click;
             btnForward.Click += btnForward_Click;
             btnClassInfo1.Click += btnClassInfo1_Click;
@@ -147,12 +97,69 @@ namespace zenmc
             btnMealInfo.Click += btnMealInfo_Click;
             btnCourseInfo.Click += btnCourseInfo_Click;
 
-            string classDate = new DateTime(year, month, firstDayOfWeek + DateTime.Now.Day).ToString("yyyy,MM,dd");
+            row1 = FindViewById<LinearLayout>(Resource.Id.row1);
+            row2 = FindViewById<LinearLayout>(Resource.Id.row2);
+            row3 = FindViewById<LinearLayout>(Resource.Id.row3);
+            row4 = FindViewById<LinearLayout>(Resource.Id.row4);
+            row5 = FindViewById<LinearLayout>(Resource.Id.row5);
+            row6 = FindViewById<LinearLayout>(Resource.Id.row6);
+            row7 = FindViewById<LinearLayout>(Resource.Id.row7);
+
+            txtDisplay = FindViewById<TextView>(Resource.Id.txtDisplay);
+            txtMonth = FindViewById<TextView>(Resource.Id.txtMonth);
+
+            btnParams = FindViewById(Resource.Id.btn1).LayoutParameters;//buttons created for the calendar will copy the parameters of this button
+        }
+
+        /// <summary>
+        /// Accesses student information stored on the server related to the student ID
+        /// being used to find the student's gender and type (old or new)
+        /// </summary>
+        void getStudentInfo()
+        {
+            studentClient = new WebClient();
+            string json = Encoding.UTF8.GetString(studentClient.UploadValues(infoUri, infoParameters));
+            studentClient.Dispose();
+            studentInfo = JsonConvert.DeserializeObject<List<Student>>(json);
+            
+            editor = userPref.Edit();
+            editor.PutString("NewInfo", "false");
+            editor.PutString("Gender", studentInfo[0].Gender);
+            editor.PutString("Type", studentInfo[0].StudentType);
+            editor.Apply();
+        }
+
+        /// <summary>
+        /// Accesses course enrollment information stored on the server and stores
+        /// the course IDs belonging to courses the student is enrolled in
+        /// </summary>
+        void getEnrollmentData()
+        {            
+            client = new WebClient();
+            string json = Encoding.UTF8.GetString(client.UploadValues(uri, parameters));
+            client.Dispose();
+
+            editor = pref.Edit();
+            editor.PutString("EnrollmentDetails", json);
+            editor.Apply();
+        }        
+
+        /// <summary>
+        /// Calls methods to find the date information needed to populate the calendar's first
+        /// set of rows, set the rows up and select the current date
+        /// </summary>
+        void initializeCalendar()
+        {
+            setDateValues();
+            populateRows();           
 
             selectDate(firstDayOfWeek + initialDay);
         }
 
-        
+        /// <summary>
+        /// Takes the enrollment information downloaded from the server and stores it in 
+        /// shared preferences so it can be easily accessed from anywhere in the app
+        /// </summary>
         void organizeEnrollmentData()
         {
             string json = pref.GetString("EnrollmentDetails", string.Empty);
@@ -167,6 +174,10 @@ namespace zenmc
             editor.Apply();
         }
 
+        /// <summary>
+        /// Assigns to variables information on either the last date selected, or if none was 
+        /// then the current date. Sets the displayed month/year on screen to the selected date.
+        /// </summary>
         void setDateValues()
         {
             DateTime date;
@@ -185,19 +196,13 @@ namespace zenmc
                 month = date.Month;
                 year = date.Year;
             }
-            
 
-            firstOfMonth = new DateTime(year, month, 1);
-
-            txtMonth.Text = new DateTime(year, month, 1)
-    .ToString("MMMM", CultureInfo.InvariantCulture) + " " + year;
-
-
-            daysInMonth = DateTime.DaysInMonth(year, month);
-            firstDayOfWeek = (int)firstOfMonth.DayOfWeek;
-            lastDayOfMonth = DateTime.DaysInMonth(year, month);
+            getMonthValues();
         }
 
+        /// <summary>
+        /// Calls methods to populate the 7 rows of the calendar
+        /// </summary>
         void populateRows()
         {
             firstRow();
@@ -209,6 +214,9 @@ namespace zenmc
             populateRow(row7,7);
         }
 
+        /// <summary>
+        /// Sets the first row of the calendar to display the names of the days of the week
+        /// </summary>
         void firstRow()
         {
             string[] days = { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
@@ -223,10 +231,16 @@ namespace zenmc
             }            
         }
         
+        /// <summary>
+        /// sets up the dates of the calendar with clickable buttons displaying each date
+        /// of the selected month
+        /// </summary>
+        /// <param name="row">The ID of the row's layout in the page layout</param>
+        /// <param name="rowNum">The number of the row currently being populated</param>
         void populateRow(LinearLayout row, int rowNum)
         {
-            int day = (rowNum - 2) * 7;
-            for (int i = 1; i < 8; i++)
+            int day = (rowNum - 2) * daysInWeek;
+            for (int i = 1; i <= daysInWeek; i++)
             {
                 day += 1;
                 Button btnDay = new Button(Application.Context);
@@ -263,6 +277,15 @@ namespace zenmc
             }
         }
 
+        /// <summary>
+        /// Assigns a background to a button based on the student's ability to register as a
+        /// student (referred to as status) for the course on the date represented by 
+        /// that button and whether or not the button is currently selected.
+        /// </summary>
+        /// <param name="status">represents by the student's ability to register for
+        /// the course. May be "Closed", "Full", "Open" or "Registered"</param>
+        /// <param name="btn">A button of the calendar</param>
+        /// <param name="selection">Whether or not the button is currently being selected</param>
         void setStatus(string status, Button btn, bool selection)
         {
             if (status == "Closed")
@@ -308,6 +331,13 @@ namespace zenmc
             }
         } 
 
+        /// <summary>
+        /// Event that occurs when the back button is clicked on the calendar. Sets the
+        /// calendar date back one month and calls a method to repopulate the calendar to
+        /// represent that month.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void btnBack_Click(object sender, EventArgs e)
         {
             forgetCurrentSelection();
@@ -324,6 +354,13 @@ namespace zenmc
             repopulateRows();
         }
 
+        /// <summary>
+        /// Event that occurs when the forward button is clicked on the calendar. Sets the
+        /// calendar date forward one month and calls a method to repopulate the calendar to
+        /// represent that month.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void btnForward_Click(object sender, EventArgs e)
         {
             forgetCurrentSelection();
@@ -340,6 +377,9 @@ namespace zenmc
             repopulateRows();
         }
 
+        /// <summary>
+        /// Removes the stored data about which date is currently selected
+        /// </summary>
         void forgetCurrentSelection()
         {
             if (pref.Contains("DateSelectedID"))
@@ -350,6 +390,10 @@ namespace zenmc
             }
         }
 
+        /// <summary>
+        /// Assigns dates to variables based on the current month selected and sets the displayed
+        /// month/year text to represent the current date
+        /// </summary>
         void getMonthValues()
         {
             firstOfMonth = new DateTime(year, month, 1);
@@ -363,6 +407,9 @@ namespace zenmc
             lastDayOfMonth = DateTime.DaysInMonth(year, month);
         }
 
+        /// <summary>
+        /// Calls methods to repopulate the rows of the calendar
+        /// </summary>
         void repopulateRows()
         {
             repopulateRow(row2, 2);
@@ -373,10 +420,16 @@ namespace zenmc
             repopulateRow(row7, 7);
         }
 
+        /// <summary>
+        /// Resets the buttons on the row to have different dates and events based on the
+        /// selected month
+        /// </summary>
+        /// <param name="row">The layout resource for the row in the displayed layout provided</param>
+        /// <param name="rowNum">The number of the given row of the calendar</param>
         void repopulateRow(LinearLayout row, int rowNum)
         {
-            int day = (rowNum - 2) * 7;
-            for (int i = 1; i < 8; i++)
+            int day = (rowNum - 2) * daysInWeek;
+            for (int i = 1; i <= daysInWeek; i++)
             {
                 day += 1;
                 Button btnDay = FindViewById<Button>(day);
@@ -409,16 +462,24 @@ namespace zenmc
                 }
             }
         }
-        
 
+        /// <summary>
+        /// Event that occurs when a button of the calendar is clicked. Removes the event
+        /// information buttons from the display and call method to select the date clicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void btnDay_Click(object sender, EventArgs e)
-        {
-            
+        {            
             removeEventButtons();
             Button btn = (Button)sender;
             selectDate(btn.Id); 
         }
 
+        /// <summary>
+        /// Finds and stores information about the date represented by the button being selected
+        /// </summary>
+        /// <param name="buttonId">Id of the button being selected</param>
         void selectDate(int buttonId)
         {
             string status;
@@ -456,6 +517,10 @@ namespace zenmc
             }
         }
 
+        /// <summary>
+        /// Removes information stored about the selected date and calls method to set the
+        /// background to be a deselected style.
+        /// </summary>
         void deselectDate()
         {
             string previousId = pref.GetString("DateSelectedID", null);
@@ -466,6 +531,13 @@ namespace zenmc
             setStatus(status, btnPrevious, false);
         }
 
+        /// <summary>
+        /// Examines a date and determines whether the student can enroll into a course
+        /// being held on the given date.
+        /// </summary>
+        /// <param name="date">String representing a date to be examined</param>
+        /// <returns>String representing the students ability to register to a course on
+        /// a certain date</returns>
         string getStatus(string date)
         {
             if(!database.checkDate(date))
@@ -494,6 +566,9 @@ namespace zenmc
             return "Open";
         }
 
+        /// <summary>
+        /// Makes the course, class and meal information buttons visible on the display
+        /// </summary>
         void addEventButtons()
         {
             btnCourseInfo.Visibility = ViewStates.Visible;
@@ -503,6 +578,9 @@ namespace zenmc
             btnMealInfo.Visibility = ViewStates.Visible;
         }
 
+        /// <summary>
+        /// Removes the course, class and meal information buttons from view.
+        /// </summary>
         void removeEventButtons()
         {
             btnCourseInfo.Visibility = ViewStates.Invisible;
@@ -512,21 +590,41 @@ namespace zenmc
             btnMealInfo.Visibility = ViewStates.Invisible;
         }
 
+        /// <summary>
+        /// Calls method to display class info related to the button when clicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void btnClassInfo1_Click(object sender, EventArgs e)
         {
             displayClassInfo(1);
         }
 
+        /// <summary>
+        /// Calls method to display class info related to the button when clicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void btnClassInfo2_Click(object sender, EventArgs e)
         {
             displayClassInfo(2);
         }
 
+        /// <summary>
+        /// Calls method to display class info related to the button when clicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void btnClassInfo3_Click(object sender, EventArgs e)
         {
             displayClassInfo(3);
         }
 
+        /// <summary>
+        /// Retrieves data related to a class and bundles it into a dialog fragment to be
+        /// displayed.
+        /// </summary>
+        /// <param name="classNumber">Number of the class being selected.</param>
         void displayClassInfo(int classNumber)
         {
             string date = pref.GetString("DateSelected", null);
@@ -550,11 +648,18 @@ namespace zenmc
             dialog.Show(transaction, "ClassDialog");
         }
 
+
         void btnMealInfo_Click(object sender, EventArgs e)
         {
 
         }
 
+        /// <summary>
+        /// Event that occurs when the course information button is clicked. Gets course ID
+        /// of the selected date and sends the user to the related course information page.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void btnCourseInfo_Click(object sender, EventArgs e)
         {            
             string dateSelected = pref.GetString("DateSelected", null);

@@ -36,7 +36,7 @@ namespace zenmc
                 else
                 {
                     var intent = new Intent(this, typeof(profile));
-                    intent.PutExtra("Student", userID);
+                    intent.PutExtra("StudentID", userID);
                     StartActivity(intent);
                 }
             };

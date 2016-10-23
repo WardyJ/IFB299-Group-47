@@ -32,6 +32,7 @@ namespace zenmc
         private String birthday;
         private Button btnUpdate;
         private Button btnCancel;
+        private bool waiting;
 
 
 
@@ -79,16 +80,9 @@ namespace zenmc
 
             progressBar = FindViewById<ProgressBar>(Resource.Id.editProfileProgressBar);
 
-            if (Intent.HasExtra("Student"))
-            {
-                studentInfo = JsonConvert.DeserializeObject<List<Student>>(Intent.GetStringExtra("Student"));
-            }
-            else
-            {
-                studentInfo = JsonConvert.DeserializeObject<List<Student>>(Intent.GetStringExtra("Owner"));
-            }
             
-
+            studentInfo = JsonConvert.DeserializeObject<List<Student>>(Intent.GetStringExtra("Info"));
+            
             etFullName.Text = studentInfo[0].FullName;
             etEmail.Text = studentInfo[0].Email;
             displayDate.Text = studentInfo[0].DateOfBirth.ToString("dd/MM/yyyy");
@@ -124,6 +118,12 @@ namespace zenmc
             btnCancel.Click += btnCancel_Click;
         }
 
+        /// <summary>
+        /// Event that occurs when the set date button is clicked. Opens up a new dialog
+        /// fragment with date set to the user's already stored date value.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnDate_Click(object sender, EventArgs e)
         {
             DialogDate dialogfrag = DialogDate.NewInstance(delegate (DateTime date)
@@ -146,31 +146,35 @@ namespace zenmc
         /// <param name="e"></param>
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (btnGender.Checked)
+            if(!waiting)
             {
-                gender = "Male";
-            }
-            else
-            {
-                gender = "Female";
-            }
+                waiting = true;
+                if (btnGender.Checked)
+                {
+                    gender = "Male";
+                }
+                else
+                {
+                    gender = "Female";
+                }
 
-            errors = false;
-            resetErrorText();
-            validateForm();
+                errors = false;
+                resetErrorText();
+                validateForm();
 
-            if (!errors)
-            {
-                WebClient client = new WebClient();
+                if (!errors)
+                {
+                    WebClient client = new WebClient();
 
-                setParameters();
+                    setParameters();
 
 
-                progressBar.Visibility = ViewStates.Visible;
-                client.UploadValuesCompleted += client_UploadValuesCompleted;
-                client.UploadValuesAsync(uri, parameters);
-                client.Dispose();
-            }
+                    progressBar.Visibility = ViewStates.Visible;
+                    client.UploadValuesCompleted += client_UploadValuesCompleted;
+                    client.UploadValuesAsync(uri, parameters);
+                    client.Dispose();
+                }
+            }            
         }
 
         /// <summary>
@@ -208,15 +212,13 @@ namespace zenmc
             {
                 errorLog.Text += "Error: Name is a required field.\n";
                 errors = true;
-                etFullName.Background = GetDrawable(Resource.Drawable.EditTextError);
-                //FindViewById<TextView>(Resource.Id.TextFullName).SetTextColor(Android.Graphics.Color.Red);
+                etFullName.Background = GetDrawable(Resource.Drawable.EditTextError);                
             }
             Regex rgx = new Regex(@"^[a-zA-Z -']+$");
             if (!rgx.IsMatch(etFullName.Text))
             {
                 errorLog.Text += "Error: Only letters and a few special characters are allowed in name\n";
                 errors = true;
-                //FindViewById<TextView>(Resource.Id.TextFullName).SetTextColor(Android.Graphics.Color.Red);
                 etFullName.Background = GetDrawable(Resource.Drawable.EditTextError);
             }
         }
@@ -243,6 +245,9 @@ namespace zenmc
             }
         }
 
+        /// <summary>
+        /// Checks input phone number, if blank displays error text
+        /// </summary>
         void validatePhoneNumber()
         {
             if (etPhoneNumber.Text == "")
@@ -254,7 +259,9 @@ namespace zenmc
             }
         }
 
-        
+        /// <summary>
+        /// Checks if the emergency contact name provided is valid, displays error message if not
+        /// </summary>
         void validateContactName()
         {
             Regex rgx = new Regex(@"^[a-zA-Z -']+$");
@@ -271,10 +278,13 @@ namespace zenmc
                 errorLog.Text += "Error: Emergency contact name is a required field.\n";
                 errors = true;
                 etContactName.Background = GetDrawable(Resource.Drawable.EditTextError);
-                //FindViewById<TextView>(Resource.Id.TextContactName).SetTextColor(Android.Graphics.Color.Red);
+                
             }
         }
 
+        /// <summary>
+        /// Checks if emergency contact phone number provided is valid, displays error text if not
+        /// </summary>
         void validateContactPhoneNumber()
         {
             if (etContactPhoneNumber.Text == "")
@@ -282,11 +292,13 @@ namespace zenmc
                 errorLog.Text += "Error: Emergency contact phone number is a required field.\n";
                 errors = true;
                 etContactPhoneNumber.Background = GetDrawable(Resource.Drawable.EditTextError);
-                //FindViewById<TextView>(Resource.Id.TextContactPhoneNumber).SetTextColor(Android.Graphics.Color.Red);
             }
 
         }
 
+        /// <summary>
+        /// Sets parameters from user input to be uploaded when user tries to change profile information
+        /// </summary>
         void setParameters()
         {
             parameters = new NameValueCollection();
@@ -309,9 +321,15 @@ namespace zenmc
             parameters.Add("Country", etCountry.Text);
         }
 
+        /// <summary>
+        /// Event that occurs when user profile details are uploaded. If an error string
+        /// is returned, an error message is displayed. Otherwise, the user is sent back to the
+        /// profile page.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void client_UploadValuesCompleted(object sender, UploadValuesCompletedEventArgs e)
         {
-
             RunOnUiThread(() =>
             {
                 string returnValue = Encoding.UTF8.GetString(e.Result, 0, e.Result.Length);
@@ -330,32 +348,30 @@ namespace zenmc
 
                     Intent intent = new Intent(this, typeof(profile));
 
-                    if (Intent.HasExtra("Student"))
-                    {
-                        intent.PutExtra("StudentEdit", JsonConvert.SerializeObject(studentInfo));
-                    }
-                    else
-                    {
-                        intent.PutExtra("OwnerEdit", JsonConvert.SerializeObject(studentInfo));
-                    }
+                    
+                    //Sends new profile info back to profile so it doesn't have to be downloaded again
+                    intent.PutExtra("Edit", JsonConvert.SerializeObject(studentInfo));
+                    
                     StartActivity(intent);
                     Finish();
                 }
                 progressBar.Visibility = ViewStates.Invisible;
+                waiting = false;
             });
         }
+
+        /// <summary>
+        /// Event that occurs when cancel button is clicked. Sends the user back to
+        /// the profile page with old student data.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void btnCancel_Click(object sender, EventArgs e)
         {
             Intent intent = new Intent(this, typeof(profile));
 
-            if (Intent.HasExtra("Student"))
-            {
-                intent.PutExtra("StudentEdit", JsonConvert.SerializeObject(studentInfo));
-            }
-            else
-            {
-                intent.PutExtra("OwnerEdit", JsonConvert.SerializeObject(studentInfo));
-            }
+            //Sends new profile info back to profile so it doesn't have to be downloaded again
+            intent.PutExtra("Edit", JsonConvert.SerializeObject(studentInfo));
 
             StartActivity(intent);
             Finish();

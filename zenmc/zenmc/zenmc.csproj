@@ -90,7 +90,6 @@
     <Compile Include="calendar.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="GettingStarted.Xamarin" />
     <None Include="packages.config" />
     <AndroidResource Include="Resources\layout\passwordChange.axml">
       <SubType>Designer</SubType>

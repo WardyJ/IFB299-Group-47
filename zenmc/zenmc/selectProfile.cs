@@ -55,6 +55,12 @@ namespace zenmc
             btnSearchName.Click += btnSearchName_Click;
         }
 
+        /// <summary>
+        /// Occurs when select by ID button is clicked. If user input is provided, uploads the
+        /// input to the server to find student information matching the ID.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void btnSelectID_Click(object sender, EventArgs e)
         {
             if (!waiting)
@@ -78,6 +84,12 @@ namespace zenmc
             }
         }
 
+        /// <summary>
+        /// Occurs when select by Email button is clicked. If user input is provided, uploads the
+        /// input to the server to find student information matching the Email.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void btnSelectEmail_Click(object sender, EventArgs e)
         {
             if (!waiting)
@@ -102,6 +114,12 @@ namespace zenmc
             }
         }
 
+        /// <summary>
+        /// Occurs when search by name button is clicked. If user input is provided, uploads the
+        /// input to the server to find all students with the input in their name.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void btnSearchName_Click(object sender, EventArgs e)
         {
             if (!waiting)
@@ -126,9 +144,15 @@ namespace zenmc
             }
         }
 
+        /// <summary>
+        /// Occurs when an ID value has been uploaded to the server. Displays error text if 
+        /// server found no student with that ID otherwise takes user to the student's profile
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void id_UploadValuesCompleted(object sender, UploadValuesCompletedEventArgs e)
         {
-            if (idCount < 1)
+            if (idCount < 1)//If no other results have been returned (prevents multiple events occuring when this page is returned to)
             {
                 idCount += 1;
                 RunOnUiThread(() =>
@@ -147,7 +171,7 @@ namespace zenmc
                             else
                             {
                                 var intent = new Intent(this, typeof(profile));
-                                intent.PutExtra("Owner", studentID);
+                                intent.PutExtra("StudentID", studentID);
                                 StartActivity(intent);
                             }
                             waiting = false;
@@ -162,6 +186,12 @@ namespace zenmc
             }
         }
 
+        /// <summary>
+        /// Occurs when an Email value has been uploaded to the server. Displays error text if 
+        /// server found no student with that Email otherwise takes user to the student's profile
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void email_UploadValuesCompleted(object sender, UploadValuesCompletedEventArgs e)
         {
             if (emailCount < 1)
@@ -191,6 +221,13 @@ namespace zenmc
             }
         }
 
+        /// <summary>
+        /// Occurs when a name value has been uploaded to the server. A dialog fragment is 
+        /// opened with information on any and all students found with the name value in their
+        /// name
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void search_UploadValuesCompleted(object sender, UploadValuesCompletedEventArgs e)
         {
             if(searchCount < 1)

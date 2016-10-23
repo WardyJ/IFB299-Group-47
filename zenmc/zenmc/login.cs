@@ -54,6 +54,11 @@ namespace zenmc
             btnResetPassword.Click += btnResetPassword_Click;
         }
 
+        /// <summary>
+        /// Event that occurs when login button is clicked. Uploads user input to the server.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void loginButton_Click(object sender, EventArgs e)
         {
             if(!waiting)
@@ -72,15 +77,18 @@ namespace zenmc
                 client.Dispose();
             }
         }
-
-
-
+        
+        /// <summary>
+        /// Event that occurs when values have been uploaded to the server. Return value is
+        /// examined and if it = None then error text is displayed. Otherwise, the user input
+        /// is stored in shared preferences and the user is sent to the menu.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void client_UploadValuesCompleted(object sender, UploadValuesCompletedEventArgs e)
         {
-
             RunOnUiThread(() =>
             {
-
                 userID = Encoding.UTF8.GetString(e.Result, 0, e.Result.Length);
                 userID = userID.Replace("\r", string.Empty).Replace("\n", string.Empty);
 
@@ -118,6 +126,13 @@ namespace zenmc
                 waiting = false;
             });
         }
+
+        /// <summary>
+        /// Event that occurs when reset password button is clicked. The password
+        /// reset dialog fragment is opened.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void btnResetPassword_Click(object sender, EventArgs e)
         {
             FragmentTransaction transaction = FragmentManager.BeginTransaction();
@@ -126,6 +141,9 @@ namespace zenmc
             resetDialog.Show(transaction, "resetDialog");
         }
 
+        /// <summary>
+        /// Event that occurs when hardware back button is clicked. Going back is prevented
+        /// </summary>
         public override void OnBackPressed()
         {
             //Stop user from leaving the log in page with back button.

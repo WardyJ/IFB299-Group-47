@@ -59,9 +59,13 @@ namespace zenmc
             client.Dispose();
 
         }
-
         
-        
+        /// <summary>
+        /// Occurs when class details have been downloaded from the server. Methods are called
+        /// to organize the class data and download course details.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void client_DownloadDataCompleted(object sender, DownloadDataCompletedEventArgs e)
         {
             RunOnUiThread(() =>
@@ -81,6 +85,12 @@ namespace zenmc
             });
         }
 
+        /// <summary>
+        /// Occurs when course data has been downloaded from the server. A method is called
+        /// to organize the course data and the user is sent to the login screen.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void course_DownloadDataCompleted(object sender, DownloadDataCompletedEventArgs e)
         {
             RunOnUiThread(() =>
@@ -99,6 +109,10 @@ namespace zenmc
             });
         }
 
+        /// <summary>
+        /// The json string returned from the server is deserialized into a list of class objects
+        /// which are then inserted into the database
+        /// </summary>
         void organizeClassData()
         {
             string json = pref.GetString("ClassDetails", string.Empty);
@@ -114,6 +128,10 @@ namespace zenmc
             }
         }
 
+        /// <summary>
+        /// The json string returned from the server is deserialized into a list of course objects
+        /// which are then inserted into the database
+        /// </summary>
         void organizeCourseData()
         {
             string json = pref.GetString("CourseDetails", string.Empty);

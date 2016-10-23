@@ -12,6 +12,9 @@ using Android.Widget;
 
 namespace zenmc
 {
+    /// <summary>
+    /// Dialog fragment displaying information about a student's residential address.
+    /// </summary>
     class residentialAddress : DialogFragment
     {
         private TextView txtStreetAddress;
@@ -51,6 +54,11 @@ namespace zenmc
             return view;
         }
 
+        /// <summary>
+        /// Event that occurs when back button is clicked. Closes the dialog fragment.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void btnBack_Click(object sender, EventArgs e)
         {
             Dismiss();
