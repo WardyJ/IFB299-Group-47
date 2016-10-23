@@ -46,28 +46,13 @@ namespace zenmc
             WebClient client = new WebClient();
 
             
-
-            if(Intent.HasExtra("Student"))
-            {
-                studentIDText = Intent.GetStringExtra("Student");
-
-            }
-            else
-            {
-                studentIDText = Intent.GetStringExtra("Owner");
-            }
+            studentIDText = Intent.GetStringExtra("StudentID");
 
             parameters.Add("StudentID", studentIDText);
 
-            if ( Intent.HasExtra("StudentEdit"))
+            if ( Intent.HasExtra("Edit"))
             {
-                studentInfo = JsonConvert.DeserializeObject<List<Student>>(Intent.GetStringExtra("StudentEdit"));
-                studentIDText = studentInfo[0].StudentID.ToString();
-                showProfileInfo();
-            }
-            else if (Intent.HasExtra("OwnerEdit"))
-            {
-                studentInfo = JsonConvert.DeserializeObject<List<Student>>(Intent.GetStringExtra("OwnerEdit"));
+                studentInfo = JsonConvert.DeserializeObject<List<Student>>(Intent.GetStringExtra("Edit"));
                 studentIDText = studentInfo[0].StudentID.ToString();
                 showProfileInfo();
             }
@@ -84,6 +69,9 @@ namespace zenmc
             btnEditProfile.Click += btnEditProfile_Click;
         }
 
+        /// <summary>
+        /// Profile information views are given text based on the related student information.
+        /// </summary>
         private void showProfileInfo()
         {
             FindViewById<TextView>(Resource.Id.prfFullName).Text = studentInfo[0].FullName;
@@ -95,6 +83,13 @@ namespace zenmc
             FindViewById<TextView>(Resource.Id.prfMedication).Text = studentInfo[0].PrescribedMedication;
         }
 
+        /// <summary>
+        /// Event that occurs when values are uploaded to the server. The returned json string is
+        /// deserialized as a Student class object and assigned to a variable. Method to show
+        /// profile is called.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void client_UploadValuesCompleted(object sender, UploadValuesCompletedEventArgs e)
         {
             RunOnUiThread(() =>
@@ -106,6 +101,13 @@ namespace zenmc
                 
             });
         }
+
+        /// <summary>
+        /// Event that occurs when emergency contact button is clicked. Emergency contact
+        /// info is bundled into a dialog fragment that is then displayed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnEmergencyContact_Click(object sender, EventArgs e)
         {
             string contactName = studentInfo[0].ContactName;
@@ -124,6 +126,12 @@ namespace zenmc
             emergencyDialog.Show(transaction, "emergencyDialog");
         }
 
+        /// <summary>
+        /// Event that occurs when residential address button is clicked. Residential address
+        /// info is bundled into a dialog fragment that is then displayed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnResidentialAddress_Click(object sender, EventArgs e)
         {
             string streetAddress = studentInfo[0].StreetAddress;
@@ -147,6 +155,12 @@ namespace zenmc
             addressDialog.Show(transaction, "addressDialog");
         }
 
+        /// <summary>
+        /// Event that occurs when change password button is clicked. Student email
+        /// info is bundled into a dialog fragment that is then displayed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnChangePassword_Click(object sender, EventArgs e)
         {
             string email = studentInfo[0].Email;
@@ -161,6 +175,11 @@ namespace zenmc
             changeDialog.Show(transaction, "changeDialog");
         }
 
+        /// <summary>
+        /// /Event that occurs when menu button is clicked. Sends the user back to the menu.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnMenu_Click(object sender, EventArgs e)
         {
             Intent intent = new Intent(this, typeof(menu));
@@ -169,21 +188,17 @@ namespace zenmc
             Finish();
         }
 
+        /// <summary>
+        /// Event that occurs when edit profile button is clicked. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnEditProfile_Click(object sender, EventArgs e)
         {
             Intent intent = new Intent(this, typeof(editProfile));
-            if(Intent.HasExtra("Owner"))
-            {
-                intent.PutExtra("Owner", JsonConvert.SerializeObject(studentInfo));
-                StartActivity(intent);
-                Finish();
-            }
-            else
-            {
-                intent.PutExtra("Student", JsonConvert.SerializeObject(studentInfo));
-                StartActivity(intent);
-                Finish();
-            }
+            intent.PutExtra("Info", JsonConvert.SerializeObject(studentInfo));
+            StartActivity(intent);
+            Finish();
             
         }
     }

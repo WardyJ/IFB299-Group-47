@@ -14,6 +14,9 @@ using System.Collections.Specialized;
 
 namespace zenmc
 {
+    /// <summary>
+    /// Dialog fragment that allows user to enter data to change their password.
+    /// </summary>
     class passwordChange : DialogFragment
     {
         private EditText etOldPassword;
@@ -48,11 +51,22 @@ namespace zenmc
             return view;
         }
 
+        /// <summary>
+        /// Event that occurs when back button is clicked. Dialog fragment is closed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void btnBack_Click(object sender, EventArgs e)
         {
             Dismiss();
         }
 
+        /// <summary>
+        /// Event that occurs when change password button is clicked. User input is validated
+        /// and if valid new password information is uploaded to the server.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void btnChangePassword_Click(object sender, EventArgs e)
         {
             bool valid = validateNewPassword();
@@ -72,10 +86,14 @@ namespace zenmc
                  client.UploadValuesCompleted += client_UploadValuesCompleted;
                  client.UploadValuesAsync(uri, parameters);
                  client.Dispose();
-            }
-            
+            }            
         }
 
+        /// <summary>
+        /// Validation for user input. Checks to see if the passwords are of correct form
+        /// and old password entries match.
+        /// </summary>
+        /// <returns>true if passwords are valid, false if not</returns>
         bool validateNewPassword()
         {
             if(etOldPassword.Text == "")
@@ -95,6 +113,13 @@ namespace zenmc
             }
             return true;
         }
+
+        /// <summary>
+        /// Event that occurs when new password information is uploaded. If an error value is
+        /// returned, an error message is displayed. Otherwise, success message is displayed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void client_UploadValuesCompleted(object sender, UploadValuesCompletedEventArgs e)
         {
             Activity.RunOnUiThread(() =>

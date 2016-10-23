@@ -12,6 +12,9 @@ using Android.Widget;
 
 namespace zenmc
 {
+    /// <summary>
+    /// Dialog fragment displaying information about a class.
+    /// </summary>
     class classDialog : DialogFragment
     {
         private TextView txtType;
@@ -40,6 +43,11 @@ namespace zenmc
             return view;
         }
 
+        /// <summary>
+        /// Closes the dialog fragment
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void btnBack_Click(object sender, EventArgs e)
         {
             Dismiss();

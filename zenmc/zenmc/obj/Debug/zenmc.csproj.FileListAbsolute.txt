@@ -1,4 +1,3 @@
-C:\Users\James\documents\visual studio 2015\Projects\zenmc\zenmc\obj\Debug\zenmc.csprojResolveAssemblyReference.cache
 C:\Users\James\documents\visual studio 2015\Projects\zenmc\zenmc\bin\Debug\zenmc.dll
 C:\Users\James\documents\visual studio 2015\Projects\zenmc\zenmc\bin\Debug\zenmc.pdb
 C:\Users\James\documents\visual studio 2015\Projects\zenmc\zenmc\bin\Debug\zenmc.zenmc.apk
@@ -87,5 +86,6 @@ C:\Users\James\documents\visual studio 2015\Projects\zenmc\zenmc\obj\Debug\andro
 C:\Users\James\documents\visual studio 2015\Projects\zenmc\zenmc\obj\Debug\android\assets\System.Xml.dll.mdb
 C:\Users\James\documents\visual studio 2015\Projects\zenmc\zenmc\obj\Debug\android\assets\System.Xml.Linq.dll.mdb
 C:\Users\James\documents\visual studio 2015\Projects\zenmc\zenmc\obj\Debug\android\assets\zenmc.dll.mdb
+C:\Users\James\documents\visual studio 2015\Projects\zenmc\zenmc\obj\Debug\zenmc.csprojResolveAssemblyReference.cache
 C:\Users\James\documents\visual studio 2015\Projects\zenmc\zenmc\obj\Debug\zenmc.dll.mdb
 C:\Users\James\documents\visual studio 2015\Projects\zenmc\zenmc\bin\Debug\zenmc.dll.mdb

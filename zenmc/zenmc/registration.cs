@@ -88,6 +88,12 @@ namespace zenmc
             btnInsert.Click += btnInsert_Click;
         }
 
+        /// <summary>
+        /// Event called when the set date button is clicked. Opens up a date picker dialog
+        /// fragment for user to input their date of birth.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnDate_Click(object sender, EventArgs e)
         {
             DialogDate dialogfrag = DialogDate.NewInstance(delegate (DateTime date)
@@ -153,15 +159,6 @@ namespace zenmc
             etContactName.Background = GetDrawable(Resource.Drawable.EditText);
             etContactPhoneNumber.Background = GetDrawable(Resource.Drawable.EditText);
             btnDate.SetTextColor(Android.Graphics.Color.SkyBlue);
-            /*FindViewById<TextView>(Resource.Id.TextFullName).SetTextColor(Android.Graphics.Color.White);
-            FindViewById<TextView>(Resource.Id.TextDateOfBirth).SetTextColor(Android.Graphics.Color.White);
-            FindViewById<TextView>(Resource.Id.TextPhoneNumber).SetTextColor(Android.Graphics.Color.White);
-            FindViewById<TextView>(Resource.Id.TextPassword).SetTextColor(Android.Graphics.Color.White);
-            FindViewById<TextView>(Resource.Id.TextConfirmPassword).SetTextColor(Android.Graphics.Color.White);
-            FindViewById<TextView>(Resource.Id.TextContactName).SetTextColor(Android.Graphics.Color.White);
-            FindViewById<TextView>(Resource.Id.TextContactPhoneNumber).SetTextColor(Android.Graphics.Color.White);
-            FindViewById<TextView>(Resource.Id.TextPhoneNumber).SetTextColor(Android.Graphics.Color.White);
-        */
         }
 
         /// <summary>
@@ -188,14 +185,12 @@ namespace zenmc
                 errorLog.Text += "Error: Name is a required field.\n";
                 errors = true;
                 etFullName.Background = GetDrawable(Resource.Drawable.EditTextError);
-                //FindViewById<TextView>(Resource.Id.TextFullName).SetTextColor(Android.Graphics.Color.Red);
             }
             Regex rgx = new Regex(@"^[a-zA-Z -']+$");
             if (!rgx.IsMatch(etFullName.Text))
             {
                 errorLog.Text += "Error: Only letters and a few special characters are allowed in name\n";
                 errors = true;
-                //FindViewById<TextView>(Resource.Id.TextFullName).SetTextColor(Android.Graphics.Color.Red);
                 etFullName.Background = GetDrawable(Resource.Drawable.EditTextError);
             }
         }
@@ -209,19 +204,20 @@ namespace zenmc
             if (!rgx.IsMatch(etEmail.Text))
             {
                 errorLog.Text += "Error: Email must be of the form address@email.com\n";
-                //FindViewById<TextView>(Resource.Id.TextEmail).SetTextColor(Android.Graphics.Color.Red);
                 etEmail.Background = GetDrawable(Resource.Drawable.EditTextError);
                 errors = true;
             }
             if (etEmail.Text == "")
             {
                 errorLog.Text += "Error: Email is a required field.\n";
-                //FindViewById<TextView>(Resource.Id.TextEmail).SetTextColor(Android.Graphics.Color.Red);
                 etEmail.Background = GetDrawable(Resource.Drawable.EditTextError);
                 errors = true;
             }
         }
 
+        /// <summary>
+        /// Checks if date of birth value has been changed. If not, displays error text.
+        /// </summary>
         void validateDateOfBirth()
         {
             if (birthday == "0-0-0")
@@ -232,6 +228,9 @@ namespace zenmc
             }            
         }
 
+        /// <summary>
+        /// Checks input phone number, if blank displays error text
+        /// </summary>
         void validatePhoneNumber()
         {
             if (etPhoneNumber.Text == "")
@@ -239,10 +238,12 @@ namespace zenmc
                 errorLog.Text += "Error: Phone number is a required field";
                 errors = true;
                 etPhoneNumber.Background = GetDrawable(Resource.Drawable.EditTextError);
-                //FindViewById<TextView>(Resource.Id.TextPhoneNumber).SetTextColor(Android.Graphics.Color.Red);
             }
         }
 
+        /// <summary>
+        /// Checks password fields. If invalid, display error message.
+        /// </summary>
         void validatePassword()
         {
             if (etPassword.Text == "")
@@ -250,7 +251,6 @@ namespace zenmc
                 errorLog.Text += "Error: Password is a required field.\n";
                 errors = true;
                 etPassword.Background = GetDrawable(Resource.Drawable.EditTextError);
-                //FindViewById<TextView>(Resource.Id.TextPassword).SetTextColor(Android.Graphics.Color.Red);
             }
             if (etPassword.Text != etConfirmPassword.Text)
             {
@@ -258,18 +258,18 @@ namespace zenmc
                 errors = true;
                 etPassword.Background = GetDrawable(Resource.Drawable.EditTextError);
                 etConfirmPassword.Background = GetDrawable(Resource.Drawable.EditTextError);
-                //FindViewById<TextView>(Resource.Id.TextPassword).SetTextColor(Android.Graphics.Color.Red);
-                //FindViewById<TextView>(Resource.Id.TextConfirmPassword).SetTextColor(Android.Graphics.Color.Red);
             }
             if (etPassword.Text.Length < 6)
             {
                 errorLog.Text += "Error: Password must be at least 6 characters long\n";
                 errors = true;
                 etPassword.Background = GetDrawable(Resource.Drawable.EditTextError);
-                //FindViewById<TextView>(Resource.Id.TextPassword).SetTextColor(Android.Graphics.Color.Red);
             }
         }
 
+        /// <summary>
+        /// Checks if the emergency contact name provided is valid, displays error message if not
+        /// </summary>
         void validateContactName()
         {
             Regex rgx = new Regex(@"^[a-zA-Z -']+$");
@@ -279,17 +279,18 @@ namespace zenmc
                 errorLog.Text += "Error: Only letters and a few special characters are allowed in contact name\n";
                 errors = true;
                 etContactName.Background = GetDrawable(Resource.Drawable.EditTextError);
-                //FindViewById<TextView>(Resource.Id.TextContactName).SetTextColor(Android.Graphics.Color.Red);
             }
             if (etContactName.Text == "")
             {
                 errorLog.Text += "Error: Emergency contact name is a required field.\n";
                 errors = true;
                 etContactName.Background = GetDrawable(Resource.Drawable.EditTextError);
-                //FindViewById<TextView>(Resource.Id.TextContactName).SetTextColor(Android.Graphics.Color.Red);
             }
         }
 
+        /// <summary>
+        /// Checks if emergency contact phone number provided is valid, displays error text if not
+        /// </summary>
         void validateContactPhoneNumber()
         {
             if (etContactPhoneNumber.Text == "")
@@ -297,11 +298,13 @@ namespace zenmc
                 errorLog.Text += "Error: Emergency contact phone number is a required field.\n";
                 errors = true;
                 etContactPhoneNumber.Background = GetDrawable(Resource.Drawable.EditTextError);
-                //FindViewById<TextView>(Resource.Id.TextContactPhoneNumber).SetTextColor(Android.Graphics.Color.Red);
             }
 
         }
 
+        /// <summary>
+        /// Sets parameters from user input to be uploaded when user tries to register
+        /// </summary>
         void setParameters()
         {
             parameters = new NameValueCollection();
@@ -323,6 +326,13 @@ namespace zenmc
             parameters.Add("Country", etCountry.Text);
         }
 
+        /// <summary>
+        /// Event that occurs when user registration details are uploaded. If an error string
+        /// is returned, an error message is displayed. Otherwise, the user is sent back to the
+        /// menu.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void client_UploadValuesCompleted(object sender, UploadValuesCompletedEventArgs e)
         {
 

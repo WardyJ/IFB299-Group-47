@@ -15,6 +15,10 @@ using System.Net;
 
 namespace zenmc
 {
+    /// <summary>
+    /// Dialog fragment displaying buttons linking to the profile page of each student found
+    /// in the search.
+    /// </summary>
     class searchName : DialogFragment
     {
         WebClient client = new WebClient();
@@ -39,6 +43,7 @@ namespace zenmc
             txtResultsLog = view.FindViewById<TextView>(Resource.Id.txtResultsLog);
             progressBar = view.FindViewById<ProgressBar>(Resource.Id.progressBar);
 
+            //Search results returned in the parent activity
             json = Arguments.GetString("searchName");
             studentInfo = JsonConvert.DeserializeObject<List<Student>>(json);
 
@@ -51,6 +56,12 @@ namespace zenmc
             return view;
         }
 
+        /// <summary>
+        /// Displays a list of students to the dialog fragment based on the list
+        /// of student objects provided. If no objects are in the list, displays a different
+        /// message.
+        /// </summary>
+        /// <param name="students">student objects retrieved from the server</param>
         void addStudents(List<Student> students)
         {
             numResults = 0;
@@ -70,6 +81,12 @@ namespace zenmc
             else { txtResultsLog.Text = numResults + " student(s) were found."; }            
         }
 
+        /// <summary>
+        /// /Event that occurs when a student's profile button is clicked. Takes the user
+        /// to the profile page of that student.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void btnProfile_Click(object sender, EventArgs e)
         {
             if (!waiting)
@@ -87,6 +104,12 @@ namespace zenmc
             }
         }
 
+        /// <summary>
+        /// Event that occurs when student info is retrieved from the server. The user is taken
+        /// to the profile page of that user.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void client_UploadValuesCompleted(object sender, UploadValuesCompletedEventArgs e)
         {
 
@@ -96,12 +119,17 @@ namespace zenmc
                 studentID = studentID.Replace("\r", string.Empty).Replace("\n", string.Empty);
                 
                 var intent = new Intent(Activity, typeof(profile));
-                intent.PutExtra("Owner", studentID);
+                intent.PutExtra("StudentID", studentID);
                 StartActivity(intent);
                 Dismiss();
             });
         }
 
+        /// <summary>
+        /// Event that occurs when back button is clicked, closes the dialog fragment.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void btnBack_Click(object sender, EventArgs e)
         {
             Dismiss();

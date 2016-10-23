@@ -26,7 +26,7 @@ namespace zenmc
         private TextView txtCourseName, txtDescription, txtCourseRequirements, txtMaleStudents, txtFemaleStudents, txtMaleManagers, txtFemaleManagers,
             txtMaleTAs, txtFemaleTAs, txtKitchenHelp, txtDate, txtLength, txtCourseHistory, errorLog;
         private string courseID, studentID, role;
-        private bool btnDescriptionPressed, btnRegisterPressed;
+        private bool btnDescriptionPressed, btnRegisterPressed, waiting;
         private RadioGroup rdoRole;
         private RadioButton btnStudent, btnManager, btnAssistantTeacher, btnKitchenHelp;
 
@@ -66,12 +66,47 @@ namespace zenmc
             femaleTA = database.getCourseDetail(courseID, "FemaleTAs") != "0" ? "Yes" : "Needed";
             numKitchenHelp = database.getCourseDetail(courseID, "KitchenHelp");
 
-
+            waiting = false;
 
             pref = PreferenceManager.GetDefaultSharedPreferences(this);
             enrollmentPref = Application.Context.GetSharedPreferences("EnrollmentInfo", FileCreationMode.Private);
             userPref = Application.Context.GetSharedPreferences("UserInfo", FileCreationMode.Private);
+            
+            setLayoutResources();
+            setLayoutText();
 
+            DateTime commencementDateTime = DateTime.Parse(commencementDate);
+
+            if (DateTime.Now >= commencementDateTime)
+            {
+                txtCourseRequirements.Text = "The registration period for this course is over.";
+                txtCourseRequirements.Visibility = ViewStates.Visible;
+                btnRegister.Visibility = ViewStates.Gone;
+            }
+            else if (courseLength != "10" && userPref.GetString("Type", null) =="New")
+            {
+                txtCourseRequirements.Text = "You are unable to register for this course until you have completed at least one ten day course.";
+                btnRegister.Visibility = ViewStates.Gone;
+                txtCourseRequirements.Visibility = ViewStates.Visible;
+            }
+            else if (enrollmentPref.Contains(courseID + "Role"))
+            {
+                role = enrollmentPref.GetString(courseID + "Role", null);
+                txtCourseRequirements.Text = "You are registered as a " +
+                    role + " in this course.";
+                txtCourseRequirements.Visibility = ViewStates.Visible;
+                btnRegister.Visibility = ViewStates.Gone;
+                btnUnregister.Visibility = ViewStates.Visible;
+            }
+            else { setRadioVisibility(); }
+        }
+
+        /// <summary>
+        /// Finds all of the controls and views in the layout and assigns them to variables so they
+        /// can be referenced later and subscribes buttons to events
+        /// </summary>
+        void setLayoutResources()
+        {
             txtCourseName = FindViewById<TextView>(Resource.Id.txtCourseName);
             txtDescription = FindViewById<TextView>(Resource.Id.txtDescription);
             txtCourseRequirements = FindViewById<TextView>(Resource.Id.txtCourseRequirements);
@@ -87,19 +122,7 @@ namespace zenmc
             txtKitchenHelp = FindViewById<TextView>(Resource.Id.txtKitchenHelp);
             txtCourseHistory = FindViewById<TextView>(Resource.Id.txtCourseHistory);
             errorLog = FindViewById<TextView>(Resource.Id.registerErrorOutput);
-
-            txtCourseName.Text = database.getCourseDetail(courseID, "CourseName");
-            txtDescription.Text = database.getCourseDetail(courseID, "Description");
-            txtDate.Text = "Course Begins: " + DateTime.Parse(commencementDate).ToString("dd/MM/yyyy");
-            txtLength.Text = "Course Length: " + courseLength + " Days";
-            txtMaleStudents.Text += numMaleStudents + "/26";
-            txtFemaleStudents.Text += numFemaleStudents + "/26\n";
-            txtMaleManagers.Text += maleManager;
-            txtFemaleManagers.Text += femaleManager + "\n";
-            txtMaleTAs.Text += maleTA;
-            txtFemaleTAs.Text += femaleTA + "\n";
-            txtKitchenHelp.Text += numKitchenHelp + "/10";
-
+            
             etCourseBG1 = FindViewById<EditText>(Resource.Id.etCourseBG1);
             etCourseBG2 = FindViewById<EditText>(Resource.Id.etCourseBG2);
             etCourseBG3 = FindViewById<EditText>(Resource.Id.etCourseBG3);
@@ -128,33 +151,32 @@ namespace zenmc
 
             btnDescriptionPressed = false;
             btnRegisterPressed = false;
-
-            DateTime commencementDateTime = DateTime.Parse(commencementDate);
-            ////already registered?
-            if (DateTime.Now >= commencementDateTime)
-            {
-                txtCourseRequirements.Text = "The registration period for this course is over.";
-                txtCourseRequirements.Visibility = ViewStates.Visible;
-                btnRegister.Visibility = ViewStates.Gone;
-            }
-            else if (courseLength != "10" && userPref.GetString("Type", null) =="New")
-            {
-                txtCourseRequirements.Text = "You are unable to register for this course until you have completed at least one ten day course.";
-                btnRegister.Visibility = ViewStates.Gone;
-                txtCourseRequirements.Visibility = ViewStates.Visible;
-            }
-            else if (enrollmentPref.Contains(courseID + "Role"))
-            {
-                role = enrollmentPref.GetString(courseID + "Role", null);
-                txtCourseRequirements.Text = "You are registered as a " +
-                    role + " in this course.";
-                txtCourseRequirements.Visibility = ViewStates.Visible;
-                btnRegister.Visibility = ViewStates.Gone;
-                btnUnregister.Visibility = ViewStates.Visible;
-            }
-            else { setRadioVisibility(); }
         }
 
+        /// <summary>
+        /// Sets the text of the views to be displayed in the activity layout.
+        /// </summary>
+        void setLayoutText()
+        {
+            txtCourseName.Text = database.getCourseDetail(courseID, "CourseName");
+            txtDescription.Text = database.getCourseDetail(courseID, "Description");
+            txtDate.Text = "Course Begins: " + DateTime.Parse(commencementDate).ToString("dd/MM/yyyy");
+            txtLength.Text = "Course Length: " + courseLength + " Days";
+            txtMaleStudents.Text += numMaleStudents + "/26";
+            txtFemaleStudents.Text += numFemaleStudents + "/26\n";
+            txtMaleManagers.Text += maleManager;
+            txtFemaleManagers.Text += femaleManager + "\n";
+            txtMaleTAs.Text += maleTA;
+            txtFemaleTAs.Text += femaleTA + "\n";
+            txtKitchenHelp.Text += numKitchenHelp + "/10";
+        }
+
+        /// <summary>
+        /// Event that occurs when the description button is clicked. Makes the description
+        /// text visible in the activity when not displayed, otherwise hides the description.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void btnDescription_Click(object sender, EventArgs e)
         {
             btnDescriptionPressed = !btnDescriptionPressed;
@@ -170,6 +192,12 @@ namespace zenmc
             }
         }
 
+        /// <summary>
+        /// Event that occurs when the registration button is clicked. Reveals the registration
+        /// form if not already displayed, otherwise hides the form.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void btnRegister_Click(object sender, EventArgs e)
         {
             btnRegisterPressed = !btnRegisterPressed;
@@ -204,17 +232,29 @@ namespace zenmc
             }
         }
 
+        /// <summary>
+        /// Calls method to send the user back to the calendar activity.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void btnBack_Click(object sender, EventArgs e)
         {
-            backToCalendar();
+            waiting = true;
+            backToCalendar();            
 
         }
 
+        /// <summary>
+        /// Calls method to send the user back to the calendar activity.
+        /// </summary>
         public override void OnBackPressed()
         {
             backToCalendar();
         }
 
+        /// <summary>
+        /// Sends the user back to the calendar activity.
+        /// </summary>
         void backToCalendar()
         {
             var intent = new Intent(this, typeof(calendar));
@@ -222,26 +262,43 @@ namespace zenmc
             Finish();
         }
 
+        /// <summary>
+        /// Event that occurs when confirm register button is clicked. Displays progress 
+        /// bar and uploads values to the server to register the student into the course.
+        /// Displays error text if the server fails to register student.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void btnConfirmRegister_Click(object sender, EventArgs e)
         {
-            WebClient client = new WebClient();
-
-            if(setRole())
+            if (!waiting)
             {
-                setParameters();
+                waiting = true;
+                WebClient client = new WebClient();
+
+                if (setRole())
+                {
+                    setParameters();
 
 
-                progressBar.Visibility = ViewStates.Visible;
-                client.UploadValuesCompleted += client_UploadValuesCompleted;
-                client.UploadValuesAsync(uri, parameters);
-                client.Dispose();
-            }      
-            else
-            {
-                errorLog.Text = "You must select a role before registering.";
-            }      
+                    progressBar.Visibility = ViewStates.Visible;
+                    client.UploadValuesCompleted += client_UploadValuesCompleted;
+                    client.UploadValuesAsync(uri, parameters);
+                    client.Dispose();
+                }
+                else
+                {
+                    errorLog.Text = "You must select a role before registering.";
+                    waiting = false;
+                }
+            }
         }
 
+        /// <summary>
+        /// Figures out which radio button is checked for role in registration form and stores
+        /// that value.
+        /// </summary>
+        /// <returns></returns>
         bool setRole()
         {
             if(btnStudent.Checked)
@@ -264,23 +321,36 @@ namespace zenmc
             return true;
         }
 
+        /// <summary>
+        /// Event called when unregister button clicked. Calls method to upload values
+        /// to the server to unregister the student from the course.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void btnUnregister_Click(object sender, EventArgs e)
         {
-            WebClient client = new WebClient();
+            if (!waiting)
+            {
+                waiting = true;
+                WebClient client = new WebClient();
 
-            parameters = new NameValueCollection();
-            studentID = userPref.GetString("CStudentID", null);
-            parameters.Add("StudentID", studentID);
-            parameters.Add("CourseID", courseID);
-            parameters.Add("Role", role);
+                parameters = new NameValueCollection();
+                studentID = userPref.GetString("CStudentID", null);
+                parameters.Add("StudentID", studentID);
+                parameters.Add("CourseID", courseID);
+                parameters.Add("Role", role);
 
 
-            progressBar.Visibility = ViewStates.Visible;
-            client.UploadValuesCompleted += client_UploadValuesCompleted;
-            client.UploadValuesAsync(unregisterUri, parameters);
-            client.Dispose();
+                progressBar.Visibility = ViewStates.Visible;
+                client.UploadValuesCompleted += client_UploadValuesCompleted;
+                client.UploadValuesAsync(unregisterUri, parameters);
+                client.Dispose();
+            }            
         }
 
+        /// <summary>
+        /// Sets the parameters to be uploaded for course registration.
+        /// </summary>
         void setParameters()
         {
             parameters = new NameValueCollection();
@@ -295,6 +365,9 @@ namespace zenmc
             parameters.Add("Role", role);
         }
 
+        /// <summary>
+        /// Sets the visibility of the radio buttons based on student and course details.
+        /// </summary>
         void setRadioVisibility()
         {
             string gender = userPref.GetString("Gender", null);
@@ -335,6 +408,14 @@ namespace zenmc
             }
         }
 
+        /// <summary>
+        /// Event that is called when the user registers or unregisters from a course.
+        /// Retrieves a value from the server and depending on the value calls method to
+        /// update data stored on app and sends the user
+        /// back to the calendar activity or displays error text.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void client_UploadValuesCompleted(object sender, UploadValuesCompletedEventArgs e)
         {
             RunOnUiThread(() =>
@@ -347,6 +428,7 @@ namespace zenmc
                 if (result == "error")
                 {
                     errorLog.Text = "There was an error processing your request. Please try again later.";
+                    waiting = false;
                 }
                 else
                 {
@@ -357,6 +439,12 @@ namespace zenmc
             });
         }
 
+        /// <summary>
+        /// Updates the database stored on the app when student has succesfully registered
+        /// or unregistered.
+        /// </summary>
+        /// <param name="result">Value returned by server representing the role the 
+        /// student is registering as or unregistering from</param>
         void updateSQLite(string result)
         {
             string query;
@@ -407,6 +495,12 @@ namespace zenmc
             database.updateCourseDetails(courseID, query);
         }
 
+        /// <summary>
+        /// Updates the shared preferences stored on app relating to the users role in the
+        /// course.
+        /// </summary>
+        /// <param name="result">Value returned by server representing the role the 
+        /// student is registering as or unregistering from</param>
         void updatePreferences(string result)
         {
             ISharedPreferencesEditor editor = enrollmentPref.Edit();
