@@ -14,6 +14,10 @@ zenmc.emergencyContact, zenmc;md5ac68c4bca503c6022c7a6c0f0301971e.emergencyConta
 zenmc.emergencyContact, zenmc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md5ac68c4bca503c6022c7a6c0f0301971e.emergencyContact
 zenmc.emergencyContact;md5ac68c4bca503c6022c7a6c0f0301971e.emergencyContact
 zenmc.emergencyContact;md5ac68c4bca503c6022c7a6c0f0301971e.emergencyContact
+zenmc.mealDialog, zenmc;md5ac68c4bca503c6022c7a6c0f0301971e.mealDialog
+zenmc.mealDialog, zenmc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md5ac68c4bca503c6022c7a6c0f0301971e.mealDialog
+zenmc.mealDialog;md5ac68c4bca503c6022c7a6c0f0301971e.mealDialog
+zenmc.mealDialog;md5ac68c4bca503c6022c7a6c0f0301971e.mealDialog
 zenmc.passwordChange, zenmc;md5ac68c4bca503c6022c7a6c0f0301971e.passwordChange
 zenmc.passwordChange, zenmc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md5ac68c4bca503c6022c7a6c0f0301971e.passwordChange
 zenmc.passwordChange;md5ac68c4bca503c6022c7a6c0f0301971e.passwordChange

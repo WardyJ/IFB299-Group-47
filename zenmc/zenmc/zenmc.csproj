@@ -69,6 +69,7 @@
     <Compile Include="emergencyContact.cs" />
     <Compile Include="EnrollmentDetails.cs" />
     <Compile Include="Meal.cs" />
+    <Compile Include="mealDialog.cs" />
     <Compile Include="passwordChange.cs" />
     <Compile Include="passwordReset.cs" />
     <Compile Include="contactPage.cs" />
@@ -146,6 +147,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\classDialog.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\mealDialog.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

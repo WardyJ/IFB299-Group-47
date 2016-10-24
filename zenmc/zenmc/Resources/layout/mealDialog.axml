@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minWidth="300dp"
+    android:minHeight="400dp">
+  <TextView
+      android:text="Meals for "
+      android:textAppearance="?android:attr/textAppearanceLarge"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="10sp"
+    android:layout_marginRight="10sp"
+      android:id="@+id/txtMealHeader"
+      android:gravity="center"
+      android:minLines="2"
+      android:lines="3" />
+  <TextView
+        android:text="meal time 1"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10sp"
+    android:layout_marginRight="10sp"
+        android:id="@+id/txtMealTime1" />
+  <TextView
+        android:text="Meal details 1"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10sp"
+    android:layout_marginRight="10sp"
+        android:lines="3"
+        android:id="@+id/txtMealDetails1"/>
+  <TextView
+        android:text="meal time 2"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10sp"
+    android:layout_marginRight="10sp"
+        android:id="@+id/txtMealTime2"/>
+  <TextView
+        android:text="Meal details 3"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10sp"
+    android:layout_marginRight="10sp"
+        android:lines="3"
+        android:id="@+id/txtMealDetails2"/>
+  <TextView
+        android:text="meal time 3"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10sp"
+    android:layout_marginRight="10sp"
+        android:id="@+id/txtMealTime3"/>
+  <TextView
+        android:text="Meal details 3"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10sp"
+    android:layout_marginRight="10sp"
+        android:lines="3"
+        android:id="@+id/txtMealDetails3"/>
+  <Button
+      android:text="Back"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/btnBack" />
+</LinearLayout>
