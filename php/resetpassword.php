@@ -25,7 +25,7 @@ if (isset($_POST['Email']))//data uploaded correctly
 	{
 		$Student = array();
 		$student = array("PhoneNumber"=>$row['PhoneNumber'],
-						"PasswordHash"=>$Password); //plaintext is sent back but is called hash
+						"PasswordHash"=>$Password); //plaintext password is sent back even though its called passwordhash
 		array_push($Student,$student);
 		echo utf8_encode(json_encode($Student));
 	}

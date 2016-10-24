@@ -1,5 +1,5 @@
 <?php
-
+//code to retrieve all details of the meals being provided in the course
 include('pdo.inc');
 
 

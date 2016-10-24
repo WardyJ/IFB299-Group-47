@@ -2,7 +2,7 @@
 	include('pdo.inc');
 	include('functions.inc');
 	
-$returnID;//value to be returned to client app
+$returnID;//variable to be returned to client app
 
 	
 if (isset($_POST['CourseID']) && isset($_POST['StudentID']) && isset($_POST['CourseHistoryOne']) && isset($_POST['CourseHistoryTwo']) 

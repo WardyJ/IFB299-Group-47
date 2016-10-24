@@ -1,5 +1,5 @@
 <?php 
-
+//code used to retrieve all data about all classes
 include('pdo.inc');
 
 $stmt = ("SELECT * FROM meditationcentre.courses");
@@ -11,12 +11,12 @@ foreach ($pdo->query($stmt) as $row)
 		
 		
 		$length = $row["Length"];		
-		for($i = 0; $i < $length; $i++)
+		for($i = 0; $i < $length; $i++)//for each day of the course
 		{
 			$stmt = ("SELECT * FROM meditationcentre.classes WHERE CAST(DateandTime AS DATE) = '$date'");
 			$count = 0;
 			
-			foreach ($pdo->query($stmt) as $classrow)
+			foreach ($pdo->query($stmt) as $classrow)//get all class info for each class of the day
 			{				
 				$class = array();
 				$class["CourseID"] = $CourseID;

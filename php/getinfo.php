@@ -1,5 +1,5 @@
 <?php
-
+//code to retrieve the gender and student type (if they are considered old or new) of a particular student
 include('pdo.inc');
 
 if(isset($_POST["StudentID"]))

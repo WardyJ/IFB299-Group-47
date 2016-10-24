@@ -1,5 +1,5 @@
 <?php
-
+//code to retrieve all course information for all courses
 include('pdo.inc');
 
 
@@ -7,7 +7,7 @@ $stmt = ("SELECT * FROM meditationcentre.courses");
 
 $allCourseInfo = array();
 
-foreach ($pdo->query($stmt) as $row)
+foreach ($pdo->query($stmt) as $row)//for each course put all course info into an array
 {
 	$courseInfo = array();
 	

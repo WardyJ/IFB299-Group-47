@@ -1,5 +1,5 @@
 <?php
-
+//code to retrieve the ids of all courses a particular student is enrolled in and what role they have in the course
 include('pdo.inc');
 include('functions.inc');
 
