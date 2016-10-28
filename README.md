@@ -1,2 +1,2 @@
-# IFB299Mystic
-IFB299 Group 47 
+# Josh's Personal Portfolio
+Ignore files other than the Artefact Folders and the Brief Summary
