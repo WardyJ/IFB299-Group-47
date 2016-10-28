@@ -1,2 +1,1 @@
-# IFB299Mystic
-IFB299 Group 47 
+# William Ellis Navigation Section
