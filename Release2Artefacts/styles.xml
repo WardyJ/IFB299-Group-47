@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<resources>
+  <!-- Inherit from the light Material Theme -->
+  <style name="MyCustomTheme" parent="android:Theme.Material.Light">
+    <!-- Override the app bar color -->
+    <item name="android:colorPrimary">@color/top_color</item>
+    
+    <!-- Accent Color-->
+    <item name="android:colorAccent">@color/button_blue</item>
+    
+    <!-- Background Color -->
+    <item name="android:windowBackground">@color/my_light_blue</item>
+    
+    <!-- Text Color -->
+    <item name="android:textColorPrimary">@color/button_blue</item>
+    
+    <!-- Text Color -->
+    <item name="android:textColor">@color/text_color</item>
+    
+    <!-- Button Background Color -->
+    <!-- ?? -->
+  </style>
+</resources>

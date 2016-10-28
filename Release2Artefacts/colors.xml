@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+<color name="my_light_blue">#F3EFE0</color>
+<color name="my_green">#48C9B0</color>
+<color name="button_blue">#3399ff</color>
+<color name="top_color">#9A3334</color>
+<color name="my_white">#FDFEFE</color>
+ <color name="text_color">#9A3334</color>
+</resources>
